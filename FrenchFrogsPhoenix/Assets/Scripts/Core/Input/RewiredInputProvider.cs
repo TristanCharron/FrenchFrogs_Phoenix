@@ -21,10 +21,10 @@ public class RewiredInputProvider : MonoBehaviour
 
     private void Awake()
     {
-        EventManager.Subscribe<InputActionEventData>(EVT_INPUT_PRESS_DOWN, (actionName) =>
-        {
-            Debug.Log(actionName);
-        });
+        //EventManager.Subscribe<InputActionEventData>(EVT_INPUT_PRESS_DOWN, (actionName) =>
+        //{
+        //    Debug.Log(actionName);
+        //});
 
         player = ReInput.players.GetPlayer(playerID);
 

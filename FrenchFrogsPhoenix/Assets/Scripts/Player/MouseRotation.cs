@@ -17,8 +17,6 @@ public class MouseRotation
         float yRot = x * sensitivity;
         float xRot = y * sensitivity;
 
-        //Debug.Log(yRot + " " + xRot);
-
         Quaternion targetRotation = character.rotation;
 
         targetRotation *= Quaternion.Euler(-xRot, yRot, 0f);
@@ -42,13 +40,10 @@ public class MouseRotation
     }
 
 
-
-
-
-    public void LookRotation(Transform character, float sensitivity)
-    {
-        LookRotation(character, sensitivity, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-    }
+    //public void LookRotation(Transform character, float sensitivity)
+    //{
+    //    LookRotation(character, sensitivity, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+    //}
 
     public void SetCursorLock(bool value)
     {

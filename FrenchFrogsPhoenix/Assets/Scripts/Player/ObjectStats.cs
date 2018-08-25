@@ -8,7 +8,6 @@ public class ObjectStats {
     public float speed;
     public float damage;
 
-
     public void Reset()
     {
         speed = 0;

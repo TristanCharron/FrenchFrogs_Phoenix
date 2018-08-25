@@ -10,7 +10,10 @@ public class StickingObject : MonoBehaviour {
     public Rigidbody rb { get; protected set; }
     public bool IsSticked { get { return playerParent != null; } }
 
-    [SerializeField] float onImpactBlobiness;
+    [SerializeField] float impactBlobiness;
+    [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
+
+    [SerializeField] Transform childMeshTransform;
 
     //Life
     int maxLife = 20;
@@ -19,6 +22,7 @@ public class StickingObject : MonoBehaviour {
     ObjectStats objectStats;
     SinRotation sinRotation;
 
+    StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
     Player playerParent;
 
@@ -43,9 +47,10 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
-    public void SetPlayerParent(Player playerParent)
+    public void SetParent(Player playerParent, StickingObject stickingObjectParent)
     {
         sinRotation.Initialize();
+        this.stickingObjectParent = stickingObjectParent;
         this.playerParent = playerParent;
     }
 
@@ -68,13 +73,13 @@ public class StickingObject : MonoBehaviour {
 
     public void SetFirstStickingchild(Player player)
     {
-        SetPlayerParent(player);
+        SetParent(player, null);
         playerParent.OnNewStickingObject.Invoke(this);
     }
 
     public void StickingNewChild(StickingObject stickingChild)
     {
-        stickingChild.SetPlayerParent(playerParent);
+        stickingChild.SetParent(playerParent, this);
 
         stickingObjectChilds.Add(stickingChild);
         stickingChild.transform.SetParent(transform, true);
@@ -116,16 +121,28 @@ public class StickingObject : MonoBehaviour {
                 Debug.Log("collision");
                 StickingNewChild(stickingObject);
 
-                ShakeScale(transform);
-                ShakeScale(stickingObject.transform);
+                ShakeScale(impactBlobiness, null);
+                stickingObject.ShakeScale(impactBlobiness, null);
             }
         }
     }
 
-    void ShakeScale(Transform transform)
+    public void ShakeScale(float impact, StickingObject objectToIgnore)
     {
-        transform.DOKill();
-        transform.localScale = Vector3.one;
-        transform.DOShakeScale(1, onImpactBlobiness, 20);
+        if (impact < 0.01)
+            return;
+
+        childMeshTransform.DOKill();
+        childMeshTransform.localScale = Vector3.one;
+        childMeshTransform.DOShakeScale(1, impact, 20);
+
+        foreach (StickingObject stickingChild in stickingObjectChilds)
+        {
+            if(stickingChild != objectToIgnore)
+                stickingChild.ShakeScale(impact * impactPropagation, this);
+        }
+
+        if (stickingObjectParent != objectToIgnore)
+            stickingObjectParent.ShakeScale(impact * impactPropagation, this);
     }
 }
