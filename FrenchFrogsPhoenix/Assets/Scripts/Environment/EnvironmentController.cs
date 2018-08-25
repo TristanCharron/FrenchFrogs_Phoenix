@@ -9,7 +9,7 @@ public class EnvironmentController : MonoBehaviour {
     [SerializeField] float respawnSpeed = 1.5f;
     [SerializeField] float maxNumbEnvironmentObject = 50;
     [SerializeField] List<EnvironmentObject> newEnvironmentObjectsRef = new List<EnvironmentObject>();
-    [SerializeField] Vector3 maxBounds = new Vector3(1000f, 1000f, 1000f);
+    public Vector3 maxBounds = new Vector3(1000f, 1000f, 1000f);
     public List<EnvironmentObject> currentObjects = new List<EnvironmentObject>();
     public Transform environmentContainer;
 
@@ -34,7 +34,7 @@ public class EnvironmentController : MonoBehaviour {
 
     public void StartSpawnEnvironmentObject()
     {
-        if(currentObjects.Count < maxNumbEnvironmentObject)
+        if (currentObjects.Count < maxNumbEnvironmentObject)
         {
             StartCoroutine(DelaySpawnEnvironmentObject());
         }
@@ -51,6 +51,13 @@ public class EnvironmentController : MonoBehaviour {
     {
         EnvironmentObject newEnvironmentObject = Instantiate(newEnvironmentObjectsRef[Random.Range(0, newEnvironmentObjectsRef.Count)], environmentContainer);
         newEnvironmentObject.SetPosition(new Vector3(Random.Range(0, maxBounds.x), Random.Range(0, maxBounds.y), Random.Range(0, maxBounds.z)));
+        currentObjects.Add(newEnvironmentObject);
+    }
+
+    public void RemoveObject(EnvironmentObject objectToRemove)
+    {
+        currentObjects.Remove(objectToRemove);
+        Destroy(objectToRemove.gameObject);
     }
 
     public void ResetEnvironment()
