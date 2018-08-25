@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum GameFSMStates
 {
@@ -12,6 +13,9 @@ public enum GameFSMStates
 [System.Serializable]
 public class GameFSM : FiniteStateMachine
 {
+
+    public const string EVT_ON_CHANGE_GAME_STATE = "OnChangeGameState";
+
     [SerializeField]
     private FSMState[] GameStates;
 
@@ -20,15 +24,15 @@ public class GameFSM : FiniteStateMachine
     {
         for(int i = 0; i < GameStates.Length; i++)
         {
-            AddFSMState(this.GameStates[i]);
+            AddFSMState(GameStates[i]);
         }
 
-        EventManager.Subscribe<FSMState>("OnChangeGameFSM", (s) =>
-        {
-            Debug.Log(s);
-        });
-
         ChangeFSMState(GameFSMStates.MAINMENU);
+
+        EventManager.Subscribe<GameFSMStates>(EVT_ON_CHANGE_GAME_STATE, (state) =>
+         {
+             ChangeFSMState(state);
+         });
 
 
     }

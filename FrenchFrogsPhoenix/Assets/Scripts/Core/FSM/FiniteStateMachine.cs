@@ -87,8 +87,9 @@ public abstract class FiniteStateMachine : MonoBehaviour
 
 
             CurrentFSMState = FSMStatesDictionnary[NextStateEnumID];
-            Debug.Log(CurrentFSMState);
+
             isChangingState = true;
+
             yield return CurrentFSMState.EnterState();
 
             isChangingState = false;

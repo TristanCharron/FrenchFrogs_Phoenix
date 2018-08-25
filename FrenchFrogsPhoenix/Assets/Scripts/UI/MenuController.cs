@@ -1,22 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MenuController : MonoBehaviour {
 
+    [SerializeField]
+    TextMeshProUGUI MenuText;
+
+    bool isActive = false;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         EventManager.Subscribe<System.Enum>("OnChangeGameFSM", (nextState)=>{
-            if(nextState.ToString() == GameFSMStates.MAINMENU.ToString())
+
+            bool isActive = nextState.ToString() == GameFSMStates.MAINMENU.ToString();
+                SetActive(isActive);
+            });
+
+        EventManager.Subscribe<string>(KeyboardInputController.EVT_KEYBOARD_PRESS, (key) => {
+
+            if(isActive)
             {
-                Debug.Log("START MENU");
+                if (key == "Fire")
+                {
+                    Debug.Log("START GAME");
+                    SetActive(false);
+                    EventManager.Invoke<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, GameFSMStates.GAMEPLAY);
+                }
             }
+           
         });
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+   
+
+
+    }
+
+
+    private void SetActive(bool active)
+    {
+        MenuText.gameObject.GetComponent<CanvasGroup>().alpha = active ? 1 : 0;
+        isActive = active;
+    }
+
+
+
 }
