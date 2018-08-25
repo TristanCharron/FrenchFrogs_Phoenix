@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Rewired;
 
 public class MenuController : MonoBehaviour {
 
@@ -19,11 +20,11 @@ public class MenuController : MonoBehaviour {
                 SetActive(isActive);
             });
 
-        EventManager.Subscribe<string>(KeyboardInputController.EVT_KEYBOARD_PRESS, (key) => {
+        EventManager.Subscribe<InputActionEventData>(RewiredInputProvider.EVT_INPUT_PRESS_DOWN, (input) => {
 
             if(isActive)
             {
-                if (key == "Fire")
+                if (input.actionName == "Fire")
                 {
                     Debug.Log("START GAME");
                     SetActive(false);

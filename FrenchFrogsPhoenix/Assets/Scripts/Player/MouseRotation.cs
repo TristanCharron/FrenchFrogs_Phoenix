@@ -12,10 +12,10 @@ public class MouseRotation
 
     private bool m_cursorIsLocked = true;
 
-    public void LookRotation(Transform character, float sensittivity)
+    public void LookRotation(Transform character, float sensitivity, float x, float y)
     {
-        float yRot = Input.GetAxis("Mouse X") * sensittivity;
-        float xRot = Input.GetAxis("Mouse Y") * sensittivity;
+        float yRot = x * sensitivity;
+        float xRot = y * sensitivity;
 
         Debug.Log(yRot + " " + xRot);
 
@@ -39,6 +39,15 @@ public class MouseRotation
         }
 
         UpdateCursorLock();
+    }
+
+
+
+
+
+    public void LookRotation(Transform character, float sensitivity)
+    {
+        LookRotation(character, sensitivity, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
     }
 
     public void SetCursorLock(bool value)
