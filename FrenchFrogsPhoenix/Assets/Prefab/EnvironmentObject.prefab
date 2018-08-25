@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4123076878829510}
   - component: {fileID: 33678490810004268}
   - component: {fileID: 23720505023164240}
+  - component: {fileID: 114685601360782866}
   - component: {fileID: 65098951305107104}
-  - component: {fileID: 114222525106319238}
   m_Layer: 0
   m_Name: EnvironmentObject
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1655068205700528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d0af7ad49d9e0d54cb487c1c81501239, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114222525106319238
+--- !u!114 &114685601360782866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1655068205700528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e3a5f3badfd574a86e129a68a10291, type: 3}
+  m_Script: {fileID: 11500000, guid: b437d8f8b3ccddc42ae16017cc61e648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   randomSpeed: 0
+  rotateSpeed: 250

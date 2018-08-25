@@ -12,12 +12,10 @@ public class MouseRotation
 
     private bool m_cursorIsLocked = true;
 
-    public void LookRotation(Transform character, float sensittivity)
+    public void LookRotation(Transform character, float sensitivity, float x, float y)
     {
-        float yRot = Input.GetAxis("Mouse X") * sensittivity;
-        float xRot = Input.GetAxis("Mouse Y") * sensittivity;
-
-        //Debug.Log(yRot + " " + xRot);
+        float yRot = x * sensitivity;
+        float xRot = y * sensitivity;
 
         Quaternion targetRotation = character.rotation;
 
@@ -40,6 +38,12 @@ public class MouseRotation
 
         UpdateCursorLock();
     }
+
+
+    //public void LookRotation(Transform character, float sensitivity)
+    //{
+    //    LookRotation(character, sensitivity, Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+    //}
 
     public void SetCursorLock(bool value)
     {
