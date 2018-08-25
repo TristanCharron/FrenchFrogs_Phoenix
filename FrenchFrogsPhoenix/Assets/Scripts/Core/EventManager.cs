@@ -1,76 +1,71 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 
-public class EventManager : MonoBehaviour
+public static class EventManager
 {
 
-    private Dictionary<string, UnityEvent> eventDictionary;
+    private static IDictionary<string, List<object>> subscribers = new Dictionary<string, List<object>>();
 
-    private static EventManager eventManager;
 
-    public static EventManager instance
+  
+    public static void Subscribe<T>(string message, Action<T> callback)
     {
-        get
+
+        if (subscribers.ContainsKey(message))
         {
-            if (!eventManager)
-            {
-                eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
 
-                if (!eventManager)
-                {
-                    Debug.LogError("There needs to be one active EventManger script on a GameObject in your scene.");
-                }
-                else
-                {
-                    eventManager.Init();
-                }
-            }
-
-            return eventManager;
-        }
-    }
-
-    void Init()
-    {
-        if (eventDictionary == null)
-        {
-            eventDictionary = new Dictionary<string, UnityEvent>();
-        }
-    }
-
-    public static void StartListening(string eventName, UnityAction listener)
-    {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
-        {
-            thisEvent.AddListener(listener);
+            subscribers[message].Add(callback);
         }
         else
         {
-            thisEvent = new UnityEvent();
-            thisEvent.AddListener(listener);
-            instance.eventDictionary.Add(eventName, thisEvent);
+
+
+            subscribers[message] = new List<object>();
+            subscribers[message].Add(callback);
         }
     }
 
-    public static void StopListening(string eventName, UnityAction listener)
+    public static void Invoke<T>(string message, T param)
     {
-        if (eventManager == null) return;
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+
+        if (subscribers.ContainsKey(message))
         {
-            thisEvent.RemoveListener(listener);
+
+            List<object> callbacks = subscribers[message];
+
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+
+                Action<T> callback = (Action<T>)callbacks[i];
+
+                callback(param);
+            }
         }
     }
 
-    public static void TriggerEvent(string eventName)
+
+
+    public static void Unsubscribe<T>(string message, Action<T> callback)
     {
-        UnityEvent thisEvent = null;
-        if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
+
+        if (subscribers.ContainsKey(message))
         {
-            thisEvent.Invoke();
+
+            List<object> callbacks = subscribers[message];
+
+            for (int i = 0; i < callbacks.Count; i++)
+            {
+
+                Action<T> tmpCallback = (Action<T>)callbacks[i];
+
+                if (tmpCallback == callback)
+                {
+
+                    callbacks.RemoveAt(i);
+
+                    break;
+                }
+            }
         }
     }
 }
