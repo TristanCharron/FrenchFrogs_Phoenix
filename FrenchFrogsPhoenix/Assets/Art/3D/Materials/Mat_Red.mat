@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Mat_Green
+  m_Name: Mat_Red
   m_Shader: {fileID: 4800000, guid: b99d1b118359a7942baa3e696325434b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -139,8 +139,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_CB691B47: -0.5
-    - Vector1_F9045FA9: 2
+    - Vector1_CB691B47: -1.27
+    - Vector1_F9045FA9: 3.61
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -261,8 +261,8 @@ Material:
     - _ZTestModeDistortion: 8
     - _ZWrite: 1
     m_Colors:
-    - Color_201011D7: {r: 0.7454839, g: 1, b: 0, a: 0}
-    - Color_E703D6C7: {r: 0.014198661, g: 1, b: 0, a: 0}
+    - Color_201011D7: {r: 1, g: 0, b: 0.12549019, a: 1}
+    - Color_E703D6C7: {r: 1, g: 0, b: 0.10990858, a: 0}
     - Vector3_BA123575: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
