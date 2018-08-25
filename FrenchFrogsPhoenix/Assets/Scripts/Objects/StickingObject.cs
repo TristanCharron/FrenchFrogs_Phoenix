@@ -13,7 +13,6 @@ public class StickingObject : MonoBehaviour {
     [SerializeField] float impactBlobiness;
     [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
 
-    [SerializeField] Transform childMeshTransform;
 
     //Life
     int maxLife = 20;
@@ -21,6 +20,7 @@ public class StickingObject : MonoBehaviour {
 
     ObjectStats objectStats;
     SinRotation sinRotation;
+    Transform childMeshTransform;
 
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
@@ -45,6 +45,11 @@ public class StickingObject : MonoBehaviour {
         {
             stickingChild.RecrusiveCalculateStats(playerStats);
         }
+    }
+
+    public void SetMeshChild(Transform childMeshTransform)
+    {
+        this.childMeshTransform = childMeshTransform;
     }
 
     public void SetParent(Player playerParent, StickingObject stickingObjectParent)
@@ -79,11 +84,11 @@ public class StickingObject : MonoBehaviour {
 
     public void StickingNewChild(StickingObject stickingChild)
     {
+        stickingChild.transform.SetParent(transform, true);
+
         stickingChild.SetParent(playerParent, this);
 
         stickingObjectChilds.Add(stickingChild);
-        stickingChild.transform.SetParent(transform, true);
-
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
@@ -121,8 +126,7 @@ public class StickingObject : MonoBehaviour {
                 Debug.Log("collision");
                 StickingNewChild(stickingObject);
 
-                ShakeScale(impactBlobiness, null);
-                stickingObject.ShakeScale(impactBlobiness, null);
+                ShakeScale(impactBlobiness, this);
             }
         }
     }
@@ -142,7 +146,7 @@ public class StickingObject : MonoBehaviour {
                 stickingChild.ShakeScale(impact * impactPropagation, this);
         }
 
-        if (stickingObjectParent != objectToIgnore)
+        if (stickingObjectParent != null && stickingObjectParent != objectToIgnore)
             stickingObjectParent.ShakeScale(impact * impactPropagation, this);
     }
 }

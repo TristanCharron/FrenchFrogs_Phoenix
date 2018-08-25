@@ -21,8 +21,6 @@ public class Player : MonoBehaviour {
 
     public BaseInput input;
 
-   
-    //Tristan add 
     public string ID { private set; get; }
 
     void Start ()
@@ -36,9 +34,9 @@ public class Player : MonoBehaviour {
         OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
 
         stickingObject.SetFirstStickingchild(this);
+        stickingObject.SetMeshChild(nullCore);
     }
 
-    //Tristan add 
     public void Spawn(PlayerType type,string ID)
     {
         switch (type)
@@ -59,50 +57,28 @@ public class Player : MonoBehaviour {
         input.SetActive(true);
 
         input.LeftStick.AddEvent(Move);
-
-        input.RightStick.AddEvent((x, y) =>
-        {
-            mouseRotation.LookRotation(transform, cameraSensitivity, x, y);
-        });
+        input.RightStick.AddEvent(RightStickHandle);
 
         this.ID = ID;
     }
 
- 
+    void RightStickHandle(float x, float y)
+    {
+        //Vector3 cameraTransform = playerCamera.transform.InverseTransformDirection(new Vector3(-y, -x, 0));
+        Vector3 cameraTransform = new Vector3(-y, x, 0);
 
-    //private void Update()
-    //{
-    //    Move();
-
-    //    if(Input.GetMouseButton(1))
-    //        mouseRotation.LookRotation(nullCore.transform, rotateSensitivity);
-    //    else
-    //        mouseRotation.LookRotation(transform, cameraSensitivity);
-    //}
+        if (Input.GetMouseButton(1))
+            mouseRotation.LookRotation(nullCore.transform, rotateSensitivity, cameraTransform);
+        else
+            mouseRotation.LookRotation(transform, cameraSensitivity, cameraTransform);
+    
+    }
 
     void CalculatePlayerStats(StickingObject newStickingObject)
     {
         playerStats.Reset();
         stickingObject.RecrusiveCalculateStats(playerStats);
     }
-
-
-    //private void Move()
-    //{
-    //    float upFactor = 0;
-    //    if (Input.GetKey(KeyCode.Q))
-    //        upFactor = 1;
-    //    else if (Input.GetKey(KeyCode.E))
-    //        upFactor = -1;
-
-    //    Vector3 input = new Vector3(Input.GetAxis("Horizontal"), upFactor, Input.GetAxis("Vertical"));
-
-    //    if (input.magnitude > 1)
-    //        input.Normalize();
-
-    //    Vector3 direction = transform.TransformDirection(input);
-    //    transform.position += direction * moveSpeed * Time.deltaTime;
-    //}
 
     private void Move(float x, float y)
     {

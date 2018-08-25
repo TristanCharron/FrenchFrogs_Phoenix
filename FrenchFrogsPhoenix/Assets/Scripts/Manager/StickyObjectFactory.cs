@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StickyObjectGenerator : MonoBehaviour {
+public class StickyObjectFactory : MonoBehaviour {
 
     [Header("Spawn params")]
     [SerializeField] float radiusSpawn = 25;
@@ -12,6 +12,9 @@ public class StickyObjectGenerator : MonoBehaviour {
     [SerializeField] StickingObject prefabStickingObjet;
     [SerializeField] float spinMagnitude;
     [SerializeField] float vectorMagnitude;
+
+    [SerializeField] MeshRenderer[] meshPrefabs;
+    [SerializeField] Material[] materials;
 
     float currentTimerSpawn = 0;
 
@@ -32,5 +35,18 @@ public class StickyObjectGenerator : MonoBehaviour {
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
+
+        Material material = materials[Random.Range(0, materials.Length)];
+        SetMeshChild(stickingObject, material);
+    }
+
+    private void SetMeshChild(StickingObject stickingObject, Material material)
+    {
+        int randomMeshIndex = Random.Range(0, meshPrefabs.Length);
+        MeshRenderer meshModel = Instantiate(meshPrefabs[randomMeshIndex], Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
+        meshModel.transform.SetParent(stickingObject.transform);
+        meshModel.transform.localPosition = Vector3.zero;
+        meshModel.material = material;
+        stickingObject.SetMeshChild(meshModel.transform);
     }
 }
