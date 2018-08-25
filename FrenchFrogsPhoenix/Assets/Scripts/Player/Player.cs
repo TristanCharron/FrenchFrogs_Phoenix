@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
         OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
 
         stickingObject.SetFirstStickingchild(this);
+        stickingObject.SetMeshChild(nullCore);
     }
 
     public void Spawn(PlayerType type,string ID)
@@ -63,7 +64,6 @@ public class Player : MonoBehaviour {
 
     void RightStickHandle(float x, float y)
     {
-        Debug.Log("x = " + x + " / y = " + y);
         //Vector3 cameraTransform = playerCamera.transform.InverseTransformDirection(new Vector3(-y, -x, 0));
         Vector3 cameraTransform = new Vector3(-y, x, 0);
 

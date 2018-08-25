@@ -261,7 +261,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971862175310614}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
@@ -386,7 +386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactBlobiness: 0
   impactPropagation: 0.8
-  childMeshTransform: {fileID: 0}
 --- !u!114 &114942724250305092
 MonoBehaviour:
   m_ObjectHideFlags: 1
