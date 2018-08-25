@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
 
     public MouseRotation mouseRotation = new MouseRotation();
+    public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
 
     [SerializeField] Camera cam;
     [SerializeField] StickingObject stickingObject;
@@ -13,9 +15,16 @@ public class Player : MonoBehaviour {
 
     [SerializeField] float moveSpeed;
 
+    public ObjectStats playerStats;
+
 	void Start ()
     {
-        stickingObject.SetParent(stickingObject);
+        stickingObject.SetParent(stickingObject, this);
+        playerStats = new ObjectStats();
+
+        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats(newStickingObject));
+
+        CalculatePlayerStats(stickingObject);
     }
 
     private void Update()
@@ -26,6 +35,12 @@ public class Player : MonoBehaviour {
             mouseRotation.LookRotation(stickingObject.transform, rotateSensitivity);
         else
             mouseRotation.LookRotation(transform, cameraSensitivity);
+    }
+
+    public void CalculatePlayerStats(StickingObject newStickingObject)
+    {
+        playerStats.Reset();
+        stickingObject.RecrusiveCalculateStats(playerStats);
     }
 
     private void Move()
@@ -45,3 +60,6 @@ public class Player : MonoBehaviour {
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 }
+
+[System.Serializable]
+public class StickingObjectEvent : UnityEvent<StickingObject> {}
