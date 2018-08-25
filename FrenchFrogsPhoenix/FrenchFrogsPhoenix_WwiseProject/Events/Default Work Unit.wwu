@@ -17,6 +17,20 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Menu" ID="{CBB7A600-B4C9-4949-9A73-40A4660E7949}">
+					<ChildrenList>
+						<Action Name="" ID="{F03661B4-A15B-4047-87AE-B26183B4ADCE}" ShortID="779084145">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="New Music Playlist Container" ID="{55286CA9-BF51-45F1-9CC5-3E52B5EA2AEC}" WorkUnitID="{6CB548DE-1F6C-497A-B41D-B038FC41C64C}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
