@@ -29,7 +29,7 @@ public class StickyObjectGenerator : MonoBehaviour {
     {
         StickingObject stickingObject = Instantiate(prefabStickingObjet, Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
 
-        Rigidbody rigidBody = stickingObject.rb; // GetComponent<Rigidbody>();
+        Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
     }
