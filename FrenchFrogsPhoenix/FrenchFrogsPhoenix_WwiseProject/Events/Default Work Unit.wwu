@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" SchemaVersion="89">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Stick" ID="{39282F11-1D4D-4E54-9405-E7A49FB52332}">
+					<ChildrenList>
+						<Action Name="" ID="{7837EC4D-6757-4B41-9B73-FD7F054DC73A}" ShortID="624129407">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Stick" ID="{CB90534E-FBA9-444C-9192-B60DCA1EB774}" WorkUnitID="{90EBE803-9D53-461F-941A-80406BDFED78}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
