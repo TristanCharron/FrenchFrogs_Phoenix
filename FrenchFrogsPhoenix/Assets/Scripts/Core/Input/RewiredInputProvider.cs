@@ -21,24 +21,18 @@ public class RewiredInputProvider : MonoBehaviour
 
     private void Awake()
     {
-        //EventManager.Subscribe<InputActionEventData>(EVT_INPUT_PRESS_DOWN, (actionName) =>
-        //{
-        //    Debug.Log(actionName);
-        //});
-
+     
         player = ReInput.players.GetPlayer(playerID);
-
-        
 
         for(int i = 0; i < ReInput.mapping.Actions.Count; i++)
         {
-            Debug.Log(ReInput.mapping.Actions[i].name);
-            player.AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed, ReInput.mapping.Actions[i].name);
-            player.AddInputEventDelegate(OnButton, UpdateLoopType.Update, InputActionEventType.Update, ReInput.mapping.Actions[i].name);
+           player.AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed, ReInput.mapping.Actions[i].name);
+           player.AddInputEventDelegate(OnButton, UpdateLoopType.Update, InputActionEventType.Update, ReInput.mapping.Actions[i].name);
         }
 
      
     }
+
 
     private void OnButtonDown(InputActionEventData obj)
     {
