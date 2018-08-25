@@ -37,7 +37,7 @@ public class PlayerFactory : MonoBehaviour {
         for (int i = 0; i < 10; i++)
         {
             yield return new WaitForSeconds(0.5f);
-            SpawnPlayer(PlayerType.AI, (Vector3.one * i) + new Vector3(5, 5, 5), Quaternion.identity);
+            SpawnPlayer(PlayerType.AI, UnityEngine.Random.insideUnitSphere * 200, Quaternion.identity);
         }
         yield break;
     }

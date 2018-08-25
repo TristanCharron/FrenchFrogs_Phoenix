@@ -16,7 +16,7 @@ public class GameplayState : FSMState {
 
     public override void UpdateState()
     {
-        Debug.Log("Gameplay");
+        //Debug.Log("Gameplay");
     }
 
 }
