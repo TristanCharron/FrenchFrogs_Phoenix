@@ -19,24 +19,42 @@ public class Player : MonoBehaviour {
     float maxDistanceStickingObject;
     public ObjectStats playerStats;
 
-    BaseInput input;
+    public BaseInput input;
+
+   
+    //Tristan add 
+    public string ID { private set; get; }
 
     void Start ()
     {
         playerStats = new ObjectStats();
+
+        if (playerCamera != null)
         playerCamera.player = this;
 
         OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats(newStickingObject));
         OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
 
         stickingObject.SetFirstStickingchild(this);
-
-        SetInput();
     }
 
-    void SetInput()
+    //Tristan add 
+    public void Spawn(PlayerType type,string ID)
     {
-        input = new PlayerInput(0);
+        switch (type)
+        {
+            case PlayerType.AI:
+                
+                //Add AI Input
+                input = new AIInput();
+                break;
+            case PlayerType.HUMAN:
+
+                input = new PlayerInput(0);
+                break;
+            default:
+                break;
+        }
 
         input.SetActive(true);
 
@@ -46,7 +64,11 @@ public class Player : MonoBehaviour {
         {
             mouseRotation.LookRotation(transform, cameraSensitivity, x, y);
         });
+
+        this.ID = ID;
     }
+
+ 
 
     //private void Update()
     //{
