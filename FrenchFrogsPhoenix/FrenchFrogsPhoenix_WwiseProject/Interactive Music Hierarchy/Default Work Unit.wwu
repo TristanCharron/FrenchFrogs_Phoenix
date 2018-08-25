@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{6CB548DE-1F6C-497A-B41D-B038FC41C64C}" SchemaVersion="89">
 	<InteractiveMusic>
-		<WorkUnit Name="Default Work Unit" ID="{6CB548DE-1F6C-497A-B41D-B038FC41C64C}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{6CB548DE-1F6C-497A-B41D-B038FC41C64C}" PersistMode="Standalone">
+			<ChildrenList>
+				<MusicPlaylistContainer Name="New Music Playlist Container" ID="{55286CA9-BF51-45F1-9CC5-3E52B5EA2AEC}" ShortID="960096011">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicSegment Name="1808_FF_techScienceJam_v1" ID="{13D712B7-BAD1-4813-B948-0580C90186AD}" ShortID="19125730">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="116869.541666667"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="1808_FF_techScienceJam_v1" ID="{7266A771-41AF-4865-A352-320525C03C83}" ShortID="701706667">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="1808_FF_techScienceJam_v1" ID="{34E297F7-5ED9-43C8-A17A-7C4CA013B8CC}" ShortID="368136654">
+											<Language>SFX</Language>
+											<AudioFile>1808_FF_techScienceJam_v1.wav</AudioFile>
+										</AudioFileSource>
+									</ChildrenList>
+									<TransitionList>
+										<MusicTransition Name="Root" ID="{2B9BF14A-14A2-4769-9311-BFBB84942429}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</TransitionList>
+									<SequenceList>
+										<MusicTrackSequence Name="" ID="{10994F57-8693-485D-A52F-8F158A3F5EA6}">
+											<ClipList>
+												<MusicClip Name="1808_FF_techScienceJam_v1" ID="{B27821AF-2CF5-4082-A937-206C3AFA8065}">
+													<PropertyList>
+														<Property Name="EndTrimOffset" Type="Real64" Value="116869.541666667"/>
+														<Property Name="FadeInMode" Type="int16" Value="0"/>
+														<Property Name="FadeOutMode" Type="int16" Value="0"/>
+													</PropertyList>
+													<AudioSourceRef Name="1808_FF_techScienceJam_v1" ID="{34E297F7-5ED9-43C8-A17A-7C4CA013B8CC}"/>
+												</MusicClip>
+											</ClipList>
+										</MusicTrackSequence>
+									</SequenceList>
+								</MusicTrack>
+							</ChildrenList>
+							<CueList>
+								<MusicCue Name="Entry Cue" ID="{394FFD5E-BC16-4A1B-950A-381240FA5F30}"/>
+								<MusicCue Name="Exit Cue" ID="{47D095D8-F2E1-4893-9E4E-4F6B73E75A29}">
+									<PropertyList>
+										<Property Name="CueType" Type="int16" Value="1"/>
+										<Property Name="TimeMs" Type="Real64" Value="116869.541666667"/>
+									</PropertyList>
+								</MusicCue>
+							</CueList>
+						</MusicSegment>
+					</ChildrenList>
+					<TransitionList>
+						<MusicTransition Name="Root" ID="{D4CD61E2-C2AA-4678-9D81-ED9E428E4FF4}">
+							<PropertyList>
+								<Property Name="IsFolder" Type="bool" Value="True"/>
+							</PropertyList>
+							<ChildrenList>
+								<MusicTransition Name="Transition" ID="{62523ACB-16DE-40B3-B2F5-1CA3E57C310A}">
+									<TransitionInfo/>
+								</MusicTransition>
+							</ChildrenList>
+							<TransitionInfo/>
+						</MusicTransition>
+					</TransitionList>
+					<Playlist>
+						<MusicPlaylistItem Name="" ID="{6D3102CA-44F2-428A-835D-ABA98D36F2EF}" ShortID="332964226">
+							<PropertyList>
+								<Property Name="LoopCount" Type="int16" Value="0"/>
+							</PropertyList>
+							<ChildrenList>
+								<MusicPlaylistItem Name="" ID="{E812A265-1338-4D6F-B850-6F16F35072CC}" ShortID="132851112">
+									<PropertyList>
+										<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+									</PropertyList>
+									<SegmentRef Name="1808_FF_techScienceJam_v1" ID="{13D712B7-BAD1-4813-B948-0580C90186AD}"/>
+								</MusicPlaylistItem>
+							</ChildrenList>
+						</MusicPlaylistItem>
+					</Playlist>
+				</MusicPlaylistContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</InteractiveMusic>
 </WwiseDocument>
