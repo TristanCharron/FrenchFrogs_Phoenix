@@ -17,7 +17,7 @@ public class MouseRotation
         float yRot = Input.GetAxis("Mouse X") * sensittivity;
         float xRot = Input.GetAxis("Mouse Y") * sensittivity;
 
-        Debug.Log(yRot + " " + xRot);
+        //Debug.Log(yRot + " " + xRot);
 
         Quaternion targetRotation = character.rotation;
 
