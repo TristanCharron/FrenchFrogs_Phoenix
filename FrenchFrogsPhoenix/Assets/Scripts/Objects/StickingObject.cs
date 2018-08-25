@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 public class StickingObject : MonoBehaviour {
 
     //Accesors
     public Rigidbody rb { get; protected set; }
-    public bool IsSticked { get { return StickingObjectParent != null; } }
-    public StickingObject StickingObjectParent { get; protected set; }
+    public bool IsSticked { get { return playerParent != null; } }
+
+    [SerializeField] float onImpactBlobiness;
 
     //Life
     int maxLife = 20;
     int currentLife;
 
     ObjectStats objectStats;
+    SinRotation sinRotation;
+
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
     Player playerParent;
 
@@ -27,6 +31,7 @@ public class StickingObject : MonoBehaviour {
     
         currentLife = maxLife;
         rb = GetComponent<Rigidbody>();
+        sinRotation = GetComponent<SinRotation>();
     }
 
     public void RecrusiveCalculateStats(ObjectStats playerStats)
@@ -38,9 +43,9 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
-    public void SetParent(StickingObject stickingParent, Player playerParent)
+    public void SetPlayerParent(Player playerParent)
     {
-        StickingObjectParent = stickingParent;
+        sinRotation.Initialize();
         this.playerParent = playerParent;
     }
 
@@ -57,15 +62,23 @@ public class StickingObject : MonoBehaviour {
     void Destroy()
     {
         DetatchChilds();
+        stickingObjectChilds.Clear();
         Destroy(gameObject);
     }
 
-    void StickingNewChild(StickingObject stickingChild)
+    public void SetFirstStickingchild(Player player)
     {
-        stickingChild.SetParent(this, playerParent);
+        SetPlayerParent(player);
+        playerParent.OnNewStickingObject.Invoke(this);
+    }
+
+    public void StickingNewChild(StickingObject stickingChild)
+    {
+        stickingChild.SetPlayerParent(playerParent);
 
         stickingObjectChilds.Add(stickingChild);
         stickingChild.transform.SetParent(transform, true);
+
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
@@ -76,7 +89,7 @@ public class StickingObject : MonoBehaviour {
     public void DetatchFromParent()
     {
         transform.SetParent(null, true);
-        StickingObjectParent = null;
+        playerParent = null;
 
         DetatchChilds();
 
@@ -102,7 +115,17 @@ public class StickingObject : MonoBehaviour {
             {
                 Debug.Log("collision");
                 StickingNewChild(stickingObject);
+
+                ShakeScale(transform);
+                ShakeScale(stickingObject.transform);
             }
         }
+    }
+
+    void ShakeScale(Transform transform)
+    {
+        transform.DOKill();
+        transform.localScale = Vector3.one;
+        transform.DOShakeScale(1, onImpactBlobiness, 20);
     }
 }
