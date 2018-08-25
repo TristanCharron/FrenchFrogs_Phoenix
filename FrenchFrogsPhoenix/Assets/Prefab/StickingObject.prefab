@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8929305140166c940904c2ffc5630dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
-  shakeFactor: 0.05
+  speed: 0.3
+  shakeFactor: 0.1
 --- !u!114 &114416602815232710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe2b83d437ca404c8ebb4cd180e2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactBlobiness: 0.1
-  impactPropagation: 0.8
+  impactBlobiness: 0.4
+  impactPropagation: 0.5
   childMeshTransform: {fileID: 4885567252513804}

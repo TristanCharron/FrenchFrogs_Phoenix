@@ -152,26 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114243647544942332, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
-        type: 2}
-      propertyPath: shakeFactor
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114416602815232710, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
-        type: 2}
-      propertyPath: impactBlobiness
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114243647544942332, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
-        type: 2}
-      propertyPath: speed
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114416602815232710, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
-        type: 2}
-      propertyPath: impactPropagation
-      value: 0.9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6eb0ae3d029e4fa478d179aa66f6530b, type: 2}
   m_IsPrefabAsset: 0
@@ -354,7 +334,7 @@ MonoBehaviour:
   nullCore: {fileID: 163325577}
   stickingObject: {fileID: 536559298}
   cameraSensitivity: 5
-  rotateSensitivity: 1
+  rotateSensitivity: 5
   moveSpeed: 5
   playerStats:
     speed: 0

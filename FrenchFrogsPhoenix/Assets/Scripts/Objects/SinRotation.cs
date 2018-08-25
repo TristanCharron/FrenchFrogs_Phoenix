@@ -11,6 +11,7 @@ public class SinRotation : MonoBehaviour
 
     Vector3 start;
     Vector3 end;
+    float sinTimer = 0;
 
     public void Initialize()
     {
@@ -25,7 +26,8 @@ public class SinRotation : MonoBehaviour
         if (!isActivated)
             return;
 
-        float sinTime = ((Mathf.Sin(Time.time * speed) + 1) * 0.5f) * shakeFactor;
-        transform.localEulerAngles = Vector3.Lerp(start, end, sinTime);
+        sinTimer += Time.deltaTime * speed;
+        float sinT = ((Mathf.Sin(sinTimer) + 1) * 0.5f) * shakeFactor;
+        transform.localEulerAngles = Vector3.Lerp(start, end, sinT);
     }
 }

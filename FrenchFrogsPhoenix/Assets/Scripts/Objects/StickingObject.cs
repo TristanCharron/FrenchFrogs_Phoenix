@@ -79,11 +79,11 @@ public class StickingObject : MonoBehaviour {
 
     public void StickingNewChild(StickingObject stickingChild)
     {
+        stickingChild.transform.SetParent(transform, true);
+
         stickingChild.SetParent(playerParent, this);
 
         stickingObjectChilds.Add(stickingChild);
-        stickingChild.transform.SetParent(transform, true);
-
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
@@ -121,8 +121,7 @@ public class StickingObject : MonoBehaviour {
                 Debug.Log("collision");
                 StickingNewChild(stickingObject);
 
-                ShakeScale(impactBlobiness, null);
-                stickingObject.ShakeScale(impactBlobiness, null);
+                ShakeScale(impactBlobiness, this);
             }
         }
     }
