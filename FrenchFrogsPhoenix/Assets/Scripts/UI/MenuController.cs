@@ -20,11 +20,11 @@ public class MenuController : MonoBehaviour {
                 SetActive(isActive);
             });
 
-        EventManager.Subscribe<InputActionEventData>(RewiredInputProvider.EVT_INPUT_PRESS_DOWN, (input) => {
+        EventManager.Subscribe<string>(RewiredInputProvider.EVT_INPUT_PRESS_DOWN, (input) => {
 
             if(isActive)
             {
-                if (input.actionName == "Fire")
+                if (input == "Fire")
                 {
                     Debug.Log("START GAME");
                     SetActive(false);

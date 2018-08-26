@@ -37,6 +37,11 @@ public class Player : MonoBehaviour {
         stickingObject.SetMeshChild(nullCore);
     }
 
+    private void Update()
+    {
+        input.Update();
+    }
+
     public void Spawn(PlayerType type,string ID)
     {
         switch (type)

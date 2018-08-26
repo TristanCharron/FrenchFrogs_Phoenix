@@ -26,7 +26,7 @@ public class RewiredInputProvider : MonoBehaviour
 
         for(int i = 0; i < ReInput.mapping.Actions.Count; i++)
         {
-           player.AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonJustPressed, ReInput.mapping.Actions[i].name);
+           player.AddInputEventDelegate(OnButtonDown, UpdateLoopType.Update, InputActionEventType.ButtonLongPressed, ReInput.mapping.Actions[i].name);
            player.AddInputEventDelegate(OnButton, UpdateLoopType.Update, InputActionEventType.Update, ReInput.mapping.Actions[i].name);
         }
 
