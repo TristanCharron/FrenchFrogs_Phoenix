@@ -87,10 +87,7 @@ public class AIPlayerFSM : FiniteStateMachine {
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
+ 
 
 
 

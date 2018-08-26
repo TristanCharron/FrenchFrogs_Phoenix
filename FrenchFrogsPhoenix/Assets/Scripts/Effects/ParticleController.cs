@@ -9,7 +9,7 @@ public class ParticleController : MonoBehaviour {
     public ParticleSystem startGameParticleSystem;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         instance = this;
 	}
 	

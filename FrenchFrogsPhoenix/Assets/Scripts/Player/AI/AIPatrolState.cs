@@ -100,6 +100,7 @@ public class AIPatrolState : AIPlayerFSMState
             if (!CachedStickingObject.IsSticked)
             {
                 ChasedObject = CachedStickingObject.gameObject.transform;
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
 
         }
@@ -109,9 +110,12 @@ public class AIPatrolState : AIPlayerFSMState
             {
                 ChasedObject = CachedPlayer.gameObject.transform;
                 Owner.SetChasedObject(ChasedObject.gameObject);
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
 
         }
+
+       
     }
 
 

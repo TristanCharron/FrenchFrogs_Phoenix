@@ -23,33 +23,30 @@ public class AIChaseState : AIPlayerFSMState
 
 
 
-            Debug.Log(9);
+            timeElapsed += Time.deltaTime;
+
+            if (timeElapsed > 5)
+            {
+                Owner.ChangeFSMState(AIPlayerStates.PATROL);
+                timeElapsed = 0;
+            }
+
 
             if (Owner.ChasedObject != null)
             {
                 Vector3 relativePos = Owner.ChasedObject.transform.position - CachedTransform.position;
-                Quaternion rotation = Quaternion.LookRotation(relativePos);
 
-                Debug.Log(rotation);
+                float dotForward = Vector3.Dot(relativePos, CachedTransform.forward);
+                float dotRight = Vector3.Dot(relativePos, CachedTransform.right);
+                float dotUp= Vector3.Dot(relativePos, CachedTransform.up);
 
-               
+                currentX = Mathf.MoveTowards(currentX, dotUp, Time.deltaTime * 2);
+                currentY = Mathf.MoveTowards(currentY, dotRight, Time.deltaTime * 2);
 
-                currentX = Mathf.MoveTowards(currentX, destX, Time.deltaTime * 2);
-                currentY = Mathf.MoveTowards(currentY, destY, Time.deltaTime * 2);
-
-                AIPlayer.input.PressLeftStick(currentX, currentY);
-                AIPlayer.input.PressRightStick(currentX, currentY);
+                AIPlayer.input.PressLeftStick(0, dotForward);
+                AIPlayer.input.PressRightStick(dotRight, dotUp);
             }
-            else
-            {
-                timeElapsed += Time.deltaTime;
-
-                if (timeElapsed > 2)
-                {
-                    Owner.ChangeFSMState(AIPlayerStates.PATROL);
-                }
-               
-            }
+       
 
         }
     }
@@ -77,7 +74,6 @@ public class AIChaseState : AIPlayerFSMState
             if (!CachedStickingObject.IsSticked)
             {
                 ChasedObject = CachedStickingObject.gameObject.transform;
-                timeElapsed = 0;
             }
 
         }
@@ -86,19 +82,12 @@ public class AIChaseState : AIPlayerFSMState
             if (CachedPlayer != AIPlayer)
             {
                 ChasedObject = CachedPlayer.gameObject.transform;
-                timeElapsed = 0;
             }
 
         }
-    }
-
-    protected void OnTriggerExit(Collider collision)
-    {
-        ChasedObject = null;
-       
 
     }
 
-
+  
 
 }

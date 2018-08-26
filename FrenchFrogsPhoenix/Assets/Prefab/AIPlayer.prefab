@@ -75,11 +75,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4350645292075924}
   - component: {fileID: 54190944460755374}
-  - component: {fileID: 65898168224482640}
   - component: {fileID: 114765449010882864}
   - component: {fileID: 114045618630464412}
   - component: {fileID: 114252084749834876}
   - component: {fileID: 114353896556867026}
+  - component: {fileID: 135270811105467874}
   m_Layer: 0
   m_Name: AIPlayer
   m_TagString: Untagged
@@ -254,18 +254,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65898168224482640
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971862175310614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!65 &65905528211254328
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -318,6 +306,7 @@ MonoBehaviour:
   paddingZ: 4.5
   ajustCameraTime: 1
   ajustCameraEase: 9
+  cameraRef: {fileID: 0}
   player: {fileID: 114765449010882864}
 --- !u!114 &114252084749834876
 MonoBehaviour:
@@ -456,3 +445,15 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 1
       enableBigTilePrepass: 1
       isFptlEnabled: 1
+--- !u!135 &135270811105467874
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971862175310614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
