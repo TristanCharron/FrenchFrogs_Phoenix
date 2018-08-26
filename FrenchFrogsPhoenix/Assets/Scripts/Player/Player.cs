@@ -35,6 +35,13 @@ public class Player : MonoBehaviour {
 
         stickingObject.SetFirstStickingchild(this);
         stickingObject.SetMeshChild(nullCore);
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
+        });
+
+        UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
     }
 
     private void Update()
@@ -59,7 +66,7 @@ public class Player : MonoBehaviour {
                 break;
         }
 
-        input.SetActive(true);
+        input.SetActive(false);
 
         input.LeftStick.AddEvent(Move);
         input.RightStick.AddEvent(RightStickHandle);

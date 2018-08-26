@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using Rewired;
 
 public class MenuController : MonoBehaviour {
 
-    [SerializeField]
-    TextMeshProUGUI MenuText;
+    [SerializeField] Text startGameTxt;
+    //TextMeshProUGUI MenuText;
 
     bool isActive = false;
 
@@ -42,7 +42,6 @@ public class MenuController : MonoBehaviour {
 
     private void SetActive(bool active)
     {
-        MenuText.gameObject.GetComponent<CanvasGroup>().alpha = active ? 1 : 0;
         isActive = active;
     }
 

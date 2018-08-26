@@ -380,10 +380,11 @@ MonoBehaviour:
   paddingZ: 4.5
   ajustCameraTime: 1
   ajustCameraEase: 9
+  cameraRef: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114439483254541874
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143810750115418}
