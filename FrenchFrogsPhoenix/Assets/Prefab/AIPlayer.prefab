@@ -1202,9 +1202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   isDebug: 0
-  AiPlayerStates:
-  - {fileID: 114252084749834876}
-  - {fileID: 114353896556867026}
   player: {fileID: 114765449010882864}
 --- !u!114 &114202005427288870
 MonoBehaviour:
@@ -1472,6 +1469,7 @@ MonoBehaviour:
   laserCollider: {fileID: 136126801920576580}
   player: {fileID: 114765449010882864}
   lineRenderer: {fileID: 120701215929333742}
+  laserCostPerSecond: 5
 --- !u!114 &114353896556867026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1653,13 +1651,28 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: StickingObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnWarpAcceleration:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnWarpStopAcceleration:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   worldPlayerStats: {fileID: 114523648388649878}
   playerCamera: {fileID: 0}
   nullCore: {fileID: 4803196025763014}
   stickingObject: {fileID: 114202005427288870}
   cameraSensitivity: 5
   rotateSensitivity: 1
-  moveSpeed: 0
+  mouvementSettings:
+    baseMoveSpeed: 5
+    baseAcceleration: 10
+    warpBoostMultiplyer: 3
+    warpCostPerSecond: 10
+    isWarpAcceleration: 0
   playerStats:
     mass: 0
     energy: 0

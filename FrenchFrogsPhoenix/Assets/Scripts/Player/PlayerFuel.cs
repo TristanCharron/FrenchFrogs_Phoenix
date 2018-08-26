@@ -49,6 +49,11 @@ public class PlayerFuel : MonoBehaviour {
         SetFuel(CurrentFuel - fuel);
     }
 
+    void InvokeFuel()
+    {
+        EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel);
+    }
+
     public FuelStates SetFuel(float fuel)
     {
         if(IsActive)
