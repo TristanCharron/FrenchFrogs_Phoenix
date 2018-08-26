@@ -2442,30 +2442,7 @@ Prefab:
       propertyPath: m_Name
       value: 'StickiyOBjectFactory '
       objectReference: {fileID: 0}
-    - target: {fileID: 114367877765999908, guid: 63221fd1945ba1642be08f3742818723,
-        type: 2}
-      propertyPath: radiusSpawn
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114367877765999908, guid: 63221fd1945ba1642be08f3742818723,
-        type: 2}
-      propertyPath: timerSpawn
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885372145439546, guid: 63221fd1945ba1642be08f3742818723, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885372145439546, guid: 63221fd1945ba1642be08f3742818723, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885372145439546, guid: 63221fd1945ba1642be08f3742818723, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 212510726626137902, guid: 63221fd1945ba1642be08f3742818723, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63221fd1945ba1642be08f3742818723, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1543180635
@@ -2660,6 +2637,21 @@ Prefab:
       propertyPath: environmentContainer
       value: 
       objectReference: {fileID: 985975528}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.z
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9142f88d0f28f148b25628041c18af0, type: 2}
   m_IsPrefabAsset: 0
