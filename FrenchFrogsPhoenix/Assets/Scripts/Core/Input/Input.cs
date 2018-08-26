@@ -9,6 +9,7 @@ public class InputButton
 {
     public string Name { private set; get; }
     public int ID { private set; get; }
+    public bool IsPressed { private set; get; }
 
     Action OnPress;
 
@@ -27,6 +28,16 @@ public class InputButton
     {
         if (OnPress != null)
             OnPress();
+    }
+
+    public void Update(bool isPressed)
+    {
+        IsPressed = isPressed;
+
+        if (isPressed)
+        {
+            Press();
+        }
     }
 }
 
@@ -75,14 +86,19 @@ public abstract class BaseInput
     public InputButton BoostButton { protected set; get; }
     public InputStick LeftStick { protected set; get; }
     public InputStick RightStick  { protected set; get; }
+
+    public List<InputButton> ButtonList { protected set; get; }
   
     public abstract void Update();
 
     public BaseInput()
     {
+      
         FireButton = new InputButton("Fire", RewiredConsts.Action.Fire);
         BoostButton = new InputButton("Boost", RewiredConsts.Action.Boost);
-
+        ButtonList = new List<InputButton>();
+        ButtonList.Add(FireButton);
+        ButtonList.Add(BoostButton);
         LeftStick = new InputStick();
         RightStick = new InputStick();
     }
@@ -106,6 +122,7 @@ public abstract class BaseInput
         RightStick.SetY(y);
         RightStick.Press();
     }
+
 }
 
 
