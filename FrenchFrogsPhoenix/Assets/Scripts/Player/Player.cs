@@ -21,9 +21,9 @@ public class Player : MonoBehaviour {
     [SerializeField] float cameraSensitivity = 2;
     [SerializeField] float rotateSensitivity = 0.01f;
 
-    [SerializeField] float baseMoveSpeed = 5;
-    [SerializeField] float baseAcceleration = 2;
+    [SerializeField] MouvementSettings mouvementSettings;
     Vector3 currentVelocity = Vector3.zero;
+
 
     float maxDistanceStickingObject;
     public ObjectStats playerStats;
@@ -127,23 +127,38 @@ public class Player : MonoBehaviour {
 
         Vector3 direction = transform.TransformDirection(input);
         if (input.magnitude == 0)
-            currentVelocity -= direction * baseAcceleration * Time.deltaTime;
-        else
-            currentVelocity += direction * baseAcceleration * Time.deltaTime;
-
-        if (currentVelocity.magnitude > baseMoveSpeed)
-            currentVelocity = currentVelocity.normalized * baseMoveSpeed;
+        {
+            currentVelocity -= direction * mouvementSettings.baseAcceleration * Time.deltaTime;
+        }
+        else if (currentVelocity.magnitude < mouvementSettings.GetMaxSpeed())
+        {
+            currentVelocity += direction * mouvementSettings.CalculateAcceleration() * Time.deltaTime;
+        }
 
         transform.position += currentVelocity * Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            WarpAcceleration();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            StopWarpAcceleration();
+        }
     }
 
     void WarpAcceleration()
     {
         OnWarpAcceleration.Invoke();
+        mouvementSettings.isWarpAcceleration = true;
     }
 
     void StopWarpAcceleration()
     {
+        mouvementSettings.isWarpAcceleration = false;
+        if (currentVelocity.magnitude > mouvementSettings.GetMaxSpeed())
+            currentVelocity = currentVelocity.normalized * mouvementSettings.GetMaxSpeed();
+
         OnWarpStopAcceleration.Invoke();
     }
 
