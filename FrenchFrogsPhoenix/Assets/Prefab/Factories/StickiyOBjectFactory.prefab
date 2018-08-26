@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee275e651547a34b9466102f8213174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusSpawn: 25
-  timerSpawn: 3
+  radiusSpawn: 500
+  timerSpawn: 2
   prefabStickingObjet: {fileID: 114416602815232710, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
     type: 2}
   spinMagnitude: 5
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1526844380085480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

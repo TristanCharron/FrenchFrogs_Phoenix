@@ -28,13 +28,6 @@ public class CanvasFader : MonoBehaviour {
 				grp.interactable = false;
 				grp.blocksRaycasts = false;
 			}
-		} else {
-			/*grp.alpha = 1f;
-
-			if(overrideInteractivity){
-				grp.interactable = true;
-				grp.blocksRaycasts = true;
-			}*/
 		}
 	}
 

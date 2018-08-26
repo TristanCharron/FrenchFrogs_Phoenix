@@ -11,9 +11,18 @@ public class PlayerCamera : MonoBehaviour {
     [SerializeField] float ajustCameraTime = 1;
     [SerializeField] Ease ajustCameraEase;
 
+    public Camera cameraRef;
     public Player player;
 
     float maxDistanceStickingObject;
+
+    private void Awake()
+    {
+        if(cameraRef == null)
+        {
+            cameraRef = GetComponent<Camera>();
+        }
+    }
 
     public void CalculateDistanceCamera(StickingObject newStickingObject)
     {

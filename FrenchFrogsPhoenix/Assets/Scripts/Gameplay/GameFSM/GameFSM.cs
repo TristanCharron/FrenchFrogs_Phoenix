@@ -20,7 +20,7 @@ public class GameFSM : FiniteStateMachine
     private FSMState[] GameStates;
 
 
-    protected override void Start()
+    protected void Awake()
     {
         for(int i = 0; i < GameStates.Length; i++)
         {
@@ -36,12 +36,6 @@ public class GameFSM : FiniteStateMachine
 
 
     }
-
- 
-
-
-
-
 }
 
 
