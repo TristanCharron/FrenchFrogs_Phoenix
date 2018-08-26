@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StickyObjectFactory : MonoBehaviour {
 
+    [SerializeField] int numberSpawn = 2000;
+    [SerializeField] int initialCount = 100;
+
     [Header("Spawn params")]
     [SerializeField] float radiusSpawn = 25;
     [SerializeField] float timerSpawn = 5;
@@ -18,6 +21,8 @@ public class StickyObjectFactory : MonoBehaviour {
 
     float currentTimerSpawn = 0;
 
+    Queue<StickingObject> stickyQueue = new Queue<StickingObject>();
+
 	void Update ()
     {
         currentTimerSpawn += Time.deltaTime;
@@ -28,27 +33,68 @@ public class StickyObjectFactory : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < numberSpawn; i++)
+        {
+            SetToPool();
+        }
+        for (int i = 0; i < initialCount; i++)
+        {
+            SpawnObject();
+        }
+    }
+
+    public void DestroyObject(StickingObject stickingObject)
+    {
+        stickingObject.gameObject.SetActive(false);
+        stickingObject.transform.SetParent(transform);
+    }
+
     void SpawnObject()
     {
-        StickingObject stickingObject = Instantiate(prefabStickingObjet, Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
+        StickingObject stickingObject = stickyQueue.Dequeue();
 
-        stickingObject.transform.SetParent(transform);
-            
+        if (stickingObject == null)
+            return;
+
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
 
-        Material material = materials[Random.Range(0, materials.Length)];
+        stickingObject.transform.position = Random.insideUnitSphere * radiusSpawn;
+
+        stickingObject.gameObject.SetActive(true);
+    }
+
+    void SetToPool()
+    {
+        StickingObject stickingObject = Instantiate(prefabStickingObjet, transform.position, Quaternion.identity);
+        stickingObject.Factory = this;
+        //Rigidbody rigidBody = stickingObject.rb;
+        //rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
+        //rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
+
+        int materialRandom = Random.Range(0, materials.Length);
+        Material material = materials[materialRandom];
         MeshRenderer mesh = SetMeshChild(stickingObject, material);
 
         float randomSize = Random.Range(.1f, 2f);
         ObjectStats stats = new ObjectStats();
+        stats.SetType((ObjectStats.Type)materialRandom);
 
         stats *= randomSize;
         stickingObject.SetObjectStats(stats);
 
         stickingObject.transform.localScale *= randomSize;
+
+        stickingObject.transform.SetParent(transform);
+
+        stickyQueue.Enqueue(stickingObject);
+        stickingObject.gameObject.SetActive(false);
     }
+
+
 
     private MeshRenderer SetMeshChild(StickingObject stickingObject, Material material)
     {
