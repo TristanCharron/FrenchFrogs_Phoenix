@@ -148,18 +148,21 @@ public class Player : MonoBehaviour {
             currentVelocity += direction * mouvementSettings.CalculateAcceleration() * Time.deltaTime;
         }
 
-        if (input.BoostButton.IsPressed)
+        Debug.Log(input.BoostButton.IsPressed);
+        bool isPress = Input.GetKeyDown(KeyCode.LeftShift);
+
+        if (isPress)
         {
             if(!mouvementSettings.isWarpAcceleration)
                 WarpAcceleration();
 
             Fuel.RemoveFuel(mouvementSettings.warpCostPerSecond * Time.deltaTime);
         }
-        else if(!input.BoostButton.IsPressed && mouvementSettings.isWarpAcceleration)
+        else if (!isPress)
         {
-            StopWarpAcceleration();
+            if (mouvementSettings.isWarpAcceleration)
+                StopWarpAcceleration();
         }
-
         transform.position += currentVelocity * Time.deltaTime;
     }
 

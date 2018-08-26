@@ -106,7 +106,6 @@ public class StickyObjectFactory : MonoBehaviour {
 
         stickingObject.gameObject.SetActive(true);
         listUsedStickyObject.Add(stickingObject);
-
     }
 
     void SetToPool()

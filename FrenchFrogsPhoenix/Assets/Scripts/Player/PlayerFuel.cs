@@ -49,16 +49,12 @@ public class PlayerFuel : MonoBehaviour {
         SetFuel(CurrentFuel - fuel);
     }
 
-    void InvokeFuel()
-    {
-        EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel);
-    }
-
     public FuelStates SetFuel(float fuel)
     {
         if(IsActive)
             CurrentFuel = Mathf.Clamp(fuel, 0, _MaxFuel);
 
+        EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel);
         return GetFuelState();
     }
 
@@ -67,7 +63,6 @@ public class PlayerFuel : MonoBehaviour {
         if(CurrentFuel <= 0)
         {
             return FuelStates.EMPTY;
-            
         }
         if(CurrentFuel < _CriticalFuel)
         {
@@ -78,6 +73,4 @@ public class PlayerFuel : MonoBehaviour {
             return FuelStates.NORMAL;
         }
     }
-
-   
 }
