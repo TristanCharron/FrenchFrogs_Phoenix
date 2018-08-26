@@ -276,7 +276,6 @@ GameObject:
   - component: {fileID: 114004743625958964}
   - component: {fileID: 135429994387137364}
   - component: {fileID: 114597357093132542}
-  - component: {fileID: 114296806001031078}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -1196,14 +1195,15 @@ MonoBehaviour:
   rotateSensitivity: 5
   mouvementSettings:
     baseMoveSpeed: 5
-    baseAcceleration: 2
+    baseAcceleration: 5
     warpBoostMultiplyer: 3
+    warpCostPerSecond: 10
     isWarpAcceleration: 0
   playerStats:
     mass: 0
     energy: 0
     power: 0
-  currentType: 0
+  currentType: 1
 --- !u!114 &114176680261489476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1218,20 +1218,7 @@ MonoBehaviour:
   laserCollider: {fileID: 136562548871153646}
   player: {fileID: 114004743625958964}
   lineRenderer: {fileID: 120839106457773694}
---- !u!114 &114296806001031078
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655789533577904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ff1dec66648de45894b57e99d0c1c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _MaxFuel: 100
-  _CriticalFuel: 20
-  _FuelComsumptionRate: 0
+  laserCostPerSecond: 5
 --- !u!114 &114392071621099488
 MonoBehaviour:
   m_ObjectHideFlags: 1

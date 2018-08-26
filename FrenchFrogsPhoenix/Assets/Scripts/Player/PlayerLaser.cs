@@ -7,6 +7,7 @@ public class PlayerLaser : MonoBehaviour {
     [SerializeField] Collider laserCollider;
     [SerializeField] Player player;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] float laserCostPerSecond = 5;
 
     LaserData laserData;
 
@@ -17,8 +18,6 @@ public class PlayerLaser : MonoBehaviour {
     {
         laserData = new LaserData();
         laserData.damage = 5;
-
-       
     }
 
     private void Update()
@@ -34,6 +33,9 @@ public class PlayerLaser : MonoBehaviour {
     {
         laserCollider.enabled = show;
         lineRenderer.enabled = show;
+
+        if(show)
+            player.Fuel.RemoveFuel(laserCostPerSecond * Time.deltaTime);
     }
 
     private void OnTriggerStay(Collider other)

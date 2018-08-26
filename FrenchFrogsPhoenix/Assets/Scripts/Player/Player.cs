@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
 
     void Start ()
     {
+        Fuel = GetComponent<PlayerFuel>();
         playerStats = new ObjectStats();
 
         if (playerCamera != null)
@@ -63,8 +64,6 @@ public class Player : MonoBehaviour {
         {
             UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
         }
-
-        StopWarpAcceleration();
     }
 
     private void Update()
@@ -124,31 +123,39 @@ public class Player : MonoBehaviour {
         else if (Input.GetKey(KeyCode.E))
             upFactor = -1;
 
-        Vector3 input = new Vector3(x, upFactor, y);
+        Vector3 joyInput = new Vector3(x, upFactor, y);
 
-        if (input.magnitude > 1)
-            input.Normalize();
+        if (joyInput.magnitude > 1)
+            joyInput.Normalize();
 
-        Vector3 direction = transform.TransformDirection(input);
-        if (input.magnitude == 0)
+        Vector3 direction = transform.TransformDirection(joyInput);
+        if (joyInput.magnitude == 0)
         {
             currentVelocity -= direction * mouvementSettings.baseAcceleration * Time.deltaTime;
         }
-        else if (currentVelocity.magnitude < mouvementSettings.GetMaxSpeed())
+
+        if (currentVelocity.magnitude > mouvementSettings.GetMaxSpeed())
+        {
+            currentVelocity = currentVelocity.normalized * mouvementSettings.GetMaxSpeed();
+        }
+        else
         {
             currentVelocity += direction * mouvementSettings.CalculateAcceleration() * Time.deltaTime;
         }
 
-        transform.position += currentVelocity * Time.deltaTime;
-
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (input.BoostButton.IsPressed)
         {
-            WarpAcceleration();
+            if(!mouvementSettings.isWarpAcceleration)
+                WarpAcceleration();
+
+            Fuel.RemoveFuel(mouvementSettings.warpCostPerSecond * Time.deltaTime);
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if(!input.BoostButton.IsPressed && mouvementSettings.isWarpAcceleration)
         {
             StopWarpAcceleration();
         }
+
+        transform.position += currentVelocity * Time.deltaTime;
     }
 
     void WarpAcceleration()
