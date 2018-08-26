@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 114004743625958964}
   - component: {fileID: 135429994387137364}
   - component: {fileID: 114597357093132542}
+  - component: {fileID: 114296806001031078}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -288,13 +289,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143810750115418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -4.51}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 3.5, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4596687017366014}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!20 &20769517733493100
 Camera:
   m_ObjectHideFlags: 1
@@ -567,6 +568,20 @@ MonoBehaviour:
   laserCollider: {fileID: 136562548871153646}
   player: {fileID: 114004743625958964}
   lineRenderer: {fileID: 120839106457773694}
+--- !u!114 &114296806001031078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655789533577904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ff1dec66648de45894b57e99d0c1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxFuel: 100
+  _CriticalFuel: 20
+  _FuelComsumptionRate: 0
 --- !u!114 &114392071621099488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -578,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cc3c69f1df9b5419802e0a6df61afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingY: 1.5
+  paddingY: 3.5
   offYbyDistance: 0.3
   offZbyDistance: 2
   paddingZ: 4.5
@@ -869,7 +884,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136562548871153646
 CapsuleCollider:

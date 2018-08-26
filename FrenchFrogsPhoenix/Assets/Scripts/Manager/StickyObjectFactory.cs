@@ -96,6 +96,7 @@ public class StickyObjectFactory : MonoBehaviour {
         stickingObject.transform.position = Random.insideUnitSphere * radiusSpawn;
 
         stickingObject.gameObject.SetActive(true);
+        stickingObject.Init();
     }
 
     void SetToPool()

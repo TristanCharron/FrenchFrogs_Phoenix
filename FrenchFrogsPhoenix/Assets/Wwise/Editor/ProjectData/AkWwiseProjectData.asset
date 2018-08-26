@@ -15,12 +15,96 @@ MonoBehaviour:
   CurrentPluginConfig: 
   m_lastPopulateTimePart2: 0
   m_lastPopulateTimePsrt1: 0
-  AcousticTextureWwu: []
-  AuxBusWwu: []
-  BankWwu: []
-  EventWwu: []
-  ExpandedItems: []
-  RtpcWwu: []
-  StateWwu: []
-  SwitchWwu: []
-  TriggerWwu: []
+  AcousticTextureWwu:
+  - Guid: '{4749D360-E523-4FDF-B45E-B42E98B12DDB}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207634383
+    ParentPhysicalPath: 
+    PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    List: []
+  AuxBusWwu:
+  - Guid: '{1F42FB6E-89BD-447A-8A5F-19580926BBD9}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -208024572
+    ParentPhysicalPath: 
+    PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    List: []
+  BankWwu:
+  - Guid: '{F5A8985D-4068-421D-A3D8-A1E15B76DA5C}'
+    m_lastTimePart2: -1999238434
+    m_lastTimePsrt1: -1821081779
+    ParentPhysicalPath: 
+    PhysicalPath: SoundBanks\Default Work Unit.wwu
+    List:
+    - Guid: ed0a3fa335ac5545a4cb57b5b2f88922
+      ID: 1741871505
+      Name: PrivateFrogsBank
+      Path: Default Work Unit\PrivateFrogsBank
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: PrivateFrogsBank
+        ObjectType: 7
+  EventWwu:
+  - Guid: '{3966F247-F001-4DD0-AB22-18EB74A0F403}'
+    m_lastTimePart2: -1999238434
+    m_lastTimePsrt1: -1844496695
+    ParentPhysicalPath: 
+    PhysicalPath: Events\Default Work Unit.wwu
+    List:
+    - Guid: 00a6b7cbc9b449499a7340a4660e7949
+      ID: -1687411216
+      Name: Menu
+      Path: Default Work Unit\Menu
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 112f28394d1d544e9405e7a49fb52332
+      ID: 1803197027
+      Name: Stick
+      Path: Default Work Unit\Stick
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stick
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+  ExpandedItems:
+  - /FrenchFrogsPhoenix_WwiseProject
+  - /FrenchFrogsPhoenix_WwiseProject/SoundBanks
+  - /FrenchFrogsPhoenix_WwiseProject/SoundBanks/Default Work Unit
+  RtpcWwu:
+  - Guid: '{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -208114526
+    ParentPhysicalPath: 
+    PhysicalPath: Game Parameters\Default Work Unit.wwu
+    List: []
+  StateWwu:
+  - Guid: '{4CDE4AE9-983F-4FB1-9EF6-0C757A8903BE}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207734268
+    ParentPhysicalPath: 
+    PhysicalPath: States\Default Work Unit.wwu
+    List: []
+  SwitchWwu:
+  - Guid: '{7646F3B9-1F83-48E6-9DCF-1EFA8EF50CFC}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207704346
+    ParentPhysicalPath: 
+    PhysicalPath: Switches\Default Work Unit.wwu
+    List: []
+  TriggerWwu:
+  - Guid: '{28A82474-D236-4747-8239-44866801DE2A}'
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207674356
+    ParentPhysicalPath: 
+    PhysicalPath: Triggers\Default Work Unit.wwu
+    List: []

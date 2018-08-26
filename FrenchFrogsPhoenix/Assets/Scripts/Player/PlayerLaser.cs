@@ -9,6 +9,7 @@ public class PlayerLaser : MonoBehaviour {
     [SerializeField] LineRenderer lineRenderer;
 
     LaserData laserData;
+    bool isReady = true;
 
     private void Start()
     {
@@ -34,13 +35,22 @@ public class PlayerLaser : MonoBehaviour {
         lineRenderer.enabled = show;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        if(!isReady)
+            return;
+
         StickingObject stickingObject = other.GetComponent<StickingObject>();
         if (stickingObject != null && stickingObject.PlayerParent != player)
         {
             Debug.Log("COLLSISION");
-            //stickingObject.Damage(laserData.damage);
         }
+    }
+
+    IEnumerator TickDelay()
+    {
+        isReady = false;
+        yield return new WaitForSeconds(.2f);
+        isReady = true;
     }
 }
