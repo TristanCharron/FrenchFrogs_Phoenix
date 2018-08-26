@@ -78,6 +78,8 @@ public abstract class BaseInput
     public InputButton FireButton { protected set; get; }
     public InputStick LeftStick { protected set; get; }
     public InputStick RightStick  { protected set; get; }
+  
+
 
     public abstract void Update();
 
@@ -85,7 +87,7 @@ public abstract class BaseInput
     {
         ButtonDictionnary = new Dictionary<string, InputButton>();
         FireButton = new InputButton("Fire", RewiredConsts.Action.Fire);
-        AddButton(FireButton);
+        
         LeftStick = new InputStick();
         RightStick = new InputStick();
     }

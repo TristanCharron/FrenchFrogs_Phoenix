@@ -1,36 +1,30 @@
 ﻿using Rewired;
+using UnityEngine;
 
 
 public class PlayerInput : BaseInput
 {
     int ID = 0;
 
+    public Rewired.Player player { protected set; get; }
+
     public override void Update()
     {
+        if (!isActive)
+            return;
 
+        if(player.GetButtonDown("Fire"))
+            FireButton.Press();
+
+ 
     }
 
     public PlayerInput(int ID) : base()
     {
 
+        player = ReInput.players.GetPlayer(ID);
 
-
-        EventManager.Subscribe<InputActionEventData>(RewiredInputProvider.EVT_INPUT_PRESS_DOWN, (input) =>
-        {
-
-
-            if (isActive)
-            {
-                switch (input.actionId)
-                {
-                    case RewiredConsts.Action.Fire:
-                        FireButton.Press();
-                        break;
-                }
-
-            }
-
-        });
+       
         EventManager.Subscribe<InputActionEventData>(RewiredInputProvider.EVT_INPUT_PRESS, (input) =>
         {
             if (isActive)

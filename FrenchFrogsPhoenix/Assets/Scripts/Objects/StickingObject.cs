@@ -8,11 +8,11 @@ public class StickingObject : MonoBehaviour {
 
     //Accesors
     public Rigidbody rb { get; protected set; }
-    public bool IsSticked { get { return playerParent != null; } }
+    public bool IsSticked { get { return PlayerParent != null; } }
+    public Player PlayerParent { get; protected set; }
 
     [SerializeField] float impactBlobiness;
     [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
-
 
     //Life
     int maxLife = 20;
@@ -24,7 +24,6 @@ public class StickingObject : MonoBehaviour {
 
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
-    Player playerParent;
 
     private void Awake()
     {
@@ -56,7 +55,7 @@ public class StickingObject : MonoBehaviour {
     {
         sinRotation.Initialize();
         this.stickingObjectParent = stickingObjectParent;
-        this.playerParent = playerParent;
+        this.PlayerParent = playerParent;
     }
 
     public void Damage(int damage)
@@ -79,27 +78,27 @@ public class StickingObject : MonoBehaviour {
     public void SetFirstStickingchild(Player player)
     {
         SetParent(player, null);
-        playerParent.OnNewStickingObject.Invoke(this);
+        PlayerParent.OnNewStickingObject.Invoke(this);
     }
 
     public void StickingNewChild(StickingObject stickingChild)
     {
         stickingChild.transform.SetParent(transform, true);
 
-        stickingChild.SetParent(playerParent, this);
+        stickingChild.SetParent(PlayerParent, this);
 
         stickingObjectChilds.Add(stickingChild);
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
 
-        playerParent.OnNewStickingObject.Invoke(this);
+        PlayerParent.OnNewStickingObject.Invoke(this);
     }
 
     public void DetatchFromParent()
     {
         transform.SetParent(null, true);
-        playerParent = null;
+        PlayerParent = null;
 
         DetatchChilds();
 
