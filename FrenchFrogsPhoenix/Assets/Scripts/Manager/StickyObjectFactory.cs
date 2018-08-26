@@ -32,6 +32,8 @@ public class StickyObjectFactory : MonoBehaviour {
     {
         StickingObject stickingObject = Instantiate(prefabStickingObjet, Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
 
+        stickingObject.transform.SetParent(transform);
+            
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
