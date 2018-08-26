@@ -50,7 +50,10 @@ public class Player : MonoBehaviour {
                 input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
         });
 
-        UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
+        if(currentType == PlayerType.HUMAN)
+        {
+            UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
+        }
     }
 
     private void Update()
@@ -64,13 +67,11 @@ public class Player : MonoBehaviour {
 
         switch (currentType)
         {
-            case PlayerType.AI:
-                
+            case PlayerType.AI:             
                 //Add AI Input
                 input = new AIInput();
                 break;
             case PlayerType.HUMAN:
-
                 input = new PlayerInput(0);
                 break;
             default:
