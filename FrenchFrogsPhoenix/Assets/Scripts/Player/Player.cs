@@ -38,7 +38,8 @@ public class Player : MonoBehaviour {
 
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
-            input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
+            if(input != null)
+                input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
         });
 
         UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;

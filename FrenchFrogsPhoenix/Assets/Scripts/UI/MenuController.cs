@@ -9,29 +9,32 @@ public class MenuController : MonoBehaviour {
     [SerializeField] Text startGameTxt;
     //TextMeshProUGUI MenuText;
 
+    PlayerInput input;
+
     bool isActive = false;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake() {
 
-        EventManager.Subscribe<System.Enum>("OnChangeGameFSM", (nextState)=>{
+        input = new PlayerInput(0);
+        input.SetActive(true);
+
+        EventManager.Subscribe<System.Enum>("OnChangeGameFSM", (nextState) => {
 
             bool isActive = nextState.ToString() == GameFSMStates.MAINMENU.ToString();
-                SetActive(isActive);
-            });
+            SetActive(isActive);
+        });
 
-        EventManager.Subscribe<string>(RewiredInputProvider.EVT_INPUT_PRESS_DOWN, (input) => {
-
-            if(isActive)
+        input.FireButton.AddEvent(() =>
+        {
+            if (isActive)
             {
-                if (input == "Fire")
-                {
-                    Debug.Log("START GAME");
-                    SetActive(false);
-                    EventManager.Invoke<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, GameFSMStates.GAMEPLAY);
-                }
+                 Debug.Log("START GAME");
+                 SetActive(false);
+                 EventManager.Invoke<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, GameFSMStates.GAMEPLAY);
             }
-           
+
+
         });
 
    
@@ -39,6 +42,10 @@ public class MenuController : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        input.Update();
+    }
 
     private void SetActive(bool active)
     {
