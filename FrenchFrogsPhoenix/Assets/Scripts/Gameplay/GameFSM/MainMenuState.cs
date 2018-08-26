@@ -8,6 +8,7 @@ public class MainMenuState : FSMState {
 
     bool isActive = false;
 
+
     // Use this for initialization
     protected override void Awake()
     {
