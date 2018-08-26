@@ -18,6 +18,9 @@ public class PlayerFactory : MonoBehaviour {
     [SerializeField]
     Player AIPlayerPrefab;
 
+    [SerializeField]
+    float radiusSpwan = 50;
+
     List<Player> PlayerList;
 
 	// Use this for initialization
@@ -34,10 +37,10 @@ public class PlayerFactory : MonoBehaviour {
 
     IEnumerator SpawnDelay()
     {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 10; i++)
         {
             yield return new WaitForSeconds(0.5f);
-            SpawnPlayer(PlayerType.AI, UnityEngine.Random.insideUnitSphere * 4, Quaternion.identity);
+            SpawnPlayer(PlayerType.AI, UnityEngine.Random.insideUnitSphere * radiusSpwan, Quaternion.identity);
         }
         yield break;
     }
