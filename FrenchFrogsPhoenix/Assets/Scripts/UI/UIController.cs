@@ -107,17 +107,17 @@ public class UIController : MonoBehaviour {
 
     public void SetPower(float powerValue)
     {
-        powerTxt.text = "Power: " + powerValue.ToString();
+        powerTxt.text = powerValue.ToString();
     }
 
     public void SetEnergy(float energyValue)
     {
-        energyTxt.text = "Energy: " + energyValue.ToString();
+        energyTxt.text = energyValue.ToString();
     }
 
     public void SetMass(float massValue)
     {
-        massTxt.text = "Mass: " + massValue.ToString();
+        massTxt.text =  massValue.ToString();
     }
 
     public void UpdateFuel(float fuelValue)
