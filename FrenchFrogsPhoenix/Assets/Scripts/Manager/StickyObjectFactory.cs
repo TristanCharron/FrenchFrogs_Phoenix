@@ -23,7 +23,34 @@ public class StickyObjectFactory : MonoBehaviour {
 
     Queue<StickingObject> stickyQueue = new Queue<StickingObject>();
 
-	void Update ()
+
+    private void Awake()
+    {
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                enabled = true;
+            }
+            else if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                enabled = false;
+                while(stickyQueue.Count > 0)
+                {
+                    StickingObject s = stickyQueue.Dequeue();
+                    Destroy(s.gameObject);
+                }
+            }
+            else
+            {
+                enabled = false;
+            }
+
+        });
+    }
+
+    void Update ()
     {
         currentTimerSpawn += Time.deltaTime;
         if (currentTimerSpawn > timerSpawn)

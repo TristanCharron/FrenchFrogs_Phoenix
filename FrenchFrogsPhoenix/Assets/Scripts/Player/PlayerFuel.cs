@@ -62,6 +62,7 @@ public class PlayerFuel : MonoBehaviour {
         if(CurrentFuel <= 0)
         {
             return FuelStates.EMPTY;
+            
         }
         if(CurrentFuel < _CriticalFuel)
         {
