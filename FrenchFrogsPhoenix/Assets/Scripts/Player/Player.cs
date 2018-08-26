@@ -44,7 +44,9 @@ public class Player : MonoBehaviour {
             playerCamera.player = this;
 
         OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());
-        OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
+        if(playerCamera != null)
+            OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
+
         OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
 
         stickingObject.SetObjectStats(new ObjectStats());
@@ -61,6 +63,8 @@ public class Player : MonoBehaviour {
         {
             UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
         }
+
+        StopWarpAcceleration();
     }
 
     private void Update()
