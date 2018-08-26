@@ -42,6 +42,12 @@ public class AIChaseState : AIPlayerFSMState
                 float dotRight = Vector3.Dot(relativePos, CachedTransform.right);
                 float dotUp= Vector3.Dot(relativePos, CachedTransform.up);
 
+                if (Owner.ChasedObject.GetComponent<Player>())
+                {
+                    if(TimeElapsed % 2 == 0)
+                        AIPlayer.input.FireButton.Press();
+                }
+
                 currentY = Mathf.MoveTowards(currentX, dotUp, Time.deltaTime * 100);
                 currentX = Mathf.MoveTowards(currentY, dotRight, Time.deltaTime * 100);
 

@@ -11,24 +11,21 @@ public class PlayerLaser : MonoBehaviour {
     LaserData laserData;
 
     private float timer = 0;
-
+    private float tickTimer = 0.1f;
+    bool isOnCooldown = false;
     private void Start()
     {
         laserData = new LaserData();
         laserData.damage = 5;
 
-        player.input.FireButton.AddEvent(()=> {
-            ShowBeam(true);
-        });
+       
     }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
+       if(player.input != null)
         {
-            ShowBeam(false);
+            ShowBeam(player.input.FireButton.IsPressed);
         }
             
     }
@@ -37,19 +34,27 @@ public class PlayerLaser : MonoBehaviour {
     {
         laserCollider.enabled = show;
         lineRenderer.enabled = show;
-
-        if (show)
-        {
-            timer = 0.02f;
-        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        if (isOnCooldown)
+            return;
+
+        if (laserData == null)
+            return;
+
         StickingObject stickingObject = other.GetComponent<StickingObject>();
         if (stickingObject != null && stickingObject.PlayerParent != player)
         {
-            //stickingObject.Damage(laserData.damage);
+            stickingObject.Damage(laserData.damage);
         }
+    }
+
+    IEnumerator LaserTickDelay()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(tickTimer);
+        isOnCooldown = false;
     }
 }
