@@ -77,9 +77,12 @@ public class Player : MonoBehaviour {
 
         switch (currentType)
         {
-            case PlayerType.AI:             
+            case PlayerType.AI:
                 //Add AI Input
+                Destroy(playerCamera.gameObject);
                 input = new AIInput();
+                AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
+                fsm.StartFSM(this);
                 break;
             case PlayerType.HUMAN:
                 input = new PlayerInput(0);
@@ -191,11 +194,13 @@ public class Player : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         Player playerRef = other.GetComponent<Player>();
+
         if (playerRef != null)
         {
             if (playerRef.currentType != PlayerType.HUMAN)
             {
-                playerRef.worldPlayerStats.ShowStats(this);
+                if (playerRef.worldPlayerStats != null)
+                    playerRef.worldPlayerStats.ShowStats(this);
             }
         }
     }

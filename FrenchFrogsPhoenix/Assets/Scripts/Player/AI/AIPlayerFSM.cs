@@ -56,8 +56,6 @@ public class AIPlayerFSM : FiniteStateMachine {
 
     public const string EVT_ON_CHANGE_AI_STATE = "OnChangeGameState";
 
-    [SerializeField]
-    private AIPlayerFSMState[] AiPlayerStates;
 
     [SerializeField]
     Player player;
@@ -73,16 +71,30 @@ public class AIPlayerFSM : FiniteStateMachine {
     // Use this for initialization
     protected override void Start () {
 
-        for (int i = 0; i < AiPlayerStates.Length; i++)
-        {
-            AiPlayerStates[i].SetPlayer(player);
-            AiPlayerStates[i].SetOwner(this);
-            AddFSMState(AiPlayerStates[i]);
-        }
-
-        ChangeFSMState(AIPlayerStates.PATROL);
+       
 
   
+    }
+
+    public void StartFSM(Player player)
+    {
+        this.player = player;
+        AIPatrolState patrolState = gameObject.AddComponent<AIPatrolState>();
+        AIChaseState chaseState = gameObject.AddComponent<AIChaseState>();
+        patrolState.SetPlayer(player);
+        patrolState.SetOwner(this);
+        chaseState.SetPlayer(player);
+        chaseState.SetOwner(this);
+        AddFSMState(patrolState);
+        AddFSMState(chaseState);
+        StartCoroutine(StartFSMCoroutine());
+        
+    }
+
+    IEnumerator StartFSMCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        ChangeFSMState(AIPlayerStates.PATROL);
     }
 
 
