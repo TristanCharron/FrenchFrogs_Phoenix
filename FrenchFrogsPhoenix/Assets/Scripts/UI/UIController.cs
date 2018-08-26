@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIController : MonoBehaviour {
 
     private static UIController instance;
 
     public Canvas canvas;
+    public Image fuelFillImgBg;
+    public Image fuelFillImg;
     [SerializeField] Text powerTxt;
-    [SerializeField] Text speedTxt;
+    [SerializeField] Text energyTxt;
     [SerializeField] Text massTxt;
     [SerializeField] CanvasFader leftUIFader;
     [SerializeField] CanvasFader RightUIFader;
@@ -24,28 +27,32 @@ public class UIController : MonoBehaviour {
         SubscribeToEvents();
     }
 
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     void SubscribeToEvents()
     {
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
-            if(CurrentState == GameFSMStates.MAINMENU)
-            {
-                ToggleInGameUI(false);
-            }
-            if (CurrentState == GameFSMStates.GAMEPLAY)
-            {
-                ToggleInGameUI(true);
-            }
-            if (CurrentState == GameFSMStates.GAMEOVER)
-            {
-                ToggleInGameUI(false);
-            }
-
-
+            ToggleInGameUI(CurrentState == GameFSMStates.MAINMENU);
         });
 
-       
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            ToggleInGameUI(CurrentState == GameFSMStates.GAMEOVER);
+        });
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            ToggleInGameUI(CurrentState != GameFSMStates.MAINMENU || CurrentState != GameFSMStates.GAMEOVER);
+        });
+
+        EventManager.Subscribe<ObjectStats>("UpdatePlayerStats", (CurrentState) =>
+        {
+            ReceiveData(CurrentState.power,CurrentState.energy,CurrentState.mass);
+        });
     }
 
     public void ActivateStartMenuUI()
@@ -60,7 +67,7 @@ public class UIController : MonoBehaviour {
 
     public void ToggleInGameUI(bool activate)
     {
-        if(activate)
+        if (activate)
         {
             ActivateInGameUI();
         }
@@ -91,18 +98,32 @@ public class UIController : MonoBehaviour {
         return instance;
     }
 
+    public void ReceiveData(float power,float speed, float mass)
+    {
+        SetPower(power);
+        SetEnergy(speed);
+        SetMass(mass);
+    }
+
     public void SetPower(float powerValue)
     {
         powerTxt.text = "Power: " + powerValue.ToString();
     }
 
-    public void SetSpeed(float speedValue)
+    public void SetEnergy(float energyValue)
     {
-        speedTxt.text = "Speed: " + speedValue.ToString();
+        energyTxt.text = "Energy: " + energyValue.ToString();
     }
 
     public void SetMass(float massValue)
     {
         massTxt.text = "Mass: " + massValue.ToString();
+    }
+
+    public void UpdateFuel(float fuelValue)
+    {
+        fuelFillImgBg.fillAmount = fuelValue;
+        DOTween.Kill(fuelFillImg);
+        fuelFillImg.DOFillAmount(fuelValue,0.5f).SetEase(Ease.InQuint);
     }
 }
