@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
 
     public MouseRotation mouseRotation = new MouseRotation();
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
+    public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
 
     [SerializeField] WorldPlayerStats worldPlayerStats;
     [SerializeField] PlayerCamera playerCamera;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour {
 
     public BaseInput input;
 
+    public PlayerFuel Fuel { get; protected set; }
     public PlayerType Type { get; private set; }
 
     public string ID { private set; get; }
@@ -34,8 +36,9 @@ public class Player : MonoBehaviour {
         if (playerCamera != null)
             playerCamera.player = this;
 
-        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats(newStickingObject));
+        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());
         OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
+        OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
 
         stickingObject.SetObjectStats(new ObjectStats());
         stickingObject.SetFirstStickingchild(this);
@@ -95,7 +98,7 @@ public class Player : MonoBehaviour {
             mouseRotation.LookRotation(transform, cameraSensitivity, cameraTransform);
     }
 
-    void CalculatePlayerStats(StickingObject newStickingObject)
+    void CalculatePlayerStats()
     {
         playerStats.Reset();
         stickingObject.RecrusiveCalculateStats(playerStats);
@@ -118,6 +121,15 @@ public class Player : MonoBehaviour {
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
+    void DestroyStickingObject(StickingObject stickingObject)
+    {
+        if(this.stickingObject == stickingObject)
+        {
+            Debug.Log("I DIE OH NON");
+            gameObject.SetActive(false);
+        }
+    }
+
     public PlayerCamera GetPlayerCamera()
     {
         return playerCamera;
@@ -125,9 +137,9 @@ public class Player : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Player>() != null)
+        Player playerRef = other.GetComponent<Player>();
+        if (playerRef != null)
         {
-            Player playerRef = other.GetComponent<Player>();
             if (playerRef.currentType != PlayerType.HUMAN)
             {
                 playerRef.worldPlayerStats.ShowStats(this);
@@ -137,9 +149,9 @@ public class Player : MonoBehaviour {
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        Player playerRef = other.GetComponent<Player>();
+        if (playerRef != null)
         {
-            Player playerRef = other.GetComponent<Player>();
             if(playerRef.worldPlayerStats != null)
             {
                 playerRef.worldPlayerStats.HideStats();
