@@ -14,8 +14,6 @@ public class AIPlayerFSMState : FSMState {
 
     public AIPlayerFSM Owner { private set; get; }
 
-
-    protected float timeElapsed = 0;
     protected float currentX = 0;
     protected float destX = 0;
     protected float currentY = 0;
@@ -27,6 +25,7 @@ public class AIPlayerFSMState : FSMState {
 
     public override void UpdateState()
     {
+        base.UpdateState();
     }
 
     protected override void Awake()

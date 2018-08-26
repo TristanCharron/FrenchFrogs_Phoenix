@@ -9,13 +9,18 @@ public class GameOverState : FSMState {
         enumID = GameFSMStates.GAMEOVER;
     }
 
-    protected override void Start()
-    {
-
-    }
 
     public override void UpdateState()
     {
-        Debug.Log("GameOver");
+        base.UpdateState();
+        if(TimeElapsed > 1)
+        {
+            Owner.ChangeFSMState(GameFSMStates.MAINMENU);
+        }
+    }
+
+    protected override void Start()
+    {
+        TimeElapsed = 0;
     }
 }

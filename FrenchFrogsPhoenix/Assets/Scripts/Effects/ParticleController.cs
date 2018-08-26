@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleController : MonoBehaviour {
-
-    private static ParticleController instance;
-
+    public static ParticleController instance;
     public ParticleSystem startGameParticleSystem;
 
 	// Use this for initialization
@@ -14,11 +12,6 @@ public class ParticleController : MonoBehaviour {
         ToggleStartGameParticles(true);
         SubscribeToEvents();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public static ParticleController GetInstance()
     {

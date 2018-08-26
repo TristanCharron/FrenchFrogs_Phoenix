@@ -28,7 +28,13 @@ public class EnvironmentController : MonoBehaviour {
             }
             if (CurrentState == GameFSMStates.GAMEOVER)
             {
-                StopCoroutine(DelaySpawnEnvironmentObject());
+                StopAllCoroutines();
+                for (int i = 0; i < currentObjects.Count; i++)
+                {
+                    Destroy(currentObjects[i].gameObject);
+
+                }
+                currentObjects.Clear();
             }
 
         });

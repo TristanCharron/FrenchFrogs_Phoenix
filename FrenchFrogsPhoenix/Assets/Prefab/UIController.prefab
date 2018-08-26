@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 222803036005508906}
   - component: {fileID: 114198395973145590}
   m_Layer: 5
-  m_Name: Speed
+  m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,6 +519,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224912457265023250}
+  - component: {fileID: 225564174602612586}
+  - component: {fileID: 114295751525398842}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -643,7 +645,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Speed: 0'
+  m_Text: 'Energy: 0'
+--- !u!114 &114295751525398842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1937136702558878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8621ebec11b9394bb8beabfa03825b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 0.3
+  max: 1
+  interval: 1
+  speed: 20
+  playOnStart: 1
 --- !u!114 &114316405321369108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,8 +711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 223244262631546376}
+  fuelFillImgBg: {fileID: 114832845568166952}
+  fuelFillImg: {fileID: 114483094668122382}
   powerTxt: {fileID: 114726873377860956}
-  speedTxt: {fileID: 114198395973145590}
+  energyTxt: {fileID: 114198395973145590}
   massTxt: {fileID: 114413540619363230}
   leftUIFader: {fileID: 114628801109685474}
   RightUIFader: {fileID: 114797499757674882}
@@ -2073,7 +2093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -162.55}
+  m_AnchoredPosition: {x: 0, y: -129.94}
   m_SizeDelta: {x: 800, y: 55.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224860871103999488
@@ -2118,18 +2138,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937136702558878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.2663973, y: 0, z: 0, w: 0.9638633}
+  m_LocalPosition: {x: 0, y: 0, z: -99.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224893514444214692}
   m_Father: {fileID: 224114129314635804}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.9, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 123.5}
-  m_SizeDelta: {x: 0, y: -247}
+  m_AnchoredPosition: {x: 0, y: 59.14496}
+  m_SizeDelta: {x: 0, y: -375.70996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224951572382794438
 RectTransform:
@@ -2220,6 +2240,17 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1003010163830894}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225564174602612586
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1937136702558878}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1

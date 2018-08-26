@@ -11,11 +11,10 @@ public class AIChaseState : AIPlayerFSMState
     Player CachedPlayer = null;
 
 
- 
-
-
     public override void UpdateState()
     {
+        base.UpdateState();
+
         if (AIPlayer.input != null)
         {
             if (CachedTransform == null)
@@ -23,12 +22,12 @@ public class AIChaseState : AIPlayerFSMState
 
 
 
-            timeElapsed += Time.deltaTime;
+            TimeElapsed += Time.deltaTime;
 
-            if (timeElapsed > 5)
+            if (TimeElapsed > 5)
             {
                 Owner.ChangeFSMState(AIPlayerStates.PATROL);
-                timeElapsed = 0;
+                TimeElapsed = 0;
             }
 
 
@@ -53,7 +52,7 @@ public class AIChaseState : AIPlayerFSMState
             else
             {
                 Owner.ChangeFSMState(AIPlayerStates.PATROL);
-                timeElapsed = 0;
+                TimeElapsed = 0;
             }
        
 
@@ -67,9 +66,6 @@ public class AIChaseState : AIPlayerFSMState
 
     protected override void Start()
     {
-        timeElapsed = 0;
-
-
     }
 
     protected void OnTriggerEnter(Collider collision)
@@ -88,7 +84,7 @@ public class AIChaseState : AIPlayerFSMState
                 if(Vector3.Distance(CachedStickingObject.transform.position,CachedTransform.position) < Vector3.Distance(ChasedObject.position, CachedTransform.position))
                 {
                     ChasedObject = CachedStickingObject.gameObject.transform;
-                    timeElapsed = 0;
+                    TimeElapsed = 0;
                 }
                
             }
@@ -101,7 +97,7 @@ public class AIChaseState : AIPlayerFSMState
                 if (Vector3.Distance(CachedPlayer.transform.position, CachedTransform.position) < Vector3.Distance(ChasedObject.position, CachedTransform.position))
                 {
                     ChasedObject = CachedPlayer.gameObject.transform;
-                    timeElapsed = 0;
+                    TimeElapsed = 0;
                 }
                     
             }
