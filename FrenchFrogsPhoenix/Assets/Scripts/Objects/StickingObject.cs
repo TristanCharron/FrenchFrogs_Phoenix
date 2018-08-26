@@ -68,6 +68,9 @@ public class StickingObject : MonoBehaviour {
         playerStats += objectStats;
         foreach (StickingObject stickingChild in stickingObjectChilds)
         {
+            if (stickingChild == this)
+                Debug.LogError("HUGE MISTAKE");
+
             stickingChild.RecrusiveCalculateStats(playerStats);
         }
     }
@@ -197,6 +200,5 @@ public class StickingObject : MonoBehaviour {
         childMeshTransform.DOShakeScale(randomWiggleDuration, randomWiggle, 20)
             .SetDelay(randomDelay)
             .SetLoops(-1, LoopType.Yoyo);
-
     }
 }
