@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StickyObjectFactory : MonoBehaviour {
 
+    [SerializeField] int numberSpawn = 2000;
+    [SerializeField] int initialCount = 100;
+
     [Header("Spawn params")]
     [SerializeField] float radiusSpawn = 25;
     [SerializeField] float timerSpawn = 5;
@@ -18,7 +21,36 @@ public class StickyObjectFactory : MonoBehaviour {
 
     float currentTimerSpawn = 0;
 
-	void Update ()
+    Queue<StickingObject> stickyQueue = new Queue<StickingObject>();
+
+
+    private void Awake()
+    {
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                enabled = true;
+            }
+            else if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                enabled = false;
+                while(stickyQueue.Count > 0)
+                {
+                    StickingObject s = stickyQueue.Dequeue();
+                    Destroy(s.gameObject);
+                }
+            }
+            else
+            {
+                enabled = false;
+            }
+
+        });
+    }
+
+    void Update ()
     {
         currentTimerSpawn += Time.deltaTime;
         if (currentTimerSpawn > timerSpawn)
@@ -28,27 +60,65 @@ public class StickyObjectFactory : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < numberSpawn; i++)
+        {
+            SetToPool();
+        }
+        for (int i = 0; i < initialCount; i++)
+        {
+            SpawnObject();
+        }
+    }
+
+    public void DestroyObject(StickingObject stickingObject)
+    {
+        stickingObject.gameObject.SetActive(false);
+        stickingObject.transform.SetParent(transform);
+    }
+
     void SpawnObject()
     {
-        StickingObject stickingObject = Instantiate(prefabStickingObjet, Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
+        StickingObject stickingObject = stickyQueue.Dequeue();
 
-        stickingObject.transform.SetParent(transform);
-            
+        if (stickingObject == null)
+            return;
+
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
 
-        Material material = materials[Random.Range(0, materials.Length)];
+        stickingObject.transform.position = Random.insideUnitSphere * radiusSpawn;
+
+        stickingObject.gameObject.SetActive(true);
+    }
+
+    void SetToPool()
+    {
+        StickingObject stickingObject = Instantiate(prefabStickingObjet, transform.position, Quaternion.identity);
+        stickingObject.Factory = this;
+
+        int materialRandom = Random.Range(0, materials.Length);
+        Material material = materials[materialRandom];
         MeshRenderer mesh = SetMeshChild(stickingObject, material);
 
         float randomSize = Random.Range(.1f, 2f);
         ObjectStats stats = new ObjectStats();
+        stats.SetType((ObjectStats.Type)materialRandom);
 
         stats *= randomSize;
         stickingObject.SetObjectStats(stats);
 
         stickingObject.transform.localScale *= randomSize;
+
+        stickingObject.transform.SetParent(transform);
+
+        stickyQueue.Enqueue(stickingObject);
+        stickingObject.gameObject.SetActive(false);
     }
+
+
 
     private MeshRenderer SetMeshChild(StickingObject stickingObject, Material material)
     {

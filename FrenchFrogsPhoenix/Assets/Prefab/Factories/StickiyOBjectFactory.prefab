@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee275e651547a34b9466102f8213174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusSpawn: 400
+  numberSpawn: 2000
+  initialCount: 100
+  radiusSpawn: 200
   timerSpawn: 0.5
   prefabStickingObjet: {fileID: 114416602815232710, guid: 6eb0ae3d029e4fa478d179aa66f6530b,
     type: 2}
@@ -60,10 +62,15 @@ MonoBehaviour:
   meshPrefabs:
   - {fileID: 23281917548546452, guid: fc8d5412c8e981d4b93d4a02bff5b9cc, type: 2}
   - {fileID: 23087477058993322, guid: 77aa736dbcfb8e54c909790a7e8a1191, type: 2}
+  - {fileID: 23650950908687964, guid: c0122735fb95d6645b1f9cb81f4f27a3, type: 2}
+  - {fileID: 23971253882216444, guid: 2353c9e35f0956a458e6c277b96122bb, type: 2}
+  - {fileID: 23774287242896224, guid: e06a23625d1faac408e6ded1033f0d32, type: 2}
   - {fileID: 23753245561467652, guid: fa94e26c481bf8a47a3dc5939c30b997, type: 2}
+  - {fileID: 23121905943390942, guid: 59cea0393a5c1d841983b09e863f1f92, type: 2}
+  - {fileID: 23542275931107344, guid: 128460e93f25ae144affaa9219b730e9, type: 2}
+  - {fileID: 23459030753401168, guid: d3023b43dd9388349be3f102f4e3e962, type: 2}
+  - {fileID: 23614298935975046, guid: 8940648547832af459518e13ec50ad63, type: 2}
   materials:
   - {fileID: 2100000, guid: 77715ab1fca6f104bad93f1033ef4153, type: 2}
   - {fileID: 2100000, guid: 0ba56b93c3a1dee4e907110e64367290, type: 2}
   - {fileID: 2100000, guid: d443cd79e27b07140b98eb8829bcfd92, type: 2}
-  - {fileID: 2100000, guid: 9e48ea992846fa34dbf7c10a94fd2fc9, type: 2}
-  - {fileID: 2100000, guid: 7e3ac0a97f12e284fa9e8c2476e10224, type: 2}

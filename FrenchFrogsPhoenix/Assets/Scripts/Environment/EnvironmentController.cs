@@ -18,14 +18,25 @@ public class EnvironmentController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         instance = this;
-        delayRespawn = new WaitForSeconds(respawnSpeed);
-        StartSpawnEnvironmentObject();
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                delayRespawn = new WaitForSeconds(respawnSpeed);
+                StartSpawnEnvironmentObject();
+            }
+            if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                StopCoroutine(DelaySpawnEnvironmentObject());
+            }
+
+        });
+
+
+     
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     public static EnvironmentController GetInstance()
     {

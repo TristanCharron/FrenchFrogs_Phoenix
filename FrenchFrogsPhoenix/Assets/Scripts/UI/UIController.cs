@@ -71,7 +71,7 @@ public class UIController : MonoBehaviour {
 
     public void ActivateInGameUI()
     {
-        //ParticleController.GetInstance().DeactivateStartGameParticles();
+        ParticleController.GetInstance().DeactivateStartGameParticles();
         leftUIFader.GlitchIn();
         RightUIFader.GlitchIn();
         startGameFader.FadeOut();
@@ -79,7 +79,7 @@ public class UIController : MonoBehaviour {
 
     public void DeactivateInGameUI()
     {
-        //ParticleController.GetInstance().ActivateStartGameParticles();
+        ParticleController.GetInstance().ActivateStartGameParticles();
         leftUIFader.Hide();
         RightUIFader.Hide();
         startGameFader.GlitchIn();
