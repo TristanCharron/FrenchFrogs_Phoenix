@@ -7,6 +7,8 @@ public class PlayerCamera : MonoBehaviour {
 
     [SerializeField] float paddingY = 4;
     [SerializeField] float offYbyDistance = 1;
+    [SerializeField] float offZbyDistance = 1;
+
     [SerializeField] float paddingZ = 25;
     [SerializeField] float ajustCameraTime = 1;
     [SerializeField] Ease ajustCameraEase;
@@ -38,7 +40,7 @@ public class PlayerCamera : MonoBehaviour {
         maxDistanceStickingObject = newDistance;
 
         transform.DOKill();
-        Vector3 destination = new Vector3(0, offYbyDistance * maxDistanceStickingObject + paddingY, -maxDistanceStickingObject - paddingZ);
+        Vector3 destination = new Vector3(0, (offYbyDistance * maxDistanceStickingObject) + paddingY, -(maxDistanceStickingObject * offZbyDistance) - paddingZ);
         transform.DOLocalMove(destination, ajustCameraTime).SetEase(ajustCameraEase);
     }
 }

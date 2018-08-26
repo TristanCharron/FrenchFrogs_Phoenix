@@ -39,10 +39,18 @@ public class StickyObjectFactory : MonoBehaviour {
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
 
         Material material = materials[Random.Range(0, materials.Length)];
-        SetMeshChild(stickingObject, material);
+        MeshRenderer mesh = SetMeshChild(stickingObject, material);
+
+        float randomSize = Random.Range(.1f, 2f);
+        ObjectStats stats = new ObjectStats();
+
+        stats *= randomSize;
+        stickingObject.SetObjectStats(stats);
+
+        stickingObject.transform.localScale *= randomSize;
     }
 
-    private void SetMeshChild(StickingObject stickingObject, Material material)
+    private MeshRenderer SetMeshChild(StickingObject stickingObject, Material material)
     {
         int randomMeshIndex = Random.Range(0, meshPrefabs.Length);
         MeshRenderer meshModel = Instantiate(meshPrefabs[randomMeshIndex], Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
@@ -50,5 +58,6 @@ public class StickyObjectFactory : MonoBehaviour {
         meshModel.transform.localPosition = Vector3.zero;
         meshModel.material = material;
         stickingObject.SetMeshChild(meshModel.transform);
+        return meshModel;
     }
 }

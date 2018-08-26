@@ -25,25 +25,19 @@ public class StickingObject : MonoBehaviour {
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
 
+
+
     private void Awake()
     {
-        //Test
-        objectStats = new ObjectStats();
-        objectStats.damage = Random.Range(0, 3);
-        objectStats.speed = Random.Range(0, 3);
+        ////Test
+        //objectStats = new ObjectStats();
+        //objectStats.damage = Random.Range(0, 3);
+        //objectStats.speed = Random.Range(0, 3);
     
         currentLife = maxLife;
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
-    }
-
-    public void RecrusiveCalculateStats(ObjectStats playerStats)
-    {
-        playerStats += objectStats;
-        foreach (StickingObject stickingChild in stickingObjectChilds)
-        {
-            stickingChild.RecrusiveCalculateStats(playerStats);
-        }
+        Wiggle();
     }
 
     public void SetMeshChild(Transform childMeshTransform)
@@ -58,8 +52,25 @@ public class StickingObject : MonoBehaviour {
         this.PlayerParent = playerParent;
     }
 
+    public void SetObjectStats(ObjectStats objectStats)
+    {
+        this.objectStats = objectStats;
+    }
+
+    public void RecrusiveCalculateStats(ObjectStats playerStats)
+    {
+        playerStats += objectStats;
+        foreach (StickingObject stickingChild in stickingObjectChilds)
+        {
+            stickingChild.RecrusiveCalculateStats(playerStats);
+        }
+    }
+
     public void Damage(int damage)
     {
+        childMeshTransform.DOKill();
+        childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
+
         currentLife -= damage;
         if(currentLife < 0)
         {
@@ -136,8 +147,8 @@ public class StickingObject : MonoBehaviour {
             return;
 
         childMeshTransform.DOKill();
-        childMeshTransform.localScale = Vector3.one;
-        childMeshTransform.DOShakeScale(1, impact, 20);
+        //childMeshTransform.localScale = Vector3.one;
+        childMeshTransform.DOShakeScale(1, impact, 20).OnComplete(Wiggle);
 
         foreach (StickingObject stickingChild in stickingObjectChilds)
         {
@@ -147,5 +158,11 @@ public class StickingObject : MonoBehaviour {
 
         if (stickingObjectParent != null && stickingObjectParent != objectToIgnore)
             stickingObjectParent.ShakeScale(impact * impactPropagation, this);
+    }
+
+    void Wiggle()
+    {
+        childMeshTransform.DOShakeScale(1, 0.05f, 20).SetDelay(.2f).SetLoops(-1, LoopType.Yoyo);
+
     }
 }

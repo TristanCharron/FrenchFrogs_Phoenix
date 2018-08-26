@@ -398,7 +398,7 @@ MonoBehaviour:
   shakeFactor: 0.05
 --- !u!114 &114827626063857026
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763709937428676}
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paddingY: 1.5
   offYbyDistance: 0.3
+  offZbyDistance: 2
   paddingZ: 4.5
   ajustCameraTime: 1
   ajustCameraEase: 9
