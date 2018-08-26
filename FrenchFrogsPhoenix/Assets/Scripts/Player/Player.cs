@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
     public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
 
+    public UnityEvent OnWarpAcceleration = new UnityEvent();
+    public UnityEvent OnWarpStopAcceleration = new UnityEvent();
+
     [SerializeField] WorldPlayerStats worldPlayerStats;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] Transform nullCore;
@@ -18,7 +21,9 @@ public class Player : MonoBehaviour {
     [SerializeField] float cameraSensitivity = 2;
     [SerializeField] float rotateSensitivity = 0.01f;
 
-    [SerializeField] float moveSpeed;
+    [SerializeField] float baseMoveSpeed = 5;
+    [SerializeField] float baseAcceleration = 2;
+    Vector3 currentVelocity = Vector3.zero;
 
     float maxDistanceStickingObject;
     public ObjectStats playerStats;
@@ -104,6 +109,7 @@ public class Player : MonoBehaviour {
     {
         playerStats.Reset();
         stickingObject.RecrusiveCalculateStats(playerStats);
+        EventManager.Invoke<ObjectStats>("UpdatePlayerStats", playerStats);
     }
 
     private void Move(float x, float y)
@@ -120,7 +126,25 @@ public class Player : MonoBehaviour {
             input.Normalize();
 
         Vector3 direction = transform.TransformDirection(input);
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        if (input.magnitude == 0)
+            currentVelocity -= direction * baseAcceleration * Time.deltaTime;
+        else
+            currentVelocity += direction * baseAcceleration * Time.deltaTime;
+
+        if (currentVelocity.magnitude > baseMoveSpeed)
+            currentVelocity = currentVelocity.normalized * baseMoveSpeed;
+
+        transform.position += currentVelocity * Time.deltaTime;
+    }
+
+    void WarpAcceleration()
+    {
+        OnWarpAcceleration.Invoke();
+    }
+
+    void StopWarpAcceleration()
+    {
+        OnWarpStopAcceleration.Invoke();
     }
 
     void DestroyStickingObject(StickingObject stickingObject)

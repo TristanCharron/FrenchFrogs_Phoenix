@@ -33,11 +33,14 @@ public class StickingObject : MonoBehaviour {
     float invisibilityTime = 0.5f;
 
     private void Awake()
-    {   //call function init
-        currentLife = maxLife;
-
+    {   
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
+    }
+
+    public void Init()
+    {
+        currentLife = maxLife;
     }
 
     private void Start()
@@ -122,6 +125,8 @@ public class StickingObject : MonoBehaviour {
         stickingChild.rb.angularVelocity = Vector3.zero;
 
         PlayerParent.OnNewStickingObject.Invoke(this);
+
+        AkSoundEngine.PostEvent("Stick", gameObject);
     }
 
     public void DetatchFromParent()

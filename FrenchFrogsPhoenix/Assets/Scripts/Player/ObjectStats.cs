@@ -38,7 +38,6 @@ public class ObjectStats {
             return Random.Range(1, 3);
         else
             return Random.Range(0, .5f);
-
     }
 
     public ObjectStats()
