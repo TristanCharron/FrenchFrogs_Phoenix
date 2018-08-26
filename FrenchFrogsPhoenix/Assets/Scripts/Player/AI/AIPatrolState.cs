@@ -37,7 +37,6 @@ public class AIPatrolState : AIPlayerFSMState
 
     protected override void Start()
     {
-        timeElapsed = 0;
         currentX = 0;
         currentY = 0;
         destX = Random.Range(-1, 1);
@@ -65,17 +64,18 @@ public class AIPatrolState : AIPlayerFSMState
 
     public override void UpdateState()
     {
+        base.UpdateState();
         if(AIPlayer.input != null)
         {
             if (CachedTransform == null)
                 CachedTransform = AIPlayer.transform;
 
 
-            timeElapsed += Time.deltaTime;
+            TimeElapsed += Time.deltaTime;
 
-            if(timeElapsed > 7f)
+            if(TimeElapsed > 7f)
             {
-                timeElapsed = 0;
+                TimeElapsed = 0;
                 currentPattern = AIPatrolPatternsArray[Random.Range(0, AIPatrolPatternsArray.Length)];
                 destX = currentPattern.x;
                 destY = currentPattern.y;

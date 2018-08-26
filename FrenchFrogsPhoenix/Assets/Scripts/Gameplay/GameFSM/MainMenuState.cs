@@ -53,6 +53,7 @@ public class MainMenuState : FSMState {
 
     public override void UpdateState()
     {
+        base.UpdateState();
         input.Update();
     }
 

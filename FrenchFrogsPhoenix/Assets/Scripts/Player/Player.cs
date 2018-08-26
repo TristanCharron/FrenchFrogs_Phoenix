@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
 
+    public const string EVT_ON_PLAYER_DEATH = "OnPlayerDeath";
+
     public MouseRotation mouseRotation = new MouseRotation();
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
     public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
@@ -126,6 +128,7 @@ public class Player : MonoBehaviour {
         if(this.stickingObject == stickingObject)
         {
             Debug.Log("I DIE OH NON");
+            EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH,this);
             gameObject.SetActive(false);
         }
     }

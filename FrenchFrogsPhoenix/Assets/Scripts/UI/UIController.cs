@@ -24,27 +24,28 @@ public class UIController : MonoBehaviour {
         SubscribeToEvents();
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     void SubscribeToEvents()
     {
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
-            ToggleInGameUI(CurrentState == GameFSMStates.MAINMENU);
+            if(CurrentState == GameFSMStates.MAINMENU)
+            {
+                ToggleInGameUI(false);
+            }
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                ToggleInGameUI(true);
+            }
+            if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                ToggleInGameUI(false);
+            }
+
+
         });
 
-        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
-        {
-            ToggleInGameUI(CurrentState == GameFSMStates.GAMEOVER);
-        });
-
-        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
-        {
-            ToggleInGameUI(CurrentState != GameFSMStates.MAINMENU || CurrentState != GameFSMStates.GAMEOVER);
-        });
+       
     }
 
     public void ActivateStartMenuUI()
