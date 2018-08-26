@@ -9,6 +9,9 @@ public class Player : MonoBehaviour {
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
     public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
 
+    public UnityEvent OnWarpAcceleration = new UnityEvent();
+    public UnityEvent OnWarpStopAcceleration = new UnityEvent();
+
     [SerializeField] WorldPlayerStats worldPlayerStats;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] Transform nullCore;
@@ -130,6 +133,16 @@ public class Player : MonoBehaviour {
             currentVelocity = currentVelocity.normalized * baseMoveSpeed;
 
         transform.position += currentVelocity * Time.deltaTime;
+    }
+
+    void WarpAcceleration()
+    {
+        OnWarpAcceleration.Invoke();
+    }
+
+    void StopWarpAcceleration()
+    {
+        OnWarpStopAcceleration.Invoke();
     }
 
     void DestroyStickingObject(StickingObject stickingObject)

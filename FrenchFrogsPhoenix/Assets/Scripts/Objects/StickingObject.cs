@@ -125,6 +125,8 @@ public class StickingObject : MonoBehaviour {
         stickingChild.rb.angularVelocity = Vector3.zero;
 
         PlayerParent.OnNewStickingObject.Invoke(this);
+
+        AkSoundEngine.PostEvent("Stick", gameObject);
     }
 
     public void DetatchFromParent()
