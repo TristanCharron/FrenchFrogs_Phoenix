@@ -28,14 +28,15 @@ public class Player : MonoBehaviour {
         playerStats = new ObjectStats();
 
         if (playerCamera != null)
-        playerCamera.player = this;
+            playerCamera.player = this;
 
         OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats(newStickingObject));
         OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
 
+        stickingObject.SetObjectStats(new ObjectStats());
         stickingObject.SetFirstStickingchild(this);
         stickingObject.SetMeshChild(nullCore);
-
+        
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
             if(input != null)
@@ -84,7 +85,6 @@ public class Player : MonoBehaviour {
             mouseRotation.LookRotation(nullCore.transform, rotateSensitivity, cameraTransform);
         else
             mouseRotation.LookRotation(transform, cameraSensitivity, cameraTransform);
-    
     }
 
     void CalculatePlayerStats(StickingObject newStickingObject)

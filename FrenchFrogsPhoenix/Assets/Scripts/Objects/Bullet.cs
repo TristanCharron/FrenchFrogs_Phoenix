@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        StickingObject stickingObject = GetComponent<StickingObject>();
+        StickingObject stickingObject = other.GetComponent<StickingObject>();
         if(stickingObject != null && stickingObject.PlayerParent != player)
         {
             Debug.Log("COLLSISION");

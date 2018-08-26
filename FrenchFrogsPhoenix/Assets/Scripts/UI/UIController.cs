@@ -21,17 +21,30 @@ public class UIController : MonoBehaviour {
         //DeactivateInGameUI();
 
         ToggleInGameUI(false);
-
-        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
-        {
-            ToggleInGameUI(CurrentState == GameFSMStates.GAMEPLAY);
-            //ToggleInGameUI(CurrentState == GameFSMStates.MAINMENU);
-        });
+        SubscribeToEvents();
     }
 
     // Update is called once per frame
     void Update() {
 
+    }
+
+    void SubscribeToEvents()
+    {
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            ToggleInGameUI(CurrentState == GameFSMStates.MAINMENU);
+        });
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            ToggleInGameUI(CurrentState == GameFSMStates.GAMEOVER);
+        });
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            ToggleInGameUI(CurrentState != GameFSMStates.MAINMENU || CurrentState != GameFSMStates.GAMEOVER);
+        });
     }
 
     public void ActivateStartMenuUI()
@@ -58,7 +71,7 @@ public class UIController : MonoBehaviour {
 
     public void ActivateInGameUI()
     {
-        ParticleController.GetInstance().DeactivateStartGameParticles();
+        //ParticleController.GetInstance().DeactivateStartGameParticles();
         leftUIFader.GlitchIn();
         RightUIFader.GlitchIn();
         startGameFader.FadeOut();
@@ -66,7 +79,7 @@ public class UIController : MonoBehaviour {
 
     public void DeactivateInGameUI()
     {
-        ParticleController.GetInstance().ActivateStartGameParticles();
+        //ParticleController.GetInstance().ActivateStartGameParticles();
         leftUIFader.Hide();
         RightUIFader.Hide();
         startGameFader.GlitchIn();

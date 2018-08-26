@@ -8,6 +8,11 @@ public class ObjectStats {
     public float speed;
     public float damage;
 
+    public ObjectStats()
+    {
+        Reset();
+    }
+
     public void Reset()
     {
         speed = 0;
@@ -18,6 +23,13 @@ public class ObjectStats {
     {
         statsThis.speed += statsAdditional.speed;
         statsThis.damage += statsAdditional.damage;
+        return statsThis;
+    }
+
+    public static ObjectStats operator *(ObjectStats statsThis, float multiplier)
+    {
+        statsThis.speed *= multiplier;
+        statsThis.damage *= multiplier;
         return statsThis;
     }
 }

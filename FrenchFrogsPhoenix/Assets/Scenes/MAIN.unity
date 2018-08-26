@@ -2442,16 +2442,6 @@ Prefab:
       propertyPath: m_Name
       value: 'StickiyOBjectFactory '
       objectReference: {fileID: 0}
-    - target: {fileID: 114367877765999908, guid: 63221fd1945ba1642be08f3742818723,
-        type: 2}
-      propertyPath: radiusSpawn
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114367877765999908, guid: 63221fd1945ba1642be08f3742818723,
-        type: 2}
-      propertyPath: timerSpawn
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63221fd1945ba1642be08f3742818723, type: 2}
   m_IsPrefabAsset: 0
@@ -2542,7 +2532,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1655789533577904, guid: 9c6f470c65338684b81811ab903be637, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114596506491140584, guid: 9c6f470c65338684b81811ab903be637,
         type: 2}
@@ -2647,6 +2637,21 @@ Prefab:
       propertyPath: environmentContainer
       value: 
       objectReference: {fileID: 985975528}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114125812060759284, guid: f9142f88d0f28f148b25628041c18af0,
+        type: 2}
+      propertyPath: maxBounds.z
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9142f88d0f28f148b25628041c18af0, type: 2}
   m_IsPrefabAsset: 0
