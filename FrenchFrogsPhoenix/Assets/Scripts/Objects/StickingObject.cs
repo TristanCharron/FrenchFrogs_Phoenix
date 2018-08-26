@@ -29,12 +29,15 @@ public class StickingObject : MonoBehaviour {
 
     Vector3 size;
 
+    bool isInvincible = false;
+    float invisibilityTime = 0.5f;
+
     private void Awake()
-    {
+    {   //call function init
         currentLife = maxLife;
+
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
-        Wiggle();
     }
 
     private void Start()
@@ -71,6 +74,9 @@ public class StickingObject : MonoBehaviour {
 
     public void Damage(int damage)
     {
+        if (isInvincible)
+            return;
+
         childMeshTransform.DOKill();
         childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
 
@@ -87,7 +93,12 @@ public class StickingObject : MonoBehaviour {
         DetatchChilds();
         stickingObjectChilds.Clear();
         //Destroy(gameObject);
-        Factory.DestroyObject(this);
+
+        if (PlayerParent != null)
+            PlayerParent.OnDestroyStickingObject.Invoke(this);
+
+        if(Factory != null)
+            Factory.DestroyObject(this);
     }
 
     public void SetFirstStickingchild(Player player)
@@ -144,6 +155,13 @@ public class StickingObject : MonoBehaviour {
                 ShakeScale(impactBlobiness, this);
             }
         }
+    }
+
+    IEnumerator InvincibilityDelay()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invisibilityTime);
+        isInvincible = false;
     }
 
     public void ShakeScale(float impact, StickingObject objectToIgnore)
