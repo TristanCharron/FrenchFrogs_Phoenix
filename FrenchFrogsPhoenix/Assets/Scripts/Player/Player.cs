@@ -23,6 +23,8 @@ public class Player : MonoBehaviour {
 
     public BaseInput input;
 
+    public PlayerType Type { get; private set; }
+
     public string ID { private set; get; }
 
     void Start ()
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour {
         input.RightStick.AddEvent(RightStickHandle);
 
         this.ID = ID;
+        this.Type = type;
     }
 
     void RightStickHandle(float x, float y)
