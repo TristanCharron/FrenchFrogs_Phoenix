@@ -162,7 +162,12 @@ public class StickingObject : MonoBehaviour {
 
     void Wiggle()
     {
-        childMeshTransform.DOShakeScale(1, 0.05f, 20).SetDelay(.2f).SetLoops(-1, LoopType.Yoyo);
+        float randomDelay = Random.Range(0, 1f);
+        float randomWiggle = Random.Range(0.005f, 0.05f);
+        float randomWiggleDuration = Random.Range(.2f, 1f);
+        childMeshTransform.DOShakeScale(randomWiggleDuration, randomWiggle, 20)
+            .SetDelay(randomDelay)
+            .SetLoops(-1, LoopType.Yoyo);
 
     }
 }
