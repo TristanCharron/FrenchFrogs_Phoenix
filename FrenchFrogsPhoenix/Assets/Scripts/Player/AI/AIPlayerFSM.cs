@@ -12,6 +12,19 @@ public class AIPlayerFSMState : FSMState {
 
     public Player AIPlayer { private set; get; }
 
+    public AIPlayerFSM Owner { private set; get; }
+
+
+    protected float timeElapsed = 0;
+    protected float currentX = 0;
+    protected float destX = 0;
+    protected float currentY = 0;
+    protected float destY = 0;
+
+    protected AIPatrolInputPattern[] AIPatrolPatternsArray;
+
+    protected Transform CachedTransform;
+
     public override void UpdateState()
     {
     }
@@ -28,6 +41,13 @@ public class AIPlayerFSMState : FSMState {
     {
         AIPlayer = p;
     }
+
+    public void SetOwner(AIPlayerFSM owner)
+    {
+        Owner = owner;
+    }
+
+ 
 }
 
 
@@ -43,6 +63,13 @@ public class AIPlayerFSM : FiniteStateMachine {
     [SerializeField]
     Player player;
 
+    public void SetChasedObject(GameObject Object)
+    {
+        ChasedObject = Object;
+    }
+
+    public GameObject ChasedObject { private set; get; }
+
 
     // Use this for initialization
     protected override void Start () {
@@ -50,6 +77,7 @@ public class AIPlayerFSM : FiniteStateMachine {
         for (int i = 0; i < AiPlayerStates.Length; i++)
         {
             AiPlayerStates[i].SetPlayer(player);
+            AiPlayerStates[i].SetOwner(this);
             AddFSMState(AiPlayerStates[i]);
         }
 
@@ -57,6 +85,7 @@ public class AIPlayerFSM : FiniteStateMachine {
 
   
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {

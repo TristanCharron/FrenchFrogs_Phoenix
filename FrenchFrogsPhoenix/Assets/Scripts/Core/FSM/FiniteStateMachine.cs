@@ -62,7 +62,7 @@ public abstract class FiniteStateMachine : MonoBehaviour
     }
 
 
-    protected void ChangeFSMState(System.Enum NextStateID)
+    public void ChangeFSMState(System.Enum NextStateID)
     {
         StartCoroutine(ChangeFSMStateCoRoutine(FSMStatesDictionnary[NextStateID].EnumID));
     }
