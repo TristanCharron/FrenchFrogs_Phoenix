@@ -22,8 +22,41 @@ public class StickyObjectFactory : MonoBehaviour {
     float currentTimerSpawn = 0;
 
     Queue<StickingObject> stickyQueue = new Queue<StickingObject>();
+    List<StickingObject> listUsedStickyObject = new List<StickingObject>();
 
-	void Update ()
+
+    private void Awake()
+    {
+        for (int i = 0; i < numberSpawn; i++)
+        {
+            SetToPool();
+        }
+
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                SpawnInitial();
+                enabled = true;
+            }
+            else if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                enabled = false;
+                for (int i = 0; i < listUsedStickyObject.Count; i++)
+                {
+                    DestroyObject(listUsedStickyObject[i]);
+                }
+            }
+            else
+            {
+                enabled = false;
+            }
+
+        });
+    }
+
+    void Update ()
     {
         currentTimerSpawn += Time.deltaTime;
         if (currentTimerSpawn > timerSpawn)
@@ -33,12 +66,8 @@ public class StickyObjectFactory : MonoBehaviour {
         }
     }
 
-    private void Start()
+    private void SpawnInitial()
     {
-        for (int i = 0; i < numberSpawn; i++)
-        {
-            SetToPool();
-        }
         for (int i = 0; i < initialCount; i++)
         {
             SpawnObject();
@@ -49,6 +78,8 @@ public class StickyObjectFactory : MonoBehaviour {
     {
         stickingObject.gameObject.SetActive(false);
         stickingObject.transform.SetParent(transform);
+        stickyQueue.Enqueue(stickingObject);
+        listUsedStickyObject.Remove(stickingObject);
     }
 
     void SpawnObject()
@@ -87,11 +118,11 @@ public class StickyObjectFactory : MonoBehaviour {
 
         stickingObject.transform.SetParent(transform);
 
+
         stickyQueue.Enqueue(stickingObject);
+        listUsedStickyObject.Add(stickingObject);
         stickingObject.gameObject.SetActive(false);
     }
-
-
 
     private MeshRenderer SetMeshChild(StickingObject stickingObject, Material material)
     {

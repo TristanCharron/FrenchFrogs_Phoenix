@@ -25,13 +25,13 @@ public class PlayerFuel : MonoBehaviour {
 
     public bool IsActive { private set; get; }
 
-    [SerializeField]
-    public Player player;
+    Player player;
 
 	
     // Use this for initialization
 	void Awake () {
         CurrentFuel = _MaxFuel;
+        player = GetComponent<Player>();
     }
 
     private void SetActive(bool isActive)
@@ -51,8 +51,8 @@ public class PlayerFuel : MonoBehaviour {
 
     public FuelStates SetFuel(float fuel)
     {
-       if(IsActive)
-       CurrentFuel = Mathf.Clamp(fuel, 0, _MaxFuel);
+        if(IsActive)
+            CurrentFuel = Mathf.Clamp(fuel, 0, _MaxFuel);
 
         return GetFuelState();
     }
@@ -62,6 +62,7 @@ public class PlayerFuel : MonoBehaviour {
         if(CurrentFuel <= 0)
         {
             return FuelStates.EMPTY;
+            
         }
         if(CurrentFuel < _CriticalFuel)
         {

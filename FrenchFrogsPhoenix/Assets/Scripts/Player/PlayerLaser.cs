@@ -40,7 +40,7 @@ public class PlayerLaser : MonoBehaviour {
         if (stickingObject != null && stickingObject.PlayerParent != player)
         {
             Debug.Log("COLLSISION");
-            stickingObject.Damage(laserData.damage);
+            //stickingObject.Damage(laserData.damage);
         }
     }
 }

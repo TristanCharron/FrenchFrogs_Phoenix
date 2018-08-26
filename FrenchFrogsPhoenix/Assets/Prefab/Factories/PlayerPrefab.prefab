@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 54975823149851306}
   - component: {fileID: 114004743625958964}
   - component: {fileID: 135429994387137364}
+  - component: {fileID: 114597357093132542}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -243,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655789533577904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 25, z: 25}
+  m_LocalPosition: {x: 5.709053, y: -1.1610665, z: 0.19934368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4023622392373936}
@@ -535,6 +536,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: StickingObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  OnDestroyStickingObject:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: StickingObjectEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  worldPlayerStats: {fileID: 0}
   playerCamera: {fileID: 114392071621099488}
   nullCore: {fileID: 4023622392373936}
   stickingObject: {fileID: 114737862303752612}
@@ -542,8 +549,10 @@ MonoBehaviour:
   rotateSensitivity: 5
   moveSpeed: 5
   playerStats:
-    speed: 0
-    damage: 0
+    mass: 0
+    energy: 0
+    power: 0
+  currentType: 0
 --- !u!114 &114176680261489476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -692,6 +701,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &114597357093132542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655789533577904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ff1dec66648de45894b57e99d0c1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxFuel: 100
+  _CriticalFuel: 20
+  _FuelComsumptionRate: 0
 --- !u!114 &114735935792601478
 MonoBehaviour:
   m_ObjectHideFlags: 1
