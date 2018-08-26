@@ -8,7 +8,7 @@ public class ParticleController : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        instance = this;
+        instance = this;    
         ToggleStartGameParticles(true);
         SubscribeToEvents();
     }
