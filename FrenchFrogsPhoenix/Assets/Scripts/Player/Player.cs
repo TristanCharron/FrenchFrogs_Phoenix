@@ -69,7 +69,8 @@ public class Player : MonoBehaviour {
 
     private void Update()
     {
-        input.Update();
+        if(input != null)
+            input.Update();
     }
 
     public void Spawn(PlayerType type,string ID)
@@ -80,7 +81,8 @@ public class Player : MonoBehaviour {
         {
             case PlayerType.AI:
                 //Add AI Input
-                Destroy(playerCamera.gameObject);
+                if(playerCamera != null)
+                    Destroy(playerCamera.gameObject);
                 input = new AIInput();
                 AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
                 fsm.StartFSM(this);

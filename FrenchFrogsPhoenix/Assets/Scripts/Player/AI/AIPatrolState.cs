@@ -98,6 +98,9 @@ public class AIPatrolState : AIPlayerFSMState
     protected void OnTriggerEnter(Collider collision)
     {
 
+        if (Owner == null)
+            return;
+
         CachedStickingObject = collision.gameObject.GetComponent<StickingObject>();
         CachedPlayer = collision.gameObject.GetComponent<Player>();
 
