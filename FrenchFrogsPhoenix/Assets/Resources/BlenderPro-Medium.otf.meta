@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dca5f3ead9a436346bf0e9fb1d9d3cd1
+guid: fa0a1a07a9e681e408b9d42726209b10
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -12,7 +12,8 @@ TrueTypeFontImporter:
   fontNames:
   - Blender Pro
   fallbackFontReferences:
-  - {fileID: 12800000, guid: b4c5226d7ad9d6f429f9fd1fa31e9ceb, type: 3}
+  - {fileID: 12800000, guid: 9a83b5425697bec47bc0dcbbbb1f42b4, type: 3}
+  - {fileID: 12800000, guid: 110a4923bf5135c4397bf0f484a7e9fa, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

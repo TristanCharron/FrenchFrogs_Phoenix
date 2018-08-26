@@ -6,6 +6,8 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public class StickingObject : MonoBehaviour {
 
+    public StickyObjectFactory Factory { get; set; }
+
     //Accesors
     public Rigidbody rb { get; protected set; }
     public bool IsSticked { get { return PlayerParent != null; } }
@@ -25,18 +27,18 @@ public class StickingObject : MonoBehaviour {
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
 
-
+    Vector3 size;
 
     private void Awake()
     {
-        ////Test
-        //objectStats = new ObjectStats();
-        //objectStats.damage = Random.Range(0, 3);
-        //objectStats.speed = Random.Range(0, 3);
-    
         currentLife = maxLife;
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
+        Wiggle();
+    }
+
+    private void Start()
+    {
         Wiggle();
     }
 
@@ -50,6 +52,7 @@ public class StickingObject : MonoBehaviour {
         sinRotation.Initialize();
         this.stickingObjectParent = stickingObjectParent;
         this.PlayerParent = playerParent;
+        size = transform.localScale;
     }
 
     public void SetObjectStats(ObjectStats objectStats)
@@ -83,7 +86,8 @@ public class StickingObject : MonoBehaviour {
     {
         DetatchChilds();
         stickingObjectChilds.Clear();
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        Factory.DestroyObject(this);
     }
 
     public void SetFirstStickingchild(Player player)
@@ -110,6 +114,7 @@ public class StickingObject : MonoBehaviour {
     {
         transform.SetParent(null, true);
         PlayerParent = null;
+        stickingObjectParent = null;
 
         DetatchChilds();
 
@@ -148,7 +153,7 @@ public class StickingObject : MonoBehaviour {
 
         childMeshTransform.DOKill();
         //childMeshTransform.localScale = Vector3.one;
-        childMeshTransform.DOShakeScale(1, impact, 20).OnComplete(Wiggle);
+        childMeshTransform.DOShakeScale(1, impact, 20).OnComplete(ResetSizeWiggle);
 
         foreach (StickingObject stickingChild in stickingObjectChilds)
         {
@@ -160,9 +165,20 @@ public class StickingObject : MonoBehaviour {
             stickingObjectParent.ShakeScale(impact * impactPropagation, this);
     }
 
+    void ResetSizeWiggle()
+    {
+        transform.localScale = size;
+        Wiggle();
+    }
+
     void Wiggle()
     {
-        childMeshTransform.DOShakeScale(1, 0.05f, 20).SetDelay(.2f).SetLoops(-1, LoopType.Yoyo);
+        float randomDelay = Random.Range(0, 3f);
+        float randomWiggle = Random.Range(0.005f, 0.02f);
+        float randomWiggleDuration = Random.Range(.2f, 2f);
+        childMeshTransform.DOShakeScale(randomWiggleDuration, randomWiggle, 20)
+            .SetDelay(randomDelay)
+            .SetLoops(-1, LoopType.Yoyo);
 
     }
 }
