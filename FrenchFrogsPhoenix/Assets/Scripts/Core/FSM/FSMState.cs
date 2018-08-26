@@ -14,6 +14,8 @@ public abstract class FSMState: MonoBehaviour
 
     public System.Enum EnumID { get { return enumID; } }
 
+    protected bool isCurrentState;
+
     public abstract void UpdateState();
 
     protected abstract void Awake();
@@ -22,11 +24,13 @@ public abstract class FSMState: MonoBehaviour
 
     public virtual IEnumerator EnterState()
     {
+        isCurrentState = true;
         yield break;
     }
 
     public virtual IEnumerator ExitState()
     {
+        isCurrentState = false;
         yield break;
     }
 

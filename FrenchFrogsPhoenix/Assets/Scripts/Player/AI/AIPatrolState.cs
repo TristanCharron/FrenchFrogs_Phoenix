@@ -6,28 +6,33 @@ public struct AIPatrolInputPattern
 {
     public float x;
     public float y;
+    public float Rx;
+    public float Ry;
 
-    public AIPatrolInputPattern(float x, float y)
+    public AIPatrolInputPattern(float x, float y, float Rx, float Ry)
     {
         this.x = x;
         this.y = y;
+        this.Rx = Rx;
+        this.Ry = Ry;
     }
 }
 
 
 public class AIPatrolState : AIPlayerFSMState
 {
-    float timeElapsed = 0;
-    float currentX = 0;
-    float destX = 0;
-    float currentY = 0;
-    float destY = 0;
+    Transform ChasedObject = null;
 
-    AIPatrolInputPattern[] AIPatrolPatternsArray;
+    StickingObject CachedStickingObject = null;
+
+    Player CachedPlayer = null;
+
+    AIPatrolInputPattern currentPattern;
 
     protected override void Awake()
     {
         enumID = AIPlayerStates.PATROL;
+       
     }
 
     protected override void Start()
@@ -38,44 +43,86 @@ public class AIPatrolState : AIPlayerFSMState
         destX = Random.Range(-1, 1);
         destY = Random.Range(-1, 1);
 
+
+
         AIPatrolPatternsArray = new AIPatrolInputPattern[]
         {
-            new AIPatrolInputPattern(-0.5f,1),
-            new AIPatrolInputPattern(0.5f,1),
-            new AIPatrolInputPattern(0.5f,-1),
-            new AIPatrolInputPattern(-0.5f,-1),
-            new AIPatrolInputPattern(-0.5f,1),
-            new AIPatrolInputPattern(1,0),
-            new AIPatrolInputPattern(-1,0),
-
+            new AIPatrolInputPattern(0,1,0,0),
+            new AIPatrolInputPattern(1,0,0,0),
+            new AIPatrolInputPattern(1,1,0,0),
+            new AIPatrolInputPattern(1,1,0,0),
+            new AIPatrolInputPattern(-1,0,0,0),
+            new AIPatrolInputPattern(0,-1,0,0),
+            new AIPatrolInputPattern(-1,-1,0,0),
         };
 
 
     }
 
+
+
+ 
+
     public override void UpdateState()
     {
         if(AIPlayer.input != null)
         {
+            if (CachedTransform == null)
+                CachedTransform = AIPlayer.transform;
+
+
             timeElapsed += Time.deltaTime;
 
-            if(timeElapsed > 2f)
+            if(timeElapsed > 7f)
             {
                 timeElapsed = 0;
-                AIPatrolInputPattern pattern = AIPatrolPatternsArray[Random.Range(0, AIPatrolPatternsArray.Length)];
-                destX = pattern.x;
-                destY = pattern.y;
+                currentPattern = AIPatrolPatternsArray[Random.Range(0, AIPatrolPatternsArray.Length)];
+                destX = currentPattern.x;
+                destY = currentPattern.y;
             }
 
             currentX = Mathf.MoveTowards(currentX, destX, Time.deltaTime * 2);
             currentY = Mathf.MoveTowards(currentY, destY, Time.deltaTime * 2);
 
             AIPlayer.input.PressLeftStick(currentX, currentY);
-            AIPlayer.input.PressRightStick(currentX, currentY);
+            AIPlayer.input.PressRightStick(currentPattern.Rx, currentPattern.Ry);
+
+          
         }
 
 
            
+    }
+
+
+    protected void OnTriggerEnter(Collider collision)
+    {
+
+        CachedStickingObject = collision.gameObject.GetComponent<StickingObject>();
+        CachedPlayer = collision.gameObject.GetComponent<Player>();
+
+        if (CachedStickingObject)
+        {
+            if (!CachedStickingObject.IsSticked)
+            {
+                ChasedObject = CachedStickingObject.gameObject.transform;
+                Owner.SetChasedObject(ChasedObject.gameObject);
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
+            }
+
+        }
+        else if (CachedPlayer)
+        {
+            if (CachedPlayer != AIPlayer && AIPlayer.Type != CachedPlayer.Type)
+            {
+                ChasedObject = CachedPlayer.gameObject.transform;
+                Owner.SetChasedObject(ChasedObject.gameObject);
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
+            }
+
+        }
+
+
     }
 
 

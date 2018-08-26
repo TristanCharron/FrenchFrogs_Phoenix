@@ -6,6 +6,8 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public class StickingObject : MonoBehaviour {
 
+    public StickyObjectFactory Factory { get; set; }
+
     //Accesors
     public Rigidbody rb { get; protected set; }
     public bool IsSticked { get { return PlayerParent != null; } }
@@ -25,25 +27,22 @@ public class StickingObject : MonoBehaviour {
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
 
+    Vector3 size;
+
+    bool isInvincible = false;
+    float invisibilityTime = 0.5f;
+
     private void Awake()
-    {
-        //Test
-        objectStats = new ObjectStats();
-        objectStats.damage = Random.Range(0, 3);
-        objectStats.speed = Random.Range(0, 3);
-    
+    {   //call function init
         currentLife = maxLife;
+
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
     }
 
-    public void RecrusiveCalculateStats(ObjectStats playerStats)
+    private void Start()
     {
-        playerStats += objectStats;
-        foreach (StickingObject stickingChild in stickingObjectChilds)
-        {
-            stickingChild.RecrusiveCalculateStats(playerStats);
-        }
+        Wiggle();
     }
 
     public void SetMeshChild(Transform childMeshTransform)
@@ -56,10 +55,34 @@ public class StickingObject : MonoBehaviour {
         sinRotation.Initialize();
         this.stickingObjectParent = stickingObjectParent;
         this.PlayerParent = playerParent;
+        size = transform.localScale;
+    }
+
+    public void SetObjectStats(ObjectStats objectStats)
+    {
+        this.objectStats = objectStats;
+    }
+
+    public void RecrusiveCalculateStats(ObjectStats playerStats)
+    {
+        playerStats += objectStats;
+        foreach (StickingObject stickingChild in stickingObjectChilds)
+        {
+            if (stickingChild == this)
+                Debug.LogError("HUGE MISTAKE");
+
+            stickingChild.RecrusiveCalculateStats(playerStats);
+        }
     }
 
     public void Damage(int damage)
     {
+        if (isInvincible)
+            return;
+
+        childMeshTransform.DOKill();
+        childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
+
         currentLife -= damage;
         if(currentLife < 0)
         {
@@ -72,7 +95,13 @@ public class StickingObject : MonoBehaviour {
     {
         DetatchChilds();
         stickingObjectChilds.Clear();
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        if (PlayerParent != null)
+            PlayerParent.OnDestroyStickingObject.Invoke(this);
+
+        if(Factory != null)
+            Factory.DestroyObject(this);
     }
 
     public void SetFirstStickingchild(Player player)
@@ -99,6 +128,7 @@ public class StickingObject : MonoBehaviour {
     {
         transform.SetParent(null, true);
         PlayerParent = null;
+        stickingObjectParent = null;
 
         DetatchChilds();
 
@@ -130,14 +160,21 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
+    IEnumerator InvincibilityDelay()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invisibilityTime);
+        isInvincible = false;
+    }
+
     public void ShakeScale(float impact, StickingObject objectToIgnore)
     {
         if (impact < 0.01)
             return;
 
         childMeshTransform.DOKill();
-        childMeshTransform.localScale = Vector3.one;
-        childMeshTransform.DOShakeScale(1, impact, 20);
+        //childMeshTransform.localScale = Vector3.one;
+        childMeshTransform.DOShakeScale(1, impact, 20).OnComplete(ResetSizeWiggle);
 
         foreach (StickingObject stickingChild in stickingObjectChilds)
         {
@@ -147,5 +184,21 @@ public class StickingObject : MonoBehaviour {
 
         if (stickingObjectParent != null && stickingObjectParent != objectToIgnore)
             stickingObjectParent.ShakeScale(impact * impactPropagation, this);
+    }
+
+    void ResetSizeWiggle()
+    {
+        transform.localScale = size;
+        Wiggle();
+    }
+
+    void Wiggle()
+    {
+        float randomDelay = Random.Range(0, 3f);
+        float randomWiggle = Random.Range(0.005f, 0.02f);
+        float randomWiggleDuration = Random.Range(.2f, 2f);
+        childMeshTransform.DOShakeScale(randomWiggleDuration, randomWiggle, 20)
+            .SetDelay(randomDelay)
+            .SetLoops(-1, LoopType.Yoyo);
     }
 }

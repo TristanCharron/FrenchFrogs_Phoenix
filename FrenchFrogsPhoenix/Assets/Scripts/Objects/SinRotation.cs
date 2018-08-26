@@ -6,6 +6,7 @@ public class SinRotation : MonoBehaviour
 {
     [SerializeField] float speed = .1f;
     [SerializeField] float shakeFactor = 0.1f;
+    [SerializeField] float randomness = 10;
 
     bool isActivated = false;
 
@@ -18,7 +19,20 @@ public class SinRotation : MonoBehaviour
         isActivated = true;
     
         start = transform.localEulerAngles;
-        end = Random.onUnitSphere * 360;
+
+        float remainRandom = randomness;
+        Vector3 random = new Vector3(RandomScalar(ref remainRandom), RandomScalar(ref remainRandom), RandomScalar(ref remainRandom));
+
+        end = start + random;
+        //end = Random.onUnitSphere * 360;
+    }
+
+    float RandomScalar(ref float randomness)
+    {
+        float random = Random.Range(0, randomness);
+
+        randomness -= random;
+        return random * Mathf.Sign(Random.Range(-1,1));
     }
 
     private void Update()

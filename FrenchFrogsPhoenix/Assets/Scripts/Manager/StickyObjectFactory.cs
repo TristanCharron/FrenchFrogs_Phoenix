@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StickyObjectFactory : MonoBehaviour {
 
+    [SerializeField] int numberSpawn = 2000;
+    [SerializeField] int initialCount = 100;
+
     [Header("Spawn params")]
     [SerializeField] float radiusSpawn = 25;
     [SerializeField] float timerSpawn = 5;
@@ -18,7 +21,42 @@ public class StickyObjectFactory : MonoBehaviour {
 
     float currentTimerSpawn = 0;
 
-	void Update ()
+    Queue<StickingObject> stickyQueue = new Queue<StickingObject>();
+    List<StickingObject> listUsedStickyObject = new List<StickingObject>();
+
+
+    private void Awake()
+    {
+        for (int i = 0; i < numberSpawn; i++)
+        {
+            SetToPool();
+        }
+
+
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                SpawnInitial();
+                enabled = true;
+            }
+            else if (CurrentState == GameFSMStates.GAMEOVER)
+            {
+                enabled = false;
+                for (int i = 0; i < listUsedStickyObject.Count; i++)
+                {
+                    DestroyObject(listUsedStickyObject[i]);
+                }
+            }
+            else
+            {
+                enabled = false;
+            }
+
+        });
+    }
+
+    void Update ()
     {
         currentTimerSpawn += Time.deltaTime;
         if (currentTimerSpawn > timerSpawn)
@@ -28,21 +66,65 @@ public class StickyObjectFactory : MonoBehaviour {
         }
     }
 
+    private void SpawnInitial()
+    {
+        for (int i = 0; i < initialCount; i++)
+        {
+            SpawnObject();
+        }
+    }
+
+    public void DestroyObject(StickingObject stickingObject)
+    {
+        stickingObject.gameObject.SetActive(false);
+        stickingObject.transform.SetParent(transform);
+        stickyQueue.Enqueue(stickingObject);
+        listUsedStickyObject.Remove(stickingObject);
+    }
+
     void SpawnObject()
     {
-        StickingObject stickingObject = Instantiate(prefabStickingObjet, Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
+        StickingObject stickingObject = stickyQueue.Dequeue();
 
-        stickingObject.transform.SetParent(transform);
-            
+        if (stickingObject == null)
+            return;
+
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);
         rigidBody.angularVelocity = (Random.insideUnitSphere * spinMagnitude);
 
-        Material material = materials[Random.Range(0, materials.Length)];
-        SetMeshChild(stickingObject, material);
+        stickingObject.transform.position = Random.insideUnitSphere * radiusSpawn;
+
+        stickingObject.gameObject.SetActive(true);
     }
 
-    private void SetMeshChild(StickingObject stickingObject, Material material)
+    void SetToPool()
+    {
+        StickingObject stickingObject = Instantiate(prefabStickingObjet, transform.position, Quaternion.identity);
+        stickingObject.Factory = this;
+
+        int materialRandom = Random.Range(0, materials.Length);
+        Material material = materials[materialRandom];
+        MeshRenderer mesh = SetMeshChild(stickingObject, material);
+
+        float randomSize = Random.Range(.1f, 2f);
+        ObjectStats stats = new ObjectStats();
+        stats.SetType((ObjectStats.Type)materialRandom);
+
+        stats *= randomSize;
+        stickingObject.SetObjectStats(stats);
+
+        stickingObject.transform.localScale *= randomSize;
+
+        stickingObject.transform.SetParent(transform);
+
+
+        stickyQueue.Enqueue(stickingObject);
+        listUsedStickyObject.Add(stickingObject);
+        stickingObject.gameObject.SetActive(false);
+    }
+
+    private MeshRenderer SetMeshChild(StickingObject stickingObject, Material material)
     {
         int randomMeshIndex = Random.Range(0, meshPrefabs.Length);
         MeshRenderer meshModel = Instantiate(meshPrefabs[randomMeshIndex], Random.insideUnitSphere * radiusSpawn, Quaternion.identity);
@@ -50,5 +132,6 @@ public class StickyObjectFactory : MonoBehaviour {
         meshModel.transform.localPosition = Vector3.zero;
         meshModel.material = material;
         stickingObject.SetMeshChild(meshModel.transform);
+        return meshModel;
     }
 }

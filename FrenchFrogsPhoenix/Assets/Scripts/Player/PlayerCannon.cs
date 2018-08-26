@@ -12,7 +12,7 @@ public class PlayerCannon : MonoBehaviour {
 
 	void Start ()
     {
-        player.input.FireButton.AddEvent(Fire);
+        //player.input.FireButton.AddEvent(Fire);
         cannonData = new CannonData();
         cannonData.damage = 5;
         cannonData.speed = 50;
