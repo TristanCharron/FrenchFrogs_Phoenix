@@ -290,7 +290,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 33902885358083924, guid: 5800a43b7f876984ea8704e8d30d52f4,
+    - target: {fileID: 33207724764124684, guid: 5800a43b7f876984ea8704e8d30d52f4,
         type: 2}
       propertyPath: m_Mesh
       value: 
@@ -300,11 +300,21 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 33207724764124684, guid: 5800a43b7f876984ea8704e8d30d52f4,
+    - target: {fileID: 33902885358083924, guid: 5800a43b7f876984ea8704e8d30d52f4,
         type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114343471716536134, guid: 5800a43b7f876984ea8704e8d30d52f4,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114343471716536134, guid: 5800a43b7f876984ea8704e8d30d52f4,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114217461896309340, guid: 5800a43b7f876984ea8704e8d30d52f4,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -321,16 +331,6 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114691928441680964, guid: 5800a43b7f876984ea8704e8d30d52f4,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114343471716536134, guid: 5800a43b7f876984ea8704e8d30d52f4,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114343471716536134, guid: 5800a43b7f876984ea8704e8d30d52f4,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  clearColorMode: 0
+  clearColorMode: 1
   backgroundColorHDR: {r: 0, g: 0, b: 0, a: 0}
   clearDepth: 1
   renderingPath: 0

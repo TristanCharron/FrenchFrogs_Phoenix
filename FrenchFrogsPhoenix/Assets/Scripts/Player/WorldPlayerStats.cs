@@ -8,6 +8,7 @@ public class WorldPlayerStats : MonoBehaviour {
     public Player playerToLookAt;
 
     [SerializeField] Player currentPlayer;
+    float speed = 0.5f;
     bool isActive;
 
     // Use this for initialization
@@ -19,7 +20,8 @@ public class WorldPlayerStats : MonoBehaviour {
 	void Update () {
 		if(isActive && playerToLookAt.currentType != PlayerType.AI)
         {
-            transform.LookAt(playerToLookAt.GetPlayerCamera().transform);
+            transform.rotation = Quaternion.Lerp(playerToLookAt.GetPlayerCamera().transform.rotation, transform.rotation, speed * Time.deltaTime);
+            //transform.LookAt(Mathf.Lerp(playerToLookAt.GetPlayerCamera().transform.eulerAngles);
         }
 	}
 
