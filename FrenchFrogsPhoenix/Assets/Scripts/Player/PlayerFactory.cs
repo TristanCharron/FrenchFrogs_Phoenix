@@ -29,10 +29,21 @@ public class PlayerFactory : MonoBehaviour {
 
         SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity);
 
-        StartCoroutine(SpawnDelay());
-     
        
-     
+        EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
+        {
+            if(CurrentState == GameFSMStates.GAMEPLAY)
+            {
+                StartCoroutine(SpawnDelay());
+            }
+            if(CurrentState == GameFSMStates.GAMEOVER)
+            {
+                RemovePlayersOfType(PlayerType.AI);
+            }
+            
+        });
+
+
     }
 
     IEnumerator SpawnDelay()
@@ -74,6 +85,26 @@ public class PlayerFactory : MonoBehaviour {
                 return;
             }
         }
+    }
+
+    public void RemovePlayersOfType(PlayerType type)
+    {
+        List<Player> PlayerToRemove = new List<Player>();
+
+        for (int i = 0; i < PlayerList.Count; i++)
+        {
+            if(PlayerList[i].Type == type)
+            {
+                PlayerToRemove.Add(PlayerList[i]);
+            }
+        }
+
+        for(int j = 0; j < PlayerToRemove.Count;j++)
+        {
+            PlayerList.Remove(PlayerToRemove[j]);
+            Destroy(PlayerToRemove[j].gameObject);
+        }
+
     }
 
     public void RemovePlayers()
