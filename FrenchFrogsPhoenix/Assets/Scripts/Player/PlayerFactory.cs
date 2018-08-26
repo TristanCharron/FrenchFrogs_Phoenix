@@ -12,6 +12,9 @@ public enum PlayerType
 
 public class PlayerFactory : MonoBehaviour {
 
+    public const string EVT_ONLOCALPLAYERDEATH = "OnLocalPlayerDeath";
+
+
     [SerializeField]
     Player PlayerPrefab;
 
@@ -23,11 +26,13 @@ public class PlayerFactory : MonoBehaviour {
 
     List<Player> PlayerList;
 
+    public Player LocalPlayer { get; private set; }
+
 	// Use this for initialization
 	void Start () {
         PlayerList = new List<Player>();
 
-        SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity);
+        LocalPlayer = SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity);
 
        
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
@@ -38,9 +43,18 @@ public class PlayerFactory : MonoBehaviour {
             }
             if(CurrentState == GameFSMStates.GAMEOVER)
             {
+                StopAllCoroutines();
                 RemovePlayersOfType(PlayerType.AI);
             }
             
+        });
+
+        EventManager.Subscribe<Player>(Player.EVT_ON_PLAYER_DEATH, (player) =>
+        {
+            if(player == LocalPlayer)
+            {
+                EventManager.Invoke(EVT_ONLOCALPLAYERDEATH);
+            }
         });
 
 
@@ -57,7 +71,7 @@ public class PlayerFactory : MonoBehaviour {
     }
 	
 
-    public void SpawnPlayer(PlayerType type, Vector3 position, Quaternion rotation)
+    public Player SpawnPlayer(PlayerType type, Vector3 position, Quaternion rotation)
     {
         if(PlayerPrefab && AIPlayerPrefab)
         {
@@ -66,10 +80,13 @@ public class PlayerFactory : MonoBehaviour {
             player.Spawn(type,DateTime.Now.ToString());
             PlayerList.Add(player);
 
+            return player;
+
         }
         else
         {
             Debug.LogError("Player Prefab is null");
+            return null;
         }
         
     }
@@ -89,21 +106,21 @@ public class PlayerFactory : MonoBehaviour {
 
     public void RemovePlayersOfType(PlayerType type)
     {
-        List<Player> PlayerToRemove = new List<Player>();
+        List<Player> newList = new List<Player>();
 
         for (int i = 0; i < PlayerList.Count; i++)
         {
-            if(PlayerList[i].Type == type)
+            if(PlayerList[i].Type != type)
             {
-                PlayerToRemove.Add(PlayerList[i]);
+                newList.Add(PlayerList[i]);
+            }
+            else
+            {
+                Destroy(PlayerList[i].gameObject);
             }
         }
 
-        for(int j = 0; j < PlayerToRemove.Count;j++)
-        {
-            PlayerList.Remove(PlayerToRemove[j]);
-            Destroy(PlayerToRemove[j].gameObject);
-        }
+        PlayerList = newList;
 
     }
 

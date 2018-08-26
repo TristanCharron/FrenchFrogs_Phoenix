@@ -9,48 +9,47 @@ public class PlayerLaser : MonoBehaviour {
     [SerializeField] LineRenderer lineRenderer;
 
     LaserData laserData;
-    bool isReady = true;
+
+    private float timer = 0;
 
     private void Start()
     {
         laserData = new LaserData();
         laserData.damage = 5;
+
+        player.input.FireButton.AddEvent(()=> {
+            ShowBeam(true);
+        });
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            ShowBeam(true);
-        }
-        else
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
         {
             ShowBeam(false);
         }
+            
     }
 
     void ShowBeam(bool show)
     {
         laserCollider.enabled = show;
         lineRenderer.enabled = show;
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if(!isReady)
-            return;
-
-        StickingObject stickingObject = other.GetComponent<StickingObject>();
-        if (stickingObject != null && stickingObject.PlayerParent != player)
+        if (show)
         {
-            Debug.Log("COLLSISION");
+            timer = 0.02f;
         }
     }
 
-    IEnumerator TickDelay()
+    private void OnTriggerEnter(Collider other)
     {
-        isReady = false;
-        yield return new WaitForSeconds(.2f);
-        isReady = true;
+        StickingObject stickingObject = other.GetComponent<StickingObject>();
+        if (stickingObject != null && stickingObject.PlayerParent != player)
+        {
+            //stickingObject.Damage(laserData.damage);
+        }
     }
 }

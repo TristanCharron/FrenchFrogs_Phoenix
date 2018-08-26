@@ -32,6 +32,8 @@ public class StickyObjectFactory : MonoBehaviour {
             SetToPool();
         }
 
+        enabled = false;
+
 
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
@@ -43,10 +45,16 @@ public class StickyObjectFactory : MonoBehaviour {
             else if (CurrentState == GameFSMStates.GAMEOVER)
             {
                 enabled = false;
+                currentTimerSpawn = 0;
+
+                StopAllCoroutines();
                 for (int i = 0; i < listUsedStickyObject.Count; i++)
                 {
                     DestroyObject(listUsedStickyObject[i]);
                 }
+
+                listUsedStickyObject.Clear();
+               
             }
             else
             {
@@ -79,7 +87,6 @@ public class StickyObjectFactory : MonoBehaviour {
         stickingObject.gameObject.SetActive(false);
         stickingObject.transform.SetParent(transform);
         stickyQueue.Enqueue(stickingObject);
-        listUsedStickyObject.Remove(stickingObject);
     }
 
     void SpawnObject()
@@ -96,7 +103,8 @@ public class StickyObjectFactory : MonoBehaviour {
         stickingObject.transform.position = Random.insideUnitSphere * radiusSpawn;
 
         stickingObject.gameObject.SetActive(true);
-        stickingObject.Init();
+        listUsedStickyObject.Add(stickingObject);
+
     }
 
     void SetToPool()
@@ -121,7 +129,6 @@ public class StickyObjectFactory : MonoBehaviour {
 
 
         stickyQueue.Enqueue(stickingObject);
-        listUsedStickyObject.Add(stickingObject);
         stickingObject.gameObject.SetActive(false);
     }
 

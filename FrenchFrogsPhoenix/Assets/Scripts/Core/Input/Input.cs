@@ -71,8 +71,8 @@ public abstract class BaseInput
 {
     protected bool isActive = false;
 
-    protected Dictionary<string, InputButton> ButtonDictionnary;
     public InputButton FireButton { protected set; get; }
+    public InputButton BoostButton { protected set; get; }
     public InputStick LeftStick { protected set; get; }
     public InputStick RightStick  { protected set; get; }
   
@@ -80,9 +80,9 @@ public abstract class BaseInput
 
     public BaseInput()
     {
-        ButtonDictionnary = new Dictionary<string, InputButton>();
         FireButton = new InputButton("Fire", RewiredConsts.Action.Fire);
-        
+        BoostButton = new InputButton("Boost", RewiredConsts.Action.Boost);
+
         LeftStick = new InputStick();
         RightStick = new InputStick();
     }
@@ -92,21 +92,6 @@ public abstract class BaseInput
         isActive = active;
     }
 
-    protected void AddButton(InputButton button)
-    {
-        ButtonDictionnary.Add(button.Name, button);
-    }
-
-    protected void PressButton(string buttonName)
-    {
-        if (ButtonDictionnary.ContainsKey(buttonName))
-        {
-            ButtonDictionnary[buttonName].Press();
-        }
-        else
-            Debug.LogError(buttonName + "does not exist on button press");
-
-    }
 
     public void PressLeftStick(float x, float y)
     {
