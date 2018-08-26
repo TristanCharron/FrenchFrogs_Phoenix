@@ -67,9 +67,6 @@ public class InputStick
     }
 }
 
-
-
-
 public abstract class BaseInput
 {
     protected bool isActive = false;
@@ -79,8 +76,6 @@ public abstract class BaseInput
     public InputStick LeftStick { protected set; get; }
     public InputStick RightStick  { protected set; get; }
   
-
-
     public abstract void Update();
 
     public BaseInput()
@@ -110,7 +105,7 @@ public abstract class BaseInput
         }
         else
             Debug.LogError(buttonName + "does not exist on button press");
-        
+
     }
 
     public void PressLeftStick(float x, float y)
@@ -126,9 +121,6 @@ public abstract class BaseInput
         RightStick.SetY(y);
         RightStick.Press();
     }
-
-
-    
 }
 
 
