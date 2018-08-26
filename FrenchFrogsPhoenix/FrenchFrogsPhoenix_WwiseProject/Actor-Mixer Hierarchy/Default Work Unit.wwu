@@ -1,6 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{90EBE803-9D53-461F-941A-80406BDFED78}" SchemaVersion="89">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{90EBE803-9D53-461F-941A-80406BDFED78}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{90EBE803-9D53-461F-941A-80406BDFED78}" PersistMode="Standalone">
+			<ChildrenList>
+				<RandomSequenceContainer Name="SFX_Stick" ID="{CB90534E-FBA9-444C-9192-B60DCA1EB774}" ShortID="23134368">
+					<PropertyList>
+						<Property Name="Lowpass" Type="int16">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{F296BBB8-FF95-47AC-97E4-01D527772CAA}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="40"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{C10997FB-3AF5-49EB-AE22-0A87C1DBAE58}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="200"/>
+											<Property Name="Min" Type="Real64" Value="-200"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+						<Property Name="Volume" Type="Real64">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{F19928A9-3951-4A47-BFA1-AE34D4AE87B1}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Min" Type="Real64" Value="-3"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="SFX_Main_Skill_Stick_01" ID="{402A8967-5A61-47C3-A7D3-2ACAE85C0767}" ShortID="252701208">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Main_Skill_Stick_01" ID="{29E02351-496C-406D-9231-10C925E30720}" ShortID="888522010">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Main_Skill_Stick_01.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Main_Skill_Stick_01" ID="{29E02351-496C-406D-9231-10C925E30720}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Main_Skill_Stick_02" ID="{2B3A3598-FADE-4230-BC31-5EEFCC67E59E}" ShortID="703314779">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Main_Skill_Stick_02" ID="{9DC6A6A1-4F39-4693-8AED-72B5F1D54649}" ShortID="299180188">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Main_Skill_Stick_02.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Main_Skill_Stick_02" ID="{9DC6A6A1-4F39-4693-8AED-72B5F1D54649}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Main_Skill_Stick_03" ID="{B9E9100F-48EC-485A-99EF-84CBDF4A6879}" ShortID="646769448">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Main_Skill_Stick_03" ID="{EF3F62AB-99B7-4281-B063-628405F7F034}" ShortID="559870666">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Main_Skill_Stick_03.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Main_Skill_Stick_03" ID="{EF3F62AB-99B7-4281-B063-628405F7F034}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_Main_Skill_Stick_04" ID="{C491DFA5-1E83-40C6-BAEA-86C073644004}" ShortID="1062870835">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_Main_Skill_Stick_04" ID="{2CA84F91-29EA-49FC-BDEE-3AD06D5D347D}" ShortID="1068849344">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Main_Skill_Stick_04.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_Main_Skill_Stick_04" ID="{2CA84F91-29EA-49FC-BDEE-3AD06D5D347D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

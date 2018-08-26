@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnSpeed: 1.5
-  maxNumbEnvironmentObject: 50
+  maxNumbEnvironmentObject: 250
   newEnvironmentObjectsRef:
   - {fileID: 114685601360782866, guid: 858d7866831b4ee4ca98e6c68e0f6d74, type: 2}
   - {fileID: 114576835599836072, guid: 768b52b107c171a4db050faf8e00efc0, type: 2}

@@ -12,15 +12,16 @@ public class MouseRotation
 
     private bool m_cursorIsLocked = true;
 
-    public void LookRotation(Transform character, float sensitivity, float x, float y)
+    public void LookRotation(Transform character, float sensitivity, Vector3 rotation)
     {
-        float yRot = x * sensitivity;
-        float xRot = y * sensitivity;
+        //float yRot = x * sensitivity;
+        //float xRot = y * sensitivity;
+        rotation *= sensitivity;
 
-        Quaternion targetRotation = character.rotation;
+        Quaternion targetRotation = character.localRotation;
 
-        targetRotation *= Quaternion.Euler(-xRot, yRot, 0f);
-
+        //targetRotation *= Quaternion.Euler(-xRot, yRot, 0f);
+        targetRotation *= Quaternion.Euler(rotation);
 
         if (clampVerticalRotation)
         {
