@@ -24,11 +24,7 @@ public class GameplayState : FSMState {
 
     public override void UpdateState()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            EventManager.Invoke("OnEndGame");
-        }
-        //Debug.Log("Gameplay");
+       
     }
 
 }

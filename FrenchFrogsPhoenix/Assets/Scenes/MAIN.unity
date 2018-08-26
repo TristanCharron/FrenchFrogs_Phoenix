@@ -2396,10 +2396,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60f4f7b9a8a546d47a167b184c3cacdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grp: {fileID: 0}
+  grp: {fileID: 639507701}
   speed: 0.2
-  overrideInteractivity: 0
-  visibleOnStart: 1
+  overrideInteractivity: 1
+  visibleOnStart: 0
   isVisible: 0
 --- !u!225 &639507701
 CanvasGroup:
@@ -2409,7 +2409,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 639507699}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -3580,7 +3580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -121.4}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 800, y: 55.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1426900443
@@ -3930,7 +3930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 123.5}
+  m_AnchoredPosition: {x: 0, y: 74}
   m_SizeDelta: {x: 0, y: -247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1543180635
