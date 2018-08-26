@@ -6,11 +6,15 @@ public struct AIPatrolInputPattern
 {
     public float x;
     public float y;
+    public float Rx;
+    public float Ry;
 
-    public AIPatrolInputPattern(float x, float y)
+    public AIPatrolInputPattern(float x, float y, float Rx, float Ry)
     {
         this.x = x;
         this.y = y;
+        this.Rx = Rx;
+        this.Ry = Ry;
     }
 }
 
@@ -22,6 +26,8 @@ public class AIPatrolState : AIPlayerFSMState
     StickingObject CachedStickingObject = null;
 
     Player CachedPlayer = null;
+
+    AIPatrolInputPattern currentPattern;
 
     protected override void Awake()
     {
@@ -38,16 +44,16 @@ public class AIPatrolState : AIPlayerFSMState
         destY = Random.Range(-1, 1);
 
 
+
         AIPatrolPatternsArray = new AIPatrolInputPattern[]
         {
-            new AIPatrolInputPattern(-0.5f,1),
-            new AIPatrolInputPattern(0.5f,1),
-            new AIPatrolInputPattern(0.5f,-1),
-            new AIPatrolInputPattern(-0.5f,-1),
-            new AIPatrolInputPattern(-0.5f,1),
-            new AIPatrolInputPattern(1,0),
-            new AIPatrolInputPattern(-1,0),
-
+            new AIPatrolInputPattern(0,1,0,0),
+            new AIPatrolInputPattern(1,0,0,0),
+            new AIPatrolInputPattern(1,1,0,0),
+            new AIPatrolInputPattern(1,1,0,0),
+            new AIPatrolInputPattern(-1,0,0,0),
+            new AIPatrolInputPattern(0,-1,0,0),
+            new AIPatrolInputPattern(-1,-1,0,0),
         };
 
 
@@ -67,19 +73,19 @@ public class AIPatrolState : AIPlayerFSMState
 
             timeElapsed += Time.deltaTime;
 
-            if(timeElapsed > 2f)
+            if(timeElapsed > 7f)
             {
                 timeElapsed = 0;
-                AIPatrolInputPattern pattern = AIPatrolPatternsArray[Random.Range(0, AIPatrolPatternsArray.Length)];
-                destX = pattern.x;
-                destY = pattern.y;
+                currentPattern = AIPatrolPatternsArray[Random.Range(0, AIPatrolPatternsArray.Length)];
+                destX = currentPattern.x;
+                destY = currentPattern.y;
             }
 
             currentX = Mathf.MoveTowards(currentX, destX, Time.deltaTime * 2);
             currentY = Mathf.MoveTowards(currentY, destY, Time.deltaTime * 2);
 
             AIPlayer.input.PressLeftStick(currentX, currentY);
-            AIPlayer.input.PressRightStick(currentX, currentY );
+            AIPlayer.input.PressRightStick(currentPattern.Rx, currentPattern.Ry);
 
           
         }
@@ -91,7 +97,7 @@ public class AIPatrolState : AIPlayerFSMState
 
     protected void OnTriggerEnter(Collider collision)
     {
-     
+
         CachedStickingObject = collision.gameObject.GetComponent<StickingObject>();
         CachedPlayer = collision.gameObject.GetComponent<Player>();
 
@@ -100,18 +106,23 @@ public class AIPatrolState : AIPlayerFSMState
             if (!CachedStickingObject.IsSticked)
             {
                 ChasedObject = CachedStickingObject.gameObject.transform;
+                Owner.SetChasedObject(ChasedObject.gameObject);
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
 
         }
         else if (CachedPlayer)
         {
-            if (CachedPlayer != AIPlayer)
+            if (CachedPlayer != AIPlayer && AIPlayer.Type != CachedPlayer.Type)
             {
                 ChasedObject = CachedPlayer.gameObject.transform;
                 Owner.SetChasedObject(ChasedObject.gameObject);
+                Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
 
         }
+
+
     }
 
 

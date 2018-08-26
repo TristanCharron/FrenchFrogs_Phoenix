@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public MouseRotation mouseRotation = new MouseRotation();
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
 
+    [SerializeField] WorldPlayerStats worldPlayerStats;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] Transform nullCore;
     [SerializeField] StickingObject stickingObject;
@@ -18,8 +19,11 @@ public class Player : MonoBehaviour {
 
     float maxDistanceStickingObject;
     public ObjectStats playerStats;
+    public PlayerType currentType;
 
     public BaseInput input;
+
+    public PlayerType Type { get; private set; }
 
     public string ID { private set; get; }
 
@@ -53,7 +57,9 @@ public class Player : MonoBehaviour {
 
     public void Spawn(PlayerType type,string ID)
     {
-        switch (type)
+        currentType = type;
+
+        switch (currentType)
         {
             case PlayerType.AI:
                 
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour {
         input.RightStick.AddEvent(RightStickHandle);
 
         this.ID = ID;
+        this.Type = type;
     }
 
     void RightStickHandle(float x, float y)
@@ -108,6 +115,35 @@ public class Player : MonoBehaviour {
 
         Vector3 direction = transform.TransformDirection(input);
         transform.position += direction * moveSpeed * Time.deltaTime;
+    }
+
+    public PlayerCamera GetPlayerCamera()
+    {
+        return playerCamera;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Player>() != null)
+        {
+            Player playerRef = other.GetComponent<Player>();
+            if (playerRef.currentType != PlayerType.HUMAN)
+            {
+                playerRef.worldPlayerStats.ShowStats(this);
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Player>() != null)
+        {
+            Player playerRef = other.GetComponent<Player>();
+            if(playerRef.worldPlayerStats != null)
+            {
+                playerRef.worldPlayerStats.HideStats();
+            }
+        }
     }
 }
 
