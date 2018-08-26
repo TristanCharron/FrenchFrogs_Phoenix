@@ -13,7 +13,7 @@ public class PlayerInput : BaseInput
         if (!isActive)
             return;
 
-        if(player.GetButton("Fire"))
+        if(player.GetButtonDown("Fire"))
             FireButton.Press();
 
  
