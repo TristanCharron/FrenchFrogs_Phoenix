@@ -17,17 +17,16 @@ public struct AIPatrolInputPattern
 
 public class AIPatrolState : AIPlayerFSMState
 {
-    float timeElapsed = 0;
-    float currentX = 0;
-    float destX = 0;
-    float currentY = 0;
-    float destY = 0;
+    Transform ChasedObject = null;
 
-    AIPatrolInputPattern[] AIPatrolPatternsArray;
+    StickingObject CachedStickingObject = null;
+
+    Player CachedPlayer = null;
 
     protected override void Awake()
     {
         enumID = AIPlayerStates.PATROL;
+       
     }
 
     protected override void Start()
@@ -37,6 +36,7 @@ public class AIPatrolState : AIPlayerFSMState
         currentY = 0;
         destX = Random.Range(-1, 1);
         destY = Random.Range(-1, 1);
+
 
         AIPatrolPatternsArray = new AIPatrolInputPattern[]
         {
@@ -53,10 +53,18 @@ public class AIPatrolState : AIPlayerFSMState
 
     }
 
+
+
+ 
+
     public override void UpdateState()
     {
         if(AIPlayer.input != null)
         {
+            if (CachedTransform == null)
+                CachedTransform = AIPlayer.transform;
+
+
             timeElapsed += Time.deltaTime;
 
             if(timeElapsed > 2f)
@@ -71,11 +79,39 @@ public class AIPatrolState : AIPlayerFSMState
             currentY = Mathf.MoveTowards(currentY, destY, Time.deltaTime * 2);
 
             AIPlayer.input.PressLeftStick(currentX, currentY);
-            AIPlayer.input.PressRightStick(currentX, currentY);
+            AIPlayer.input.PressRightStick(currentX, currentY );
+
+          
         }
 
 
            
+    }
+
+
+    protected void OnTriggerEnter(Collider collision)
+    {
+     
+        CachedStickingObject = collision.gameObject.GetComponent<StickingObject>();
+        CachedPlayer = collision.gameObject.GetComponent<Player>();
+
+        if (CachedStickingObject)
+        {
+            if (!CachedStickingObject.IsSticked)
+            {
+                ChasedObject = CachedStickingObject.gameObject.transform;
+            }
+
+        }
+        else if (CachedPlayer)
+        {
+            if (CachedPlayer != AIPlayer)
+            {
+                ChasedObject = CachedPlayer.gameObject.transform;
+                Owner.SetChasedObject(ChasedObject.gameObject);
+            }
+
+        }
     }
 
 

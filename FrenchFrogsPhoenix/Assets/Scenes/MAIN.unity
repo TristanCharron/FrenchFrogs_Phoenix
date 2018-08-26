@@ -2042,6 +2042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872224641}
+  - component: {fileID: 872224642}
   m_Layer: 0
   m_Name: ParticleController
   m_TagString: Untagged
@@ -2062,6 +2063,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &872224642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872224640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef21fa5dd7cf5774b850246438952e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGameParticleSystem: {fileID: 1946139479}
 --- !u!1 &985975527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +2650,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9142f88d0f28f148b25628041c18af0, type: 2}
   m_IsPrefabAsset: 0
+--- !u!198 &1946139479 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198879663525594154, guid: 0092979c6418712448a7c70977c6375c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1077424298}
 --- !u!1 &1947562212
 GameObject:
   m_ObjectHideFlags: 0
