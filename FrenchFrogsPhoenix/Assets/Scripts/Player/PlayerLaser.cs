@@ -14,7 +14,7 @@ public class PlayerLaser : MonoBehaviour {
     private float timer = 0;
     private float tickTimer = 0.1f;
     bool isOnCooldown = false;
-    private void Start()
+    private void Awake()
     {
         laserData = new LaserData();
         laserData.damage = 5;
@@ -31,19 +31,22 @@ public class PlayerLaser : MonoBehaviour {
 
     void ShowBeam(bool show)
     {
+        if (show && player.Fuel.CurrentFuel > 0)
+        {
+            player.Fuel.RemoveFuel(laserCostPerSecond * Time.deltaTime);        
+        }
+        else
+        {
+            show = false;
+        }
+
         laserCollider.enabled = show;
         lineRenderer.enabled = show;
-
-        if(show)
-            player.Fuel.RemoveFuel(laserCostPerSecond * Time.deltaTime);
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (isOnCooldown)
-            return;
-
-        if (laserData == null)
             return;
 
         StickingObject stickingObject = other.GetComponent<StickingObject>();

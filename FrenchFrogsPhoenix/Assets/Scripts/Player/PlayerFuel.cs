@@ -12,10 +12,10 @@ public enum FuelStates
 public class PlayerFuel : MonoBehaviour {
 
     [SerializeField]
-    private float _MaxFuel;
+    private float maxFuel;
 
     [SerializeField]
-    private float _CriticalFuel;
+    private float criticalFuel;
 
     [SerializeField, Range(0,2)]
     private float _FuelComsumptionRate;
@@ -27,14 +27,18 @@ public class PlayerFuel : MonoBehaviour {
 
     Player player;
 
-	
+
+    private void Update()
+    {
+        //RemoveFuel(FuelComsumptionRate * Time.deltaTime);
+    }
     // Use this for initialization
-	void Awake () {
-        CurrentFuel = _MaxFuel;
+    void Awake () {
+        CurrentFuel = maxFuel;
         player = GetComponent<Player>();
     }
 
-    private void SetActive(bool isActive)
+    public void SetActive(bool isActive)
     {
         IsActive = isActive;
     }
@@ -52,10 +56,16 @@ public class PlayerFuel : MonoBehaviour {
     public FuelStates SetFuel(float fuel)
     {
         if(IsActive)
-            CurrentFuel = Mathf.Clamp(fuel, 0, _MaxFuel);
+            CurrentFuel = Mathf.Clamp(fuel, 0, maxFuel);
 
-        EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel);
+        InvokeFuelEvent();
         return GetFuelState();
+    }
+
+    void InvokeFuelEvent()
+    {
+        if(player.currentType == PlayerType.HUMAN)
+            EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel / maxFuel);
     }
 
     private FuelStates GetFuelState()
@@ -64,7 +74,7 @@ public class PlayerFuel : MonoBehaviour {
         {
             return FuelStates.EMPTY;
         }
-        if(CurrentFuel < _CriticalFuel)
+        if(CurrentFuel < criticalFuel)
         {
             return FuelStates.CRITICAL;
         }

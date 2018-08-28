@@ -11,18 +11,12 @@ public class Player : MonoBehaviour {
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
     public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
 
-    public UnityEvent OnWarpAcceleration = new UnityEvent();
-    public UnityEvent OnWarpStopAcceleration = new UnityEvent();
-
     [SerializeField] WorldPlayerStats worldPlayerStats;
-    [SerializeField] PlayerCamera playerCamera;
+
     [SerializeField] Transform nullCore;
     [SerializeField] StickingObject stickingObject;
     [SerializeField] float cameraSensitivity = 2;
     [SerializeField] float rotateSensitivity = 0.01f;
-
-    [SerializeField] MouvementSettings mouvementSettings;
-    Vector3 currentVelocity = Vector3.zero;
 
 
     float maxDistanceStickingObject;
@@ -31,6 +25,7 @@ public class Player : MonoBehaviour {
 
     public BaseInput input;
 
+    public PlayerFlightControl Control { get; protected set; }
     public PlayerFuel Fuel { get; protected set; }
     public PlayerType Type { get; private set; }
 
@@ -40,14 +35,9 @@ public class Player : MonoBehaviour {
     {
         Fuel = GetComponent<PlayerFuel>();
         playerStats = new ObjectStats();
+        Control = GetComponent<PlayerFlightControl>();
 
-        if (playerCamera != null)
-            playerCamera.player = this;
-
-        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());
-        if(playerCamera != null)
-            OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
-
+        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());   
         OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
 
         stickingObject.SetObjectStats(new ObjectStats());
@@ -58,12 +48,13 @@ public class Player : MonoBehaviour {
         {
             if(input != null)
                 input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
-        });
 
-        if(currentType == PlayerType.HUMAN)
-        {
-            UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
-        }
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+                Fuel.SetActive(true);
+            else
+                Fuel.SetActive(false);
+
+        });
     }
 
     private void Update()
@@ -79,9 +70,6 @@ public class Player : MonoBehaviour {
         switch (currentType)
         {
             case PlayerType.AI:
-                //Add AI Input
-                if(playerCamera != null)
-                    Destroy(playerCamera.gameObject);
                 input = new AIInput();
                 AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
                 fsm.StartFSM(this);
@@ -95,22 +83,11 @@ public class Player : MonoBehaviour {
 
         input.SetActive(false);
 
-        input.LeftStick.AddEvent(Move);
-        input.RightStick.AddEvent(RightStickHandle);
+        //input.LeftStick.AddEvent(Move);
+        //input.RightStick.AddEvent(RightStickHandle);
 
         this.ID = ID;
         this.Type = type;
-    }
-
-    void RightStickHandle(float x, float y)
-    {
-        //Vector3 cameraTransform = playerCamera.transform.InverseTransformDirection(new Vector3(-y, -x, 0));
-        Vector3 cameraTransform = new Vector3(-y, x, 0);
-
-        if (Input.GetMouseButton(1))
-            mouseRotation.LookRotation(nullCore.transform, rotateSensitivity, cameraTransform);
-        else
-            mouseRotation.LookRotation(transform, cameraSensitivity, cameraTransform);
     }
 
     void CalculatePlayerStats()
@@ -118,67 +95,6 @@ public class Player : MonoBehaviour {
         playerStats.Reset();
         stickingObject.RecrusiveCalculateStats(playerStats);
         EventManager.Invoke<ObjectStats>("UpdatePlayerStats", playerStats);
-    }
-
-    private void Move(float x, float y)
-    {
-        float upFactor = 0;
-        if (Input.GetKey(KeyCode.Q))
-            upFactor = 1;
-        else if (Input.GetKey(KeyCode.E))
-            upFactor = -1;
-
-        Vector3 joyInput = new Vector3(x, upFactor, y);
-
-        if (joyInput.magnitude > 1)
-            joyInput.Normalize();
-
-        Vector3 direction = transform.TransformDirection(joyInput);
-        if (joyInput.magnitude == 0)
-        {
-            currentVelocity -= direction * mouvementSettings.baseAcceleration * Time.deltaTime;
-        }
-
-        if (currentVelocity.magnitude > mouvementSettings.GetMaxSpeed())
-        {
-            currentVelocity = currentVelocity.normalized * mouvementSettings.GetMaxSpeed();
-        }
-        else
-        {
-            currentVelocity += direction * mouvementSettings.CalculateAcceleration() * Time.deltaTime;
-        }
-
-        Debug.Log(input.BoostButton.IsPressed);
-        bool isPress = Input.GetKeyDown(KeyCode.LeftShift);
-
-        if (isPress)
-        {
-            if(!mouvementSettings.isWarpAcceleration)
-                WarpAcceleration();
-
-            Fuel.RemoveFuel(mouvementSettings.warpCostPerSecond * Time.deltaTime);
-        }
-        else if (!isPress)
-        {
-            if (mouvementSettings.isWarpAcceleration)
-                StopWarpAcceleration();
-        }
-        transform.position += currentVelocity * Time.deltaTime;
-    }
-
-    void WarpAcceleration()
-    {
-        OnWarpAcceleration.Invoke();
-        mouvementSettings.isWarpAcceleration = true;
-    }
-
-    void StopWarpAcceleration()
-    {
-        mouvementSettings.isWarpAcceleration = false;
-        if (currentVelocity.magnitude > mouvementSettings.GetMaxSpeed())
-            currentVelocity = currentVelocity.normalized * mouvementSettings.GetMaxSpeed();
-
-        OnWarpStopAcceleration.Invoke();
     }
 
     void DestroyStickingObject(StickingObject stickingObject)
@@ -189,11 +105,6 @@ public class Player : MonoBehaviour {
             EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH,this);
             gameObject.SetActive(false);
         }
-    }
-
-    public PlayerCamera GetPlayerCamera()
-    {
-        return playerCamera;
     }
 
     public void OnTriggerEnter(Collider other)

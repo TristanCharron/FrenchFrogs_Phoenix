@@ -45,7 +45,6 @@ public class AIPlayerFSMState : FSMState {
     {
         Owner = owner;
     }
-
  
 }
 
@@ -56,24 +55,13 @@ public class AIPlayerFSM : FiniteStateMachine {
 
     public const string EVT_ON_CHANGE_AI_STATE = "OnChangeGameState";
 
-
     [SerializeField]
     Player player;
 
+    public GameObject ChasedObject { private set; get; }
     public void SetChasedObject(GameObject Object)
     {
         ChasedObject = Object;
-    }
-
-    public GameObject ChasedObject { private set; get; }
-
-
-    // Use this for initialization
-    protected override void Start () {
-
-       
-
-  
     }
 
     public void StartFSM(Player player)
@@ -96,10 +84,4 @@ public class AIPlayerFSM : FiniteStateMachine {
         yield return new WaitForEndOfFrame();
         ChangeFSMState(AIPlayerStates.PATROL);
     }
-
-
- 
-
-
-
 }

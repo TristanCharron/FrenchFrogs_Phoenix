@@ -14,23 +14,20 @@ public class PlayerFactory : MonoBehaviour {
 
     public const string EVT_ONLOCALPLAYERDEATH = "OnLocalPlayerDeath";
 
+    [SerializeField] Player playerPrefab;
+    [SerializeField] CameraFlightFollow playerCameraPrefab;
 
-    [SerializeField]
-    Player PlayerPrefab;
+    [SerializeField] Player AIPlayerPrefab;
 
-    [SerializeField]
-    Player AIPlayerPrefab;
+    [SerializeField] float radiusSpwan = 50;
 
-    [SerializeField]
-    float radiusSpwan = 50;
-
-    List<Player> PlayerList;
+    List<Player> playerList;
 
     public Player LocalPlayer { get; private set; }
 
 	// Use this for initialization
 	void Start () {
-        PlayerList = new List<Player>();
+        playerList = new List<Player>();
 
         LocalPlayer = SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity);
 
@@ -73,15 +70,17 @@ public class PlayerFactory : MonoBehaviour {
 
     public Player SpawnPlayer(PlayerType type, Vector3 position, Quaternion rotation)
     {
-        if(PlayerPrefab && AIPlayerPrefab)
+        if(playerPrefab && AIPlayerPrefab)
         {
-            Player player = Instantiate(type == PlayerType.HUMAN ? PlayerPrefab : AIPlayerPrefab, transform, true);
+            Player player = Instantiate(type == PlayerType.HUMAN ? playerPrefab : AIPlayerPrefab, transform, true);
             player.transform.SetPositionAndRotation(position, rotation);
             player.Spawn(type,DateTime.Now.ToString());
-            PlayerList.Add(player);
+            playerList.Add(player);
+
+            if (type == PlayerType.HUMAN)
+                SetCameraToPlayer(player);
 
             return player;
-
         }
         else
         {
@@ -91,14 +90,21 @@ public class PlayerFactory : MonoBehaviour {
         
     }
 
+    void SetCameraToPlayer(Player player)
+    {
+        CameraFlightFollow cameraFollow = Instantiate(playerCameraPrefab, transform, true);
+        PlayerFlightControl flight = player.GetComponent<PlayerFlightControl>();
+        cameraFollow.SetPlayerFlightControl(flight);
+    }
+
     public void RemovePlayer(string ID)
     {
-        for(int i = 0; i < PlayerList.Count; i++)
+        for(int i = 0; i < playerList.Count; i++)
         {
-            if(PlayerList[i].ID == ID)
+            if(playerList[i].ID == ID)
             {
-                Destroy(PlayerList[i].gameObject);
-                PlayerList.RemoveAt(i);
+                Destroy(playerList[i].gameObject);
+                playerList.RemoveAt(i);
                 return;
             }
         }
@@ -108,30 +114,30 @@ public class PlayerFactory : MonoBehaviour {
     {
         List<Player> newList = new List<Player>();
 
-        for (int i = 0; i < PlayerList.Count; i++)
+        for (int i = 0; i < playerList.Count; i++)
         {
-            if(PlayerList[i].Type != type)
+            if(playerList[i].Type != type)
             {
-                newList.Add(PlayerList[i]);
+                newList.Add(playerList[i]);
             }
             else
             {
-                Destroy(PlayerList[i].gameObject);
+                Destroy(playerList[i].gameObject);
             }
         }
 
-        PlayerList = newList;
+        playerList = newList;
 
     }
 
     public void RemovePlayers()
     {
-       for(int i = 0; i < PlayerList.Count;i++)
+       for(int i = 0; i < playerList.Count;i++)
         {
-            Destroy(PlayerList[i].gameObject);
+            Destroy(playerList[i].gameObject);
         }
 
-        PlayerList.Clear();
+        playerList.Clear();
 
     }
 }

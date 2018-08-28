@@ -87,6 +87,8 @@ public class StickingObject : MonoBehaviour {
         childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
 
         currentLife -= damage;
+        StartCoroutine(InvincibilityDelay());
+
         if(currentLife < 0)
         {
             Destroy();
@@ -105,6 +107,14 @@ public class StickingObject : MonoBehaviour {
 
         if(Factory != null)
             Factory.DestroyObject(this);
+    }
+
+    
+    IEnumerator InvincibilityDelay()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invisibilityTime);
+        isInvincible = false;
     }
 
     public void SetFirstStickingchild(Player player)
@@ -165,12 +175,6 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
-    IEnumerator InvincibilityDelay()
-    {
-        isInvincible = true;
-        yield return new WaitForSeconds(invisibilityTime);
-        isInvincible = false;
-    }
 
     public void ShakeScale(float impact, StickingObject objectToIgnore)
     {

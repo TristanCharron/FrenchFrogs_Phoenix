@@ -10,17 +10,20 @@ public class WorldPlayerStats : MonoBehaviour {
     [SerializeField] Player currentPlayer;
     float speed = 0.5f;
     bool isActive;
+    Camera mainCamera;
 
     // Use this for initialization
     void Start () {
         HideStats();
-	}
+        mainCamera = Camera.main;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if(isActive && playerToLookAt.currentType != PlayerType.AI)
         {
-            transform.rotation = Quaternion.Lerp(playerToLookAt.GetPlayerCamera().transform.rotation, transform.rotation, speed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, transform.rotation, speed * Time.deltaTime);
             //transform.LookAt(Mathf.Lerp(playerToLookAt.GetPlayerCamera().transform.eulerAngles);
         }
 	}
