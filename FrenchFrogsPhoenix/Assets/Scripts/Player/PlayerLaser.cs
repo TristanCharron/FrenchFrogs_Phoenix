@@ -50,7 +50,9 @@ public class PlayerLaser : MonoBehaviour {
             return;
 
         StickingObject stickingObject = other.GetComponent<StickingObject>();
-        if (stickingObject != null && stickingObject.PlayerParent != player)
+        //ca fait pu de sens lol
+
+        if (stickingObject != null && stickingObject.ObjectParent != player)
         {
             stickingObject.Damage(laserData.damage);
         }

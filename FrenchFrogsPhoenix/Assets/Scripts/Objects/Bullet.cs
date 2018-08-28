@@ -31,7 +31,8 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         StickingObject stickingObject = other.GetComponent<StickingObject>();
-        if(stickingObject != null && stickingObject.PlayerParent != player)
+        //ca fait pu de sens
+        if(stickingObject != null && stickingObject.ObjectParent != player)
         {
             Debug.Log("COLLSISION");
             stickingObject.Damage(cannonData.damage);

@@ -17,7 +17,6 @@ public class PlayerFuel : MonoBehaviour {
     [SerializeField]
     private float criticalFuel;
 
-    [SerializeField, Range(0,2)]
     private float _FuelComsumptionRate;
     public float FuelComsumptionRate { private set; get; }
 

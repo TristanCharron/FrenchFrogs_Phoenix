@@ -54,17 +54,31 @@ public class CustomPointer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (use_mouse_input) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Screen.lockCursor = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Screen.lockCursor = false;
+        }
+
+
+        if (use_mouse_input) {
 		
-			float x_axis = Input.GetAxis("Mouse X");
-			float y_axis = Input.GetAxis("Mouse Y");
+        float x_axis = Input.GetAxis("Mouse X");
+        float y_axis = Input.GetAxis("Mouse Y");
 		
-			if (invert_y_axis)
-				y_axis = -y_axis;
+        if (invert_y_axis)
+	        y_axis = -y_axis;
 		
-			//Add the input to the pointer's position
-			pointerPosition += new Vector2(x_axis * mouse_sensitivity_modifier,
-			                               y_axis * mouse_sensitivity_modifier);
+        //Add the input to the pointer's position
+        pointerPosition += new Vector2(x_axis * mouse_sensitivity_modifier,
+			                            y_axis * mouse_sensitivity_modifier);
 											
 			
 		} else if (use_gamepad_input) {

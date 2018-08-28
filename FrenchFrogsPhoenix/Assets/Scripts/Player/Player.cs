@@ -14,12 +14,12 @@ public class Player : MonoBehaviour {
     [SerializeField] WorldPlayerStats worldPlayerStats;
 
     [SerializeField] Transform nullCore;
-    [SerializeField] StickingObject stickingObject;
+    //[SerializeField] StickingObject stickingObject;
     [SerializeField] float cameraSensitivity = 2;
     [SerializeField] float rotateSensitivity = 0.01f;
 
 
-    float maxDistanceStickingObject;
+    //float maxDistanceStickingObject;
     public ObjectStats playerStats;
     public PlayerType currentType;
 
@@ -37,13 +37,9 @@ public class Player : MonoBehaviour {
         playerStats = new ObjectStats();
         Control = GetComponent<PlayerFlightControl>();
 
-        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());   
-        OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
+       // OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());   
+       // OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
 
-        stickingObject.SetObjectStats(new ObjectStats());
-        stickingObject.SetFirstStickingchild(this);
-        stickingObject.SetMeshChild(nullCore);
-        
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
             if(input != null)
@@ -93,19 +89,19 @@ public class Player : MonoBehaviour {
     void CalculatePlayerStats()
     {
         playerStats.Reset();
-        stickingObject.RecrusiveCalculateStats(playerStats);
+      //  stickingObject.RecrusiveCalculateStats(playerStats);
         EventManager.Invoke<ObjectStats>("UpdatePlayerStats", playerStats);
     }
 
-    void DestroyStickingObject(StickingObject stickingObject)
-    {
-        if(this.stickingObject == stickingObject)
-        {
-            Debug.Log("I DIE OH NON");
-            EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH,this);
-            gameObject.SetActive(false);
-        }
-    }
+    //void DestroyStickingObject(StickingObject stickingObject)
+    //{
+    //    if(this.stickingObject == stickingObject)
+    //    {
+    //        Debug.Log("I DIE OH NON");
+    //        EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH,this);
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 
     public void OnTriggerEnter(Collider other)
     {

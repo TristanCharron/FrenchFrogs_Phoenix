@@ -10,8 +10,8 @@ public class StickingObject : MonoBehaviour {
 
     //Accesors
     public Rigidbody rb { get; protected set; }
-    public bool IsSticked { get { return PlayerParent != null; } }
-    public Player PlayerParent { get; protected set; }
+    public bool IsSticked { get { return ObjectParent != null; } }
+    public MassObject ObjectParent { get; protected set; }
 
     [SerializeField] float impactBlobiness;
     [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
@@ -53,12 +53,13 @@ public class StickingObject : MonoBehaviour {
         this.childMeshTransform = childMeshTransform;
     }
 
-    public void SetParent(Player playerParent, StickingObject stickingObjectParent)
+    public void SetParent(MassObject ObjectParent, StickingObject stickingObjectParent)
     {
         sinRotation.Initialize();
         this.stickingObjectParent = stickingObjectParent;
-        this.PlayerParent = playerParent;
+        this.ObjectParent = ObjectParent;
         size = transform.localScale;
+        rb.isKinematic = true;
     }
 
     public void SetObjectStats(ObjectStats objectStats)
@@ -100,12 +101,14 @@ public class StickingObject : MonoBehaviour {
     {
         DetatchChilds();
         stickingObjectChilds.Clear();
+        rb.isKinematic = false;
+
         //Destroy(gameObject);
 
-        if (PlayerParent != null)
-            PlayerParent.OnDestroyStickingObject.Invoke(this);
+        //if (ObjectParent != null)
+        //    ObjectParent.OnDestroyStickingObject.Invoke(this);
 
-        if(Factory != null)
+        if (Factory != null)
             Factory.DestroyObject(this);
     }
 
@@ -117,24 +120,24 @@ public class StickingObject : MonoBehaviour {
         isInvincible = false;
     }
 
-    public void SetFirstStickingchild(Player player)
+    public void SetFirstStickingchild(MassObject parent)
     {
-        SetParent(player, null);
-        PlayerParent.OnNewStickingObject.Invoke(this);
+        SetParent(parent, null);
+        //ObjectParent.OnNewStickingObject.Invoke(this);
     }
 
     public void StickingNewChild(StickingObject stickingChild)
     {
         stickingChild.transform.SetParent(transform, true);
 
-        stickingChild.SetParent(PlayerParent, this);
+        stickingChild.SetParent(ObjectParent, this);
 
         stickingObjectChilds.Add(stickingChild);
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
 
-        PlayerParent.OnNewStickingObject.Invoke(this);
+        //PlayerParent.OnNewStickingObject.Invoke(this);
 
         AkSoundEngine.PostEvent("Stick", gameObject);
     }
@@ -142,7 +145,7 @@ public class StickingObject : MonoBehaviour {
     public void DetatchFromParent()
     {
         transform.SetParent(null, true);
-        PlayerParent = null;
+        ObjectParent = null;
         stickingObjectParent = null;
 
         DetatchChilds();
