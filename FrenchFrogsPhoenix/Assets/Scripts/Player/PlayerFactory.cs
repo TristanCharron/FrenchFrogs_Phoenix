@@ -17,7 +17,7 @@ public class PlayerFactory : MonoBehaviour {
     [SerializeField] Player playerPrefab;
     [SerializeField] CameraFlightFollow playerCameraPrefab;
 
-    [SerializeField] Player AIPlayerPrefab;
+   // [SerializeField] Player AIPlayerPrefab;
 
     [SerializeField] float radiusSpwan = 50;
 
@@ -29,7 +29,7 @@ public class PlayerFactory : MonoBehaviour {
 	void Start () {
         playerList = new List<Player>();
 
-        LocalPlayer = SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity);
+        LocalPlayer = SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity, 0);
 
        
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
@@ -59,22 +59,23 @@ public class PlayerFactory : MonoBehaviour {
 
     IEnumerator SpawnDelay()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 1; i < 10; i++)
         {
             yield return new WaitForSeconds(0.5f);
-            SpawnPlayer(PlayerType.AI, UnityEngine.Random.insideUnitSphere * radiusSpwan, Quaternion.identity);
+            SpawnPlayer(PlayerType.AI, UnityEngine.Random.insideUnitSphere * radiusSpwan, Quaternion.identity, i);
         }
         yield break;
     }
 	
 
-    public Player SpawnPlayer(PlayerType type, Vector3 position, Quaternion rotation)
+    public Player SpawnPlayer(PlayerType type, Vector3 position, Quaternion rotation, int ID)
     {
-        if(playerPrefab && AIPlayerPrefab)
+        if(playerPrefab) // && AIPlayerPrefab)
         {
-            Player player = Instantiate(type == PlayerType.HUMAN ? playerPrefab : AIPlayerPrefab, transform, true);
+            //Player prefab = type == PlayerType.HUMAN ? playerPrefab : AIPlayerPrefab;
+            Player player = Instantiate(playerPrefab, transform, true);
             player.transform.SetPositionAndRotation(position, rotation);
-            player.Spawn(type,DateTime.Now.ToString());
+            player.Spawn(type,ID);
             playerList.Add(player);
 
             if (type == PlayerType.HUMAN)
@@ -97,18 +98,18 @@ public class PlayerFactory : MonoBehaviour {
         cameraFollow.SetPlayerFlightControl(flight);
     }
 
-    public void RemovePlayer(string ID)
-    {
-        for(int i = 0; i < playerList.Count; i++)
-        {
-            if(playerList[i].ID == ID)
-            {
-                Destroy(playerList[i].gameObject);
-                playerList.RemoveAt(i);
-                return;
-            }
-        }
-    }
+    //public void RemovePlayer(string ID)
+    //{
+    //    for(int i = 0; i < playerList.Count; i++)
+    //    {
+    //        if(playerList[i].ID == ID)
+    //        {
+    //            Destroy(playerList[i].gameObject);
+    //            playerList.RemoveAt(i);
+    //            return;
+    //        }
+    //    }
+    //}
 
     public void RemovePlayersOfType(PlayerType type)
     {

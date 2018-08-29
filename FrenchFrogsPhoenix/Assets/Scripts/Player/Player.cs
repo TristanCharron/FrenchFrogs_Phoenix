@@ -23,13 +23,13 @@ public class Player : MonoBehaviour {
     public ObjectStats playerStats;
     public PlayerType currentType;
 
-    public BaseInput input;
+    public InputBase input;
 
     public PlayerFlightControl Control { get; protected set; }
     public PlayerFuel Fuel { get; protected set; }
     public PlayerType Type { get; private set; }
 
-    public string ID { private set; get; }
+    public int ID { private set; get; }
 
     void Start ()
     {
@@ -59,23 +59,26 @@ public class Player : MonoBehaviour {
             input.Update();
     }
 
-    public void Spawn(PlayerType type,string ID)
+    public void Spawn(PlayerType type,int ID)
     {
         currentType = type;
 
         switch (currentType)
         {
             case PlayerType.AI:
-                input = new AIInput();
+                //input = new AIInput();
+                input = new InputAI();
                 AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
                 fsm.StartFSM(this);
                 break;
             case PlayerType.HUMAN:
-                input = new PlayerInput(0);
+                input = new InputPlayer();
+                //input = new PlayerInput(0);
                 break;
             default:
                 break;
         }
+        input.Init(ID);
 
         input.SetActive(false);
 

@@ -17,8 +17,8 @@ public class PlayerFuel : MonoBehaviour {
     [SerializeField]
     private float criticalFuel;
 
-    private float _FuelComsumptionRate;
-    public float FuelComsumptionRate { private set; get; }
+    [SerializeField]
+    private float fuelComsumptionRate;
 
     public float CurrentFuel { private set; get; }
 
@@ -29,7 +29,7 @@ public class PlayerFuel : MonoBehaviour {
 
     private void Update()
     {
-        //RemoveFuel(FuelComsumptionRate * Time.deltaTime);
+        RemoveFuel(fuelComsumptionRate * Time.deltaTime);
     }
     // Use this for initialization
     void Awake () {

@@ -1077,7 +1077,6 @@ MonoBehaviour:
       PublicKeyToken=null
   worldPlayerStats: {fileID: 0}
   nullCore: {fileID: 4070866271921828}
-  stickingObject: {fileID: 114632248590464066}
   cameraSensitivity: 5
   rotateSensitivity: 5
   playerStats:
@@ -1153,7 +1152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFuel: 100
   criticalFuel: 25
-  _FuelComsumptionRate: 0
+  fuelComsumptionRate: -5
 --- !u!114 &114915496629351658
 MonoBehaviour:
   m_ObjectHideFlags: 1

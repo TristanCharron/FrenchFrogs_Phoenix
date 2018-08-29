@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-
-
 public abstract class FSMState: MonoBehaviour 
 {
     [SerializeField]

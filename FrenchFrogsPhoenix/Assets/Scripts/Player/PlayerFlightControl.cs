@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using RewiredConsts;
 
 public class PlayerFlightControl : MonoBehaviour
 {
@@ -27,14 +28,14 @@ public class PlayerFlightControl : MonoBehaviour
     bool roll_exists = true;
 
     Rigidbody rigidBody;
-    Player player;
+    public Player Player { get; protected set; }
 
     public bool IsWarpSpeed { get; protected set; }
 
 	void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        player = GetComponent<Player>();
+        Player = GetComponent<Player>();
 
         mousePos = new Vector2(0,0);	
 		DZ = CustomPointer.instance.deadzone_radius;
@@ -71,22 +72,22 @@ public class PlayerFlightControl : MonoBehaviour
     {
         if (thrust_exists)
         {
-            if (Input.GetKey(KeyCode.LeftShift) && player.Fuel.CurrentFuel > 0)
+            if (Player.input.GetButton(Action.Dash) && Player.Fuel.CurrentFuel > 0)
             {
                 currentMag = Mathf.Lerp(currentMag, moveSettings.warpSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
                 if (!IsWarpSpeed)
                     OnWarpAcceleration.Invoke();
 
-                player.Fuel.RemoveFuel(warpFuelConsumption * Time.deltaTime);
+                Player.Fuel.RemoveFuel(warpFuelConsumption * Time.deltaTime);
                 IsWarpSpeed = true;
             }
             else
             {
-                if (Input.GetAxis("Vertical") > 0)
+                if (Player.input.GetAxis(Action.MoveVertical) > 0)
                 {
                     currentMag = Mathf.Lerp(currentMag, moveSettings.upInputSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
                 }
-                else if (Input.GetAxis("Vertical") < 0)
+                else if (Player.input.GetAxis(Action.MoveVertical) < 0)
                 {
                     currentMag = Mathf.Lerp(currentMag, moveSettings.downInputSeed, moveSettings.thrust_transition_speed * Time.deltaTime);
                 }
@@ -109,7 +110,7 @@ public class PlayerFlightControl : MonoBehaviour
         pitch = Mathf.Clamp(distFromVertical, -screen_clamp - DZ, screen_clamp + DZ) * moveSettings.pitchYaw_strength;
         yaw = Mathf.Clamp(distFromHorizontal, -screen_clamp - DZ, screen_clamp + DZ) * moveSettings.pitchYaw_strength;
         if (roll_exists)
-            roll = (Input.GetAxis("Horizontal") * -moveSettings.rollSpeedModifier);
+            roll = (Player.input.GetAxis(Action.MoveHorizontal) * -moveSettings.rollSpeedModifier);
     }
 
     void UpdateCursorPosition()

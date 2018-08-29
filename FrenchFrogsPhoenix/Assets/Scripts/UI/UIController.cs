@@ -9,11 +9,21 @@ public class UIController : MonoBehaviour {
     private static UIController instance;
 
     public Canvas canvas;
-    public Image fuelFillImgBg;
-    public Image fuelFillImg;
+
+    //Maybe mettre des animations quand tu aim dequoi de different
+    [SerializeField] Image mouseCursor;
+
+    [Header("Fuel")]
+    [SerializeField] Image fuelFillImgBg;
+    [SerializeField] Image fuelFillImg;
+    [SerializeField] Text energyRatioText;
+
+    [Header("Stats")]
     [SerializeField] Text powerTxt;
     [SerializeField] Text energyTxt;
     [SerializeField] Text massTxt;
+
+    [Header("Canvas Fader")]
     [SerializeField] CanvasFader leftUIFader;
     [SerializeField] CanvasFader RightUIFader;
     [SerializeField] CanvasFader startGameFader;
@@ -68,16 +78,12 @@ public class UIController : MonoBehaviour {
             ToggleInGameUI(CurrentState != GameFSMStates.MAINMENU || CurrentState != GameFSMStates.GAMEOVER);
         });
 
-        EventManager.Subscribe<ObjectStats>("UpdatePlayerStats", (currentStats) =>
-        {
-            ShowStats(currentStats);
-        });
-
-        EventManager.Subscribe<float>("UpdatePlayerFuel", (fuel) =>
-        {
-            UpdateFuel(fuel);
-        });
+        EventManager.Subscribe<ObjectStats>("UpdatePlayerStats", (currentStats) => ShowStats(currentStats));
+        EventManager.Subscribe<float>("UpdatePlayerFuel", (fuel) => UpdateFuel(fuel));
+        EventManager.Subscribe<Vector2>("UpdateMousePosition", (mPos) => UpdateMousePosition(mPos));
+        
     }
+
 
     public void ActivateStartMenuUI()
     {
@@ -101,17 +107,15 @@ public class UIController : MonoBehaviour {
         }
     }
 
-    public void ActivateInGameUI()
+    void ActivateInGameUI()
     {
-       // ParticleController.GetInstance().DeactivateStartGameParticles();
         leftUIFader.GlitchIn();
         RightUIFader.GlitchIn();
         startGameFader.FadeOut();
     }
 
-    public void DeactivateInGameUI()
+    void DeactivateInGameUI()
     {
-       // ParticleController.GetInstance().ActivateStartGameParticles();
         leftUIFader.Hide();
         RightUIFader.Hide();
         startGameFader.GlitchIn();
@@ -129,10 +133,33 @@ public class UIController : MonoBehaviour {
         massTxt.text = Mathf.RoundToInt(stats.mass).ToString();
     }
 
-
-    public void UpdateFuel(float fuelValue)
+    void UpdateMousePosition(Vector2 newPosition)
     {
-        timerBeforeUpdateFuel = 0;
+        mouseCursor.transform.localPosition = (newPosition*2) - new Vector2(Screen.width, Screen.height);
+    }
+
+    void UpdateFuel(float fuelValue)
+    {
+        //Si le fuel monte automatiquement, on met pas de delay avec le background
+        if (fuelValue > fuelFillImg.fillAmount)
+            fuelFillImgBg.fillAmount = fuelValue;
+        else
+            timerBeforeUpdateFuel = 0;
+
         fuelFillImg.fillAmount = fuelValue;
+        UpdateEnergyRatioText(fuelValue);
+    }
+
+    void UpdateEnergyRatioText(float fuelValue)
+    {
+        int roundValue = Mathf.RoundToInt(fuelValue * 100);
+    
+        string stringValue = roundValue.ToString() + "%";
+        if (roundValue < 100)
+            stringValue = "0" + stringValue;
+        if (roundValue < 10)
+            stringValue = "0" + stringValue;
+
+        energyRatioText.text = stringValue;
     }
 }

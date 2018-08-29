@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RewiredConsts;
 
 public class AIChaseState : AIPlayerFSMState
 {
-
     Transform ChasedObject = null;
 
     StickingObject CachedStickingObject = null;
     Player CachedPlayer = null;
-
 
     public override void UpdateState()
     {
@@ -45,15 +44,18 @@ public class AIChaseState : AIPlayerFSMState
                 if (Owner.ChasedObject.GetComponent<Player>())
                 {
                     if(TimeElapsed % 2 == 0)
-                        AIPlayer.input.FireButton.Press();
+                        Input.SetButton(Action.Fire, true);
                 }
 
                 currentY = Mathf.MoveTowards(currentX, dotUp, Time.deltaTime * 100);
                 currentX = Mathf.MoveTowards(currentY, dotRight, Time.deltaTime * 100);
 
+                Input.SetAxis(Action.MoveHorizontal, dotForward);
+                Input.SetAxis(Action.CameraHorizontal, currentX);
+                Input.SetAxis(Action.CameraVertical, currentY);
 
-                AIPlayer.input.PressLeftStick(0, dotForward);
-                AIPlayer.input.PressRightStick(currentX, currentY);
+                //AIPlayer.input.PressLeftStick(0, dotForward);
+                //AIPlayer.input.PressRightStick(currentX, currentY);
             }
             else
             {
@@ -91,10 +93,8 @@ public class AIChaseState : AIPlayerFSMState
                 {
                     ChasedObject = CachedStickingObject.gameObject.transform;
                     TimeElapsed = 0;
-                }
-               
+                }   
             }
-
         }
         else if (CachedPlayer)
         {
@@ -107,11 +107,6 @@ public class AIChaseState : AIPlayerFSMState
                 }
                     
             }
-
         }
-        
     }
-
-  
-
 }

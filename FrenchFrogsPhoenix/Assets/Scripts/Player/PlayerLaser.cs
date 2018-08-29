@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RewiredConsts;
 
 public class PlayerLaser : MonoBehaviour {
 
@@ -20,13 +21,22 @@ public class PlayerLaser : MonoBehaviour {
         laserData.damage = 5;
     }
 
+    void Start()
+    {
+        player.input.SubscribeButtonDown(Action.Fire, Fire);
+    }
+
+    void Fire()
+    {
+        Debug.Log("Fire test");
+    }
+
     private void Update()
     {
        if(player.input != null)
-        {
-            ShowBeam(player.input.FireButton.IsPressed);
-        }
-            
+       {
+            ShowBeam(player.input.GetButton(Action.Fire));
+       }    
     }
 
     void ShowBeam(bool show)

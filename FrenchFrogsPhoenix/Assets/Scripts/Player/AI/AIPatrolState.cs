@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RewiredConsts;
 
 public struct AIPatrolInputPattern
 {
@@ -32,7 +33,6 @@ public class AIPatrolState : AIPlayerFSMState
     protected override void Awake()
     {
         enumID = AIPlayerStates.PATROL;
-       
     }
 
     protected override void Start()
@@ -41,8 +41,6 @@ public class AIPatrolState : AIPlayerFSMState
         currentY = 0;
         destX = Random.Range(-1, 1);
         destY = Random.Range(-1, 1);
-
-
 
         AIPatrolPatternsArray = new AIPatrolInputPattern[]
         {
@@ -54,13 +52,7 @@ public class AIPatrolState : AIPlayerFSMState
             new AIPatrolInputPattern(0,-1,0,0),
             new AIPatrolInputPattern(-1,-1,0,0),
         };
-
-
     }
-
-
-
- 
 
     public override void UpdateState()
     {
@@ -69,7 +61,6 @@ public class AIPatrolState : AIPlayerFSMState
         {
             if (CachedTransform == null)
                 CachedTransform = AIPlayer.transform;
-
 
             TimeElapsed += Time.deltaTime;
 
@@ -84,20 +75,17 @@ public class AIPatrolState : AIPlayerFSMState
             currentX = Mathf.MoveTowards(currentX, destX, Time.deltaTime * 2);
             currentY = Mathf.MoveTowards(currentY, destY, Time.deltaTime * 2);
 
-            AIPlayer.input.PressLeftStick(currentX, currentY);
-            AIPlayer.input.PressRightStick(currentPattern.Rx, currentPattern.Ry);
-
-          
+            Input.SetAxis(Action.MoveHorizontal, currentX);
+            Input.SetAxis(Action.MoveVertical, currentY);
+            Input.SetAxis(Action.CameraHorizontal, currentPattern.Rx);
+            Input.SetAxis(Action.CameraVertical, currentPattern.Ry);
+            //AIPlayer.input.PressLeftStick(currentX, currentY);
+            //AIPlayer.input.PressRightStick(currentPattern.Rx, currentPattern.Ry);
         }
-
-
-           
     }
-
 
     protected void OnTriggerEnter(Collider collision)
     {
-
         if (Owner == null)
             return;
 
@@ -112,7 +100,6 @@ public class AIPatrolState : AIPlayerFSMState
                 Owner.SetChasedObject(ChasedObject.gameObject);
                 Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
-
         }
         else if (CachedPlayer)
         {
@@ -122,12 +109,6 @@ public class AIPatrolState : AIPlayerFSMState
                 Owner.SetChasedObject(ChasedObject.gameObject);
                 Owner.ChangeFSMState(AIPlayerStates.CHASE);
             }
-
         }
-
-
     }
-
-
-
 }

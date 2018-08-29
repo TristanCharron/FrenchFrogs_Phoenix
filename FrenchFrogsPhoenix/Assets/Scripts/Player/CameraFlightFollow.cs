@@ -5,6 +5,8 @@ using System.Collections;
 [System.Serializable]
 public class CameraFlightFollow : MonoBehaviour
 {
+    public Player player { get; protected set; }
+
     [SerializeField] public PlayerFlightControl control; 
 	
 	[SerializeField] float follow_distance = 3.0f;
@@ -20,6 +22,7 @@ public class CameraFlightFollow : MonoBehaviour
     public void SetPlayerFlightControl(PlayerFlightControl control)
     {
         this.control = control;
+        player = control.GetComponent<Player>();
     }
 
     void FixedUpdate()
