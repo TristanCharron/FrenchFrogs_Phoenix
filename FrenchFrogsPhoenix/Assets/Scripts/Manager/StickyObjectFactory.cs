@@ -96,7 +96,7 @@ public class StickyObjectFactory : MonoBehaviour {
         if (stickingObject == null)
             return;
 
-        stickingObject.Init();
+        stickingObject.GetComponent<HealthComponent>().Init();
 
         Rigidbody rigidBody = stickingObject.rb;
         rigidBody.velocity = (Random.insideUnitSphere * vectorMagnitude);

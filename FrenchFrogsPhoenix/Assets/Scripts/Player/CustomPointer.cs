@@ -123,22 +123,25 @@ public class CustomPointer : MonoBehaviour {
 		pointerPosition.x = Mathf.Clamp (pointerPosition.x, 0, Screen.width);
 		pointerPosition.y = Mathf.Clamp (pointerPosition.y, 0, Screen.height);
 
-        EventManager.Invoke<Vector2>("UpdateMousePosition", pointerPosition);
-	}
-	
-	
-	
-	//void OnGUI() {
- //       //Draw the pointer texture.
- //       if (pointerTexture != null && !center_lock)
- //       {
- //           GUI.DrawTexture(new Rect(pointerPosition.x - (pointerTexture.width / 2), Screen.height - pointerPosition.y - (pointerTexture.height / 2), pointerTexture.width, pointerTexture.height), pointerTexture);
- //       }
- //       else
- //       {
- //           GUI.DrawTexture(new Rect((Screen.width / 2f) - (pointerTexture.width / 2), (Screen.height / 2f) - (pointerTexture.height / 2), pointerTexture.width, pointerTexture.height), pointerTexture);
 
- //       }
-	//}
+        Vector2 centeredMousePosition = (pointerPosition * 2) - new Vector2(Screen.width, Screen.height);
+        EventManager.Invoke<Vector2>("UpdateMousePosition", pointerPosition);
+        EventManager.Invoke<Vector2>("UpdateCenterMousePosition", centeredMousePosition);
+    }
+
+
+
+    //void OnGUI() {
+    //       //Draw the pointer texture.
+    //       if (pointerTexture != null && !center_lock)
+    //       {
+    //           GUI.DrawTexture(new Rect(pointerPosition.x - (pointerTexture.width / 2), Screen.height - pointerPosition.y - (pointerTexture.height / 2), pointerTexture.width, pointerTexture.height), pointerTexture);
+    //       }
+    //       else
+    //       {
+    //           GUI.DrawTexture(new Rect((Screen.width / 2f) - (pointerTexture.width / 2), (Screen.height / 2f) - (pointerTexture.height / 2), pointerTexture.width, pointerTexture.height), pointerTexture);
+
+    //       }
+    //}
 
 }

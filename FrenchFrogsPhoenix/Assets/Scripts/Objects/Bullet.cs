@@ -30,14 +30,6 @@ public class Bullet : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        StickingObject stickingObject = other.GetComponent<StickingObject>();
-        //ca fait pu de sens
-        if(stickingObject != null && stickingObject.ObjectParent != player)
-        {
-            Debug.Log("COLLSISION");
-            stickingObject.Damage(cannonData.damage);
-            PoolManager.instance.ReturnObject(poolName, gameObject);
-            StopCoroutine(delayDestroyCoroutine);
-        }
+     //to redo
     }
 }

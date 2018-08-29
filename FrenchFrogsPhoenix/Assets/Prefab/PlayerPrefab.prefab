@@ -37,15 +37,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4356008060933906}
   - component: {fileID: 33513618817408856}
-  - component: {fileID: 23075931968846836}
-  - component: {fileID: 136495295510798828}
+  - component: {fileID: 65551054415376360}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1193100936332288
 GameObject:
   m_ObjectHideFlags: 1
@@ -271,6 +270,7 @@ GameObject:
   - component: {fileID: 114915496629351658}
   - component: {fileID: 135611309427622320}
   - component: {fileID: 114875848869452298}
+  - component: {fileID: 114415344700934680}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -457,7 +457,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1191651052616416}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 25.2}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 25, z: 1}
   m_Children: []
   m_Father: {fileID: 4351748042136314}
@@ -640,41 +640,6 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: a9d8565cd2f99b04c94288f457b17456, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!23 &23075931968846836
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1191651052616416}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1047,6 +1012,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65551054415376360
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191651052616416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2.0000005, z: 1.0000005}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &114344964493810840
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1084,6 +1061,29 @@ MonoBehaviour:
     energy: 0
     power: 0
   currentType: 1
+--- !u!114 &114415344700934680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1858115663855500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2b6c3939f6f9a449f0e12222dc941a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: DamageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  maxHp: 25
+  hpRegen: 1
+  armor: 0
 --- !u!114 &114507664115823338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1135,7 +1135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70587b6a884f644d88408c28275ef69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserCollider: {fileID: 136495295510798828}
+  laserCollider: {fileID: 65551054415376360}
+  laserSpeed: 15
+  aimingEase: 0.4
+  shootAheadDistance: 200
   player: {fileID: 114344964493810840}
   lineRenderer: {fileID: 120113497634908870}
   laserCostPerSecond: 15
@@ -1306,7 +1309,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!135 &135160934254482212
 SphereCollider:
@@ -1332,19 +1335,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136495295510798828
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1191651052616416}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!198 &198922240673476532
 ParticleSystem:
   m_ObjectHideFlags: 1

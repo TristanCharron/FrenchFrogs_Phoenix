@@ -16,10 +16,6 @@ public class StickingObject : MonoBehaviour {
     [SerializeField] float impactBlobiness;
     [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
 
-    //Life
-    int maxLife = 20;
-    int currentLife;
-
     ObjectStats objectStats;
     SinRotation sinRotation;
     Transform childMeshTransform;
@@ -36,11 +32,6 @@ public class StickingObject : MonoBehaviour {
     {   
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
-    }
-
-    public void Init()
-    {
-        currentLife = maxLife;
     }
 
     private void Start()
@@ -79,51 +70,25 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
-    public void Damage(int damage)
+    public void OnDamageEvent()
     {
-        if (isInvincible)
-            return;
-
         childMeshTransform.DOKill();
         childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
-
-        currentLife -= damage;
-        StartCoroutine(InvincibilityDelay());
-
-        if(currentLife < 0)
-        {
-            Destroy();
-        }
     }
 
-    [ContextMenu("Destroy")]
-    void Destroy()
+    public void OnDestroyEvent()
     {
         DetatchChilds();
         stickingObjectChilds.Clear();
         rb.isKinematic = false;
 
-        //Destroy(gameObject);
-
-        //if (ObjectParent != null)
-        //    ObjectParent.OnDestroyStickingObject.Invoke(this);
-
         if (Factory != null)
             Factory.DestroyObject(this);
-    }
-
-    
-    IEnumerator InvincibilityDelay()
-    {
-        isInvincible = true;
-        yield return new WaitForSeconds(invisibilityTime);
-        isInvincible = false;
     }
 
     public void SetFirstStickingchild(MassObject parent)
     {
         SetParent(parent, null);
-        //ObjectParent.OnNewStickingObject.Invoke(this);
     }
 
     public void StickingNewChild(StickingObject stickingChild)

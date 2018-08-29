@@ -80,7 +80,7 @@ public class UIController : MonoBehaviour {
 
         EventManager.Subscribe<ObjectStats>("UpdatePlayerStats", (currentStats) => ShowStats(currentStats));
         EventManager.Subscribe<float>("UpdatePlayerFuel", (fuel) => UpdateFuel(fuel));
-        EventManager.Subscribe<Vector2>("UpdateMousePosition", (mPos) => UpdateMousePosition(mPos));
+        EventManager.Subscribe<Vector2>("UpdateCenterMousePosition", (mPos) => UpdateMousePosition(mPos));
         
     }
 
@@ -135,7 +135,7 @@ public class UIController : MonoBehaviour {
 
     void UpdateMousePosition(Vector2 newPosition)
     {
-        mouseCursor.transform.localPosition = (newPosition*2) - new Vector2(Screen.width, Screen.height);
+        mouseCursor.transform.localPosition = newPosition;// (newPosition*2) - new Vector2(Screen.width, Screen.height);
     }
 
     void UpdateFuel(float fuelValue)
