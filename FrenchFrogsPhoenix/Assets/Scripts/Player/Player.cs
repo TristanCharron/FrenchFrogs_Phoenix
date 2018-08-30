@@ -37,9 +37,6 @@ public class Player : MonoBehaviour {
         playerStats = new ObjectStats();
         Control = GetComponent<PlayerFlightControl>();
 
-       // OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats());   
-       // OnDestroyStickingObject.AddListener((newStickingObject) => DestroyStickingObject(newStickingObject));
-
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
             if(input != null)
@@ -66,14 +63,12 @@ public class Player : MonoBehaviour {
         switch (currentType)
         {
             case PlayerType.AI:
-                //input = new AIInput();
                 input = new InputAI();
                 AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
                 fsm.StartFSM(this);
                 break;
             case PlayerType.HUMAN:
                 input = new InputPlayer();
-                //input = new PlayerInput(0);
                 break;
             default:
                 break;
@@ -81,9 +76,6 @@ public class Player : MonoBehaviour {
         input.Init(ID);
 
         input.SetActive(false);
-
-        //input.LeftStick.AddEvent(Move);
-        //input.RightStick.AddEvent(RightStickHandle);
 
         this.ID = ID;
         this.Type = type;
@@ -93,7 +85,7 @@ public class Player : MonoBehaviour {
     {
         playerStats.Reset();
       //  stickingObject.RecrusiveCalculateStats(playerStats);
-        EventManager.Invoke<ObjectStats>("UpdatePlayerStats", playerStats);
+        EventManager.Invoke<ObjectStats>(EventConst.GetUpdatePlayerStats(ID), playerStats);
     }
 
     //void DestroyStickingObject(StickingObject stickingObject)
@@ -105,6 +97,12 @@ public class Player : MonoBehaviour {
     //        gameObject.SetActive(false);
     //    }
     //}
+
+    public void OnDestroy()
+    {
+        EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH, this);
+        gameObject.SetActive(false);
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -132,6 +130,3 @@ public class Player : MonoBehaviour {
         }
     }
 }
-
-[System.Serializable]
-public class StickingObjectEvent : UnityEvent<StickingObject> {}

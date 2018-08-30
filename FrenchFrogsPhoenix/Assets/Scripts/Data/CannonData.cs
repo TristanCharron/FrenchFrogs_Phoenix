@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonData {
-
-    public int damage;
+[System.Serializable]
+public class CannonData
+{
     public float speed;
     public float fireRate;
 }

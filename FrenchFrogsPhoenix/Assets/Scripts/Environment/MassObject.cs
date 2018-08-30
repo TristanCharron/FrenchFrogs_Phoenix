@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MassObject : MonoBehaviour {
     [SerializeField] bool attract;
@@ -26,19 +27,23 @@ public class MassObject : MonoBehaviour {
         rigidbody.angularVelocity = (Random.insideUnitSphere * startSpinMagnitude);
     }
 
+    void Attraction(StickingObject stickingObject)
+    {
+        Vector3 diff = (transform.position - stickingObject.transform.position);
+        float directionFactor = (attract) ? 1 : -1;
+        float inverseRatio = 1 - (diff.magnitude / sphereCollider.radius);
+        float evaluatedRatio = attractFactor.Evaluate(inverseRatio);
+
+        stickingObject.rb.velocity *= 0.9f;
+        stickingObject.rb.AddForce(diff * directionFactor * evaluatedRatio * attractForce);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         StickingObject stickingObject = other.GetComponent<StickingObject>();
         if(stickingObject)
         {
-            Vector3 diff = (transform.position - stickingObject.transform.position);
-            float directionFactor = (attract) ? 1 : -1;
-            float inverseRatio = 1 - (diff.magnitude / sphereCollider.radius);
-            float evaluatedRatio = attractFactor.Evaluate(inverseRatio);
-
-            stickingObject.rb.velocity *= 0.9f;
-            stickingObject.rb.AddForce(diff * directionFactor * evaluatedRatio * attractForce);
+            Attraction(stickingObject);
         }
-
     }
 }

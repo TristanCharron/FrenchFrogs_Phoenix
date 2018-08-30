@@ -1,22 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerCannon : MonoBehaviour {
-
-    [SerializeField] Player player;
+using RewiredConsts;
+public class PlayerCannon : HitScanner
+{
     [SerializeField] Transform cannonTip;
-    CannonData cannonData;
+    [SerializeField] CannonData cannonData;
+    [SerializeField] bool useHitScan= true;
 
+    InputBase input; 
     bool canFire = true;
 
-	void Start ()
+    void Start()
     {
-        //player.input.FireButton.AddEvent(Fire);
-        cannonData = new CannonData();
-        cannonData.damage = 5;
-        cannonData.speed = 50;
-        cannonData.fireRate = .5f;
+        base.Start();
+
+        input = player.input;
+
+        //input.SubscribeButtonDown(Action.Fire, Fire);
+        input.SubscribeButtonHold(Action.Fire, Fire);
+    }
+
+    void Update()
+    {
+        HitScanAnalyse();
     }
 
     IEnumerator CooldownFire()
@@ -35,8 +42,14 @@ public class PlayerCannon : MonoBehaviour {
         Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.transform.position = cannonTip.position;
 
-        bullet.Initialize(player, cannonData, player.transform.forward);
+        bullet.Initialize(player, damageData, aimDirection, cannonData.speed);
 
         StartCoroutine(CooldownFire());
+
+        if(useHitScan)
+        {
+            HitScanDamage();
+            bullet.useHitScan = true;
+        }
     }
 }

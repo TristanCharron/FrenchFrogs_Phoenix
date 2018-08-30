@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 20095956538649144}
   - component: {fileID: 124810439169929032}
   - component: {fileID: 114307960153236734}
-  - component: {fileID: 114806679269930298}
   - component: {fileID: 114934863704844468}
   - component: {fileID: 114503943194640504}
   - component: {fileID: 114384777407749328}
@@ -122,7 +121,7 @@ MonoBehaviour:
   listenerId: 0
 --- !u!114 &114503943194640504
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648787333143832}
@@ -177,34 +176,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 1
       enableBigTilePrepass: 1
       isFptlEnabled: 1
---- !u!114 &114806679269930298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1648787333143832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ebfb170970604408291b4728c5244d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointerTexture: {fileID: 2800000, guid: 843e07561dec6ea4f99358acce8a0288, type: 3}
-  use_mouse_input: 1
-  use_gamepad_input: 0
-  pointer_returns_to_center: 0
-  instant_snapping: 0
-  center_speed: 3
-  center_lock: 0
-  invert_y_axis: 0
-  deadzone_radius: 50
-  thumbstick_speed_modifier: 1
-  mouse_sensitivity_modifier: 15
-  deadzone_rect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
 --- !u!114 &114816930951037222
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -95,7 +95,7 @@ public abstract class BaseInput
     {
       
         FireButton = new InputButton("Fire", RewiredConsts.Action.Fire);
-        BoostButton = new InputButton("Boost", RewiredConsts.Action.Boost);
+        //BoostButton = new InputButton("Boost", RewiredConsts.Action.Boost);
         ButtonList = new List<InputButton>();
         ButtonList.Add(FireButton);
         ButtonList.Add(BoostButton);

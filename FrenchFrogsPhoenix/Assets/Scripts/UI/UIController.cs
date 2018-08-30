@@ -8,10 +8,12 @@ public class UIController : MonoBehaviour {
 
     private static UIController instance;
 
+    public Canvas inclinedCanvas;
     public Canvas canvas;
 
     //Maybe mettre des animations quand tu aim dequoi de different
     [SerializeField] Image mouseCursor;
+
 
     [Header("Fuel")]
     [SerializeField] Image fuelFillImgBg;
@@ -33,14 +35,15 @@ public class UIController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         instance = this;
         //DeactivateInGameUI();
 
         ToggleInGameUI(false);
         SubscribeToEvents();
 
-        canvas.worldCamera = Camera.main;
+        inclinedCanvas.worldCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -78,10 +81,11 @@ public class UIController : MonoBehaviour {
             ToggleInGameUI(CurrentState != GameFSMStates.MAINMENU || CurrentState != GameFSMStates.GAMEOVER);
         });
 
-        EventManager.Subscribe<ObjectStats>("UpdatePlayerStats", (currentStats) => ShowStats(currentStats));
-        EventManager.Subscribe<float>("UpdatePlayerFuel", (fuel) => UpdateFuel(fuel));
-        EventManager.Subscribe<Vector2>("UpdateCenterMousePosition", (mPos) => UpdateMousePosition(mPos));
-        
+        //0 for player ID
+        EventManager.Subscribe<ObjectStats>(EventConst.GetUpdatePlayerStats(0), (currentStats) => ShowStats(currentStats));
+        EventManager.Subscribe<float>(EventConst.GetUpdatePlayerFuel(0), (fuel) => UpdateFuel(fuel));
+        EventManager.Subscribe<Vector2>(EventConst.GetUpdateUIPosAim(0), (mPos) => UpdateCursorPosition(mPos));
+        EventManager.Subscribe<bool>(EventConst.GetUpdateAimTargetInSight(0), (isInSight) => UpdateTargetInSight(isInSight));
     }
 
 
@@ -109,6 +113,8 @@ public class UIController : MonoBehaviour {
 
     void ActivateInGameUI()
     {
+        mouseCursor.gameObject.SetActive(true);
+
         leftUIFader.GlitchIn();
         RightUIFader.GlitchIn();
         startGameFader.FadeOut();
@@ -116,6 +122,8 @@ public class UIController : MonoBehaviour {
 
     void DeactivateInGameUI()
     {
+        mouseCursor.gameObject.SetActive(false);
+
         leftUIFader.Hide();
         RightUIFader.Hide();
         startGameFader.GlitchIn();
@@ -133,9 +141,9 @@ public class UIController : MonoBehaviour {
         massTxt.text = Mathf.RoundToInt(stats.mass).ToString();
     }
 
-    void UpdateMousePosition(Vector2 newPosition)
+    void UpdateCursorPosition(Vector3 uiPosition)
     {
-        mouseCursor.transform.localPosition = newPosition;// (newPosition*2) - new Vector2(Screen.width, Screen.height);
+        mouseCursor.transform.position = uiPosition;
     }
 
     void UpdateFuel(float fuelValue)
@@ -153,7 +161,7 @@ public class UIController : MonoBehaviour {
     void UpdateEnergyRatioText(float fuelValue)
     {
         int roundValue = Mathf.RoundToInt(fuelValue * 100);
-    
+
         string stringValue = roundValue.ToString() + "%";
         if (roundValue < 100)
             stringValue = "0" + stringValue;
@@ -161,5 +169,17 @@ public class UIController : MonoBehaviour {
             stringValue = "0" + stringValue;
 
         energyRatioText.text = stringValue;
+    }
+
+    void UpdateTargetInSight(bool isInSight)
+    {
+        if(isInSight)
+        {
+            mouseCursor.transform.DOScale(.2f, .1f);
+        }
+        else
+        {
+            mouseCursor.transform.DOScale(.5f, .1f);
+        }
     }
 }

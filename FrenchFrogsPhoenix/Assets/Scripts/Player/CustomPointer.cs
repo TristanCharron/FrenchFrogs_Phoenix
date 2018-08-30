@@ -61,20 +61,6 @@ public class CustomPointer : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = true;
-           // Screen.lockCursor = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = false;
-           // Screen.lockCursor = false;
-        }
-
-
         if (use_mouse_input)
         {
 

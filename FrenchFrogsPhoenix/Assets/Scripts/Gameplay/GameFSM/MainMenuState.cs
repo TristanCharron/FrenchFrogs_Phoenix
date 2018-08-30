@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainMenuState : FSMState {
 
-    PlayerInput input;
+    InputPlayer input;
 
     bool isActive = false;
 
@@ -13,7 +13,8 @@ public class MainMenuState : FSMState {
     protected override void Awake()
     {
         enumID = GameFSMStates.MAINMENU;
-        input = new PlayerInput(0);
+        input = new InputPlayer();
+        input.Init(0);
         input.SetActive(true);
 
         EventManager.Subscribe<System.Enum>("OnChangeGameFSM", (nextState) => {
@@ -22,7 +23,7 @@ public class MainMenuState : FSMState {
             SetActive(isActive);
         });
 
-        input.FireButton.AddEvent(() =>
+        input.SubscribeButtonDown(RewiredConsts.Action.Fire, () =>
         {
             if (isActive)
             {
@@ -30,13 +31,7 @@ public class MainMenuState : FSMState {
                 SetActive(false);
                 EventManager.Invoke<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, GameFSMStates.GAMEPLAY);
             }
-
-
         });
-
-
-
-
     }
 
 
@@ -56,9 +51,4 @@ public class MainMenuState : FSMState {
         base.UpdateState();
         input.Update();
     }
-
-  
- 
-
- 
 }

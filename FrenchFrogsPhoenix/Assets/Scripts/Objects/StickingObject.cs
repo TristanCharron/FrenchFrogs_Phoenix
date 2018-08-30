@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class StickingObject : MonoBehaviour {
@@ -179,3 +180,6 @@ public class StickingObject : MonoBehaviour {
             .SetLoops(-1, LoopType.Yoyo);
     }
 }
+
+[System.Serializable]
+public class StickingObjectEvent : UnityEvent<StickingObject> { }

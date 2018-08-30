@@ -11,28 +11,31 @@ public enum FuelStates
 
 public class PlayerFuel : MonoBehaviour {
 
-    [SerializeField]
-    private float maxFuel;
+    [SerializeField] float maxFuel;
+    [SerializeField] float criticalFuel;
+    [SerializeField] float fuelRegen;
+    [SerializeField] float timerBeforeRegen = 1;
+    [SerializeField] AnimationCurve regenCurve;
 
-    [SerializeField]
-    private float criticalFuel;
-
-    [SerializeField]
-    private float fuelComsumptionRate;
-
+    public float FuelRatio {
+        get {
+            return (CurrentFuel / maxFuel);
+        }
+    }
     public float CurrentFuel { private set; get; }
-
     public bool IsActive { private set; get; }
 
     Player player;
 
+    float didntUseFuelTimer = 0;
 
     private void Update()
     {
-        RemoveFuel(fuelComsumptionRate * Time.deltaTime);
+        RegenFuel();
     }
-    // Use this for initialization
-    void Awake () {
+
+    void Awake ()
+    {
         CurrentFuel = maxFuel;
         player = GetComponent<Player>();
     }
@@ -42,6 +45,18 @@ public class PlayerFuel : MonoBehaviour {
         IsActive = isActive;
     }
 
+    void RegenFuel()
+    {
+        if (didntUseFuelTimer > timerBeforeRegen)
+        {
+            AddFuel(fuelRegen * Time.deltaTime * regenCurve.Evaluate(FuelRatio));
+        }
+        else
+        {
+            didntUseFuelTimer += Time.deltaTime;
+        }
+    }
+
     public void AddFuel(float fuel)
     {
         SetFuel(CurrentFuel + fuel);
@@ -49,6 +64,7 @@ public class PlayerFuel : MonoBehaviour {
 
     public void RemoveFuel(float fuel)
     {
+        didntUseFuelTimer = 0;
         SetFuel(CurrentFuel - fuel);
     }
 
@@ -63,8 +79,7 @@ public class PlayerFuel : MonoBehaviour {
 
     void InvokeFuelEvent()
     {
-        if(player.currentType == PlayerType.HUMAN)
-            EventManager.Invoke<float>("UpdatePlayerFuel", CurrentFuel / maxFuel);
+        EventManager.Invoke<float>(EventConst.GetUpdatePlayerFuel(player.ID), CurrentFuel / maxFuel);
     }
 
     private FuelStates GetFuelState()

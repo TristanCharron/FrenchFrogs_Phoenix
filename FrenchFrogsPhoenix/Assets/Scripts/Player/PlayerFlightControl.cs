@@ -38,22 +38,27 @@ public class PlayerFlightControl : MonoBehaviour
         Player = GetComponent<Player>();
 
         mousePos = new Vector2(0,0);	
-		DZ = CustomPointer.instance.deadzone_radius;
+		DZ = GetComponent<PlayerAim>().deadZone;
 		
 		roll = 0; //Setting this equal to 0 here as a failsafe in case the roll axis is not set up.
+
+        EventManager.Subscribe<Vector2>(EventConst.GetUpdateUIPosAim(Player.ID), (mPos) => UpdateCursorPosition(mPos));
 	}
 
     void FixedUpdate ()
     {
-        UpdateCursorPosition();
 
-        SetPitchYawRoll();
+       // SetPitchYawRoll();
 
         //Getting the current speed.
         currentMag = rigidBody.velocity.magnitude;
         ApplyTrust();
-        ApplyTorque();
 
+        if (!Player.input.GetButton(RewiredConsts.Action.FreeAim))
+        {
+            SetPitchYawRoll();
+            ApplyTorque();
+        }
         rigidBody.velocity = transform.forward * currentMag;
 
         if (blankSettings.use_banking)
@@ -113,10 +118,8 @@ public class PlayerFlightControl : MonoBehaviour
             roll = (Player.input.GetAxis(Action.MoveHorizontal) * -moveSettings.rollSpeedModifier);
     }
 
-    void UpdateCursorPosition()
+    void UpdateCursorPosition(Vector2 mousePos)
     {
-		mousePos = CustomPointer.pointerPosition;
-		
 		//Calculate distances from the center of the screen.
 		float distV = Vector2.Distance(mousePos, new Vector2(mousePos.x, Screen.height / 2));
 		float distH = Vector2.Distance(mousePos, new Vector2(Screen.width / 2, mousePos.y));

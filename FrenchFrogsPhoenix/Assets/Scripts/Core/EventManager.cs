@@ -3,23 +3,16 @@ using System.Collections.Generic;
 
 public static class EventManager
 {
-
     private static IDictionary<string, List<object>> subscribers = new Dictionary<string, List<object>>();
 
-
-  
     public static void Subscribe<T>(string message, Action<T> callback)
     {
-
         if (subscribers.ContainsKey(message))
         {
-
             subscribers[message].Add(callback);
         }
         else
         {
-
-
             subscribers[message] = new List<object>();
             subscribers[message].Add(callback);
         }
@@ -29,13 +22,10 @@ public static class EventManager
     {
         if (subscribers.ContainsKey(message))
         {
-
             subscribers[message].Add(callback);
         }
         else
         {
-
-
             subscribers[message] = new List<object>();
             subscribers[message].Add(callback);
         }
@@ -46,7 +36,6 @@ public static class EventManager
 
         if (subscribers.ContainsKey(message))
         {
-
             List<object> callbacks = subscribers[message];
 
             for (int i = 0; i < callbacks.Count; i++)
@@ -64,7 +53,6 @@ public static class EventManager
 
         if (subscribers.ContainsKey(message))
         {
-
             List<object> callbacks = subscribers[message];
 
             for (int i = 0; i < callbacks.Count; i++)
@@ -79,10 +67,8 @@ public static class EventManager
 
     public static void Unsubscribe<T>(string message, Action<T> callback)
     {
-
         if (subscribers.ContainsKey(message))
         {
-
             List<object> callbacks = subscribers[message];
 
             for (int i = 0; i < callbacks.Count; i++)
@@ -103,7 +89,6 @@ public static class EventManager
 
     public static void Unsubscribe(string message, Action callback)
     {
-
         if (subscribers.ContainsKey(message))
         {
             List<object> callbacks = subscribers[message];
