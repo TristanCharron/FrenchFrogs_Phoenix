@@ -4,6 +4,7 @@
     public const string UPDATE_AIM_TARGET_IN_SIGHT = "UpdateAimTargetInSight_";
 
     public const string UPDATE_PLAYER_STATS = "UpdatePlayerStats_";
+    public const string UPDATE_PLAYER_HEALTH = "UpdatePlayerHealth_";
     public const string UPDATE_PLAYER_FUEL = "UpdatePlayerFuel_";
 
  
@@ -25,6 +26,12 @@
     {
         return UPDATE_PLAYER_STATS + id;
     }
+
+    public static string GetUpdatePlayerHealth(int id)
+    {
+        return UPDATE_PLAYER_HEALTH + id;
+    }
+
     public static string GetUpdatePlayerFuel(int id)
     {
         return UPDATE_PLAYER_FUEL + id;

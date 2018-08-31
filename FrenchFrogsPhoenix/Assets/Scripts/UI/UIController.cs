@@ -15,10 +15,18 @@ public class UIController : MonoBehaviour {
     [SerializeField] Image mouseCursor;
 
 
+
+    [Header("Health")]
+    /*[SerializeField] Image healthFillImgBg;
+    [SerializeField] Image healthFillImg;
+    [SerializeField] Text healthRatioText;*/
+    [SerializeField] RadialBar healthBar;
+
     [Header("Fuel")]
-    [SerializeField] Image fuelFillImgBg;
+    /*[SerializeField] Image fuelFillImgBg;
     [SerializeField] Image fuelFillImg;
-    [SerializeField] Text energyRatioText;
+    [SerializeField] Text energyRatioText;*/
+    [SerializeField] RadialBar fuelBar;
 
     [Header("Stats")]
     [SerializeField] Text powerTxt;
@@ -46,22 +54,8 @@ public class UIController : MonoBehaviour {
         inclinedCanvas.worldCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        UpdateFuelDelay();
-    }
-
-    void UpdateFuelDelay()
-    {
-        timerBeforeUpdateFuel += Time.deltaTime;
-        if (timerBeforeUpdateFuel > delayBeforeUpdateFuel)
-        {
-            fuelFillImgBg.DOKill();
-            fuelFillImgBg.DOFillAmount(fuelFillImg.fillAmount, 0.3f).SetEase(Ease.InQuint);
-
-            timerBeforeUpdateFuel = 0;
-        }
     }
 
     void SubscribeToEvents()
@@ -83,7 +77,8 @@ public class UIController : MonoBehaviour {
 
         //0 for player ID
         EventManager.Subscribe<ObjectStats>(EventConst.GetUpdatePlayerStats(0), (currentStats) => ShowStats(currentStats));
-        EventManager.Subscribe<float>(EventConst.GetUpdatePlayerFuel(0), (fuel) => UpdateFuel(fuel));
+        EventManager.Subscribe<float>(EventConst.GetUpdatePlayerHealth(0), (health) => healthBar.UpdateFill(health));
+        EventManager.Subscribe<float>(EventConst.GetUpdatePlayerFuel(0), (fuel) => fuelBar.UpdateFill(fuel));
         EventManager.Subscribe<Vector2>(EventConst.GetUpdateUIPosAim(0), (mPos) => UpdateCursorPosition(mPos));
         EventManager.Subscribe<bool>(EventConst.GetUpdateAimTargetInSight(0), (isInSight) => UpdateTargetInSight(isInSight));
     }
@@ -144,31 +139,6 @@ public class UIController : MonoBehaviour {
     void UpdateCursorPosition(Vector3 uiPosition)
     {
         mouseCursor.transform.position = uiPosition;
-    }
-
-    void UpdateFuel(float fuelValue)
-    {
-        //Si le fuel monte automatiquement, on met pas de delay avec le background
-        if (fuelValue > fuelFillImg.fillAmount)
-            fuelFillImgBg.fillAmount = fuelValue;
-        else
-            timerBeforeUpdateFuel = 0;
-
-        fuelFillImg.fillAmount = fuelValue;
-        UpdateEnergyRatioText(fuelValue);
-    }
-
-    void UpdateEnergyRatioText(float fuelValue)
-    {
-        int roundValue = Mathf.RoundToInt(fuelValue * 100);
-
-        string stringValue = roundValue.ToString() + "%";
-        if (roundValue < 100)
-            stringValue = "0" + stringValue;
-        if (roundValue < 10)
-            stringValue = "0" + stringValue;
-
-        energyRatioText.text = stringValue;
     }
 
     void UpdateTargetInSight(bool isInSight)
