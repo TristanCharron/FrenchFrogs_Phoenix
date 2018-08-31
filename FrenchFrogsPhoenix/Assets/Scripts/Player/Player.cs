@@ -100,6 +100,11 @@ public class Player : MonoBehaviour {
     //    }
     //}
 
+    public void OnDamage(float healthRatio)
+    {
+        EventManager.Invoke<float>(EventConst.GetUpdatePlayerHealth(ID), healthRatio);
+    }
+
     public void OnDestroy()
     {
         EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH, this);

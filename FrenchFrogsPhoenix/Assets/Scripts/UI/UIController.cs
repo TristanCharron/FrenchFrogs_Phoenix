@@ -14,18 +14,10 @@ public class UIController : MonoBehaviour {
     //Maybe mettre des animations quand tu aim dequoi de different
     [SerializeField] Image mouseCursor;
 
-
-
     [Header("Health")]
-    /*[SerializeField] Image healthFillImgBg;
-    [SerializeField] Image healthFillImg;
-    [SerializeField] Text healthRatioText;*/
     [SerializeField] RadialBar healthBar;
 
     [Header("Fuel")]
-    /*[SerializeField] Image fuelFillImgBg;
-    [SerializeField] Image fuelFillImg;
-    [SerializeField] Text energyRatioText;*/
     [SerializeField] RadialBar fuelBar;
 
     [Header("Stats")]
@@ -81,17 +73,6 @@ public class UIController : MonoBehaviour {
         EventManager.Subscribe<float>(EventConst.GetUpdatePlayerFuel(0), (fuel) => fuelBar.UpdateFill(fuel));
         EventManager.Subscribe<Vector2>(EventConst.GetUpdateUIPosAim(0), (mPos) => UpdateCursorPosition(mPos));
         EventManager.Subscribe<bool>(EventConst.GetUpdateAimTargetInSight(0), (isInSight) => UpdateTargetInSight(isInSight));
-    }
-
-
-    public void ActivateStartMenuUI()
-    {
-
-    }
-
-    public void DeactivateStartMenuUI()
-    {
-
     }
 
     public void ToggleInGameUI(bool activate)

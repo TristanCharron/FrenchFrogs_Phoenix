@@ -55,7 +55,7 @@ public class HitScanner : MonoBehaviour {
             HealthComponent health = scanHit.collider.GetComponent<HealthComponent>();
             if (health != null)
             {
-                health.Damge(damageData);
+                health.Damage(damageData);
             }
         }
     }
