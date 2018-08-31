@@ -32,8 +32,8 @@ public class CameraFlightFollow : MonoBehaviour
 
         Vector3 newPosition = target.TransformPoint(control.yaw * yawMultiplier, camera_elevation, -follow_distance);
 
-        Vector3 positionDifference = target.position - transform.position;
-        transform.position = Vector3.Lerp(transform.position, newPosition + target.up * upOffset, Time.deltaTime * follow_tightness);
+        Vector3 positionDifference = (target.position - transform.position) + target.up * upOffset;
+        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * follow_tightness);
 
         Quaternion newRotation;
         if (control.IsWarpSpeed && shake_on_afterburn)

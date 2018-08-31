@@ -104,7 +104,7 @@ MonoBehaviour:
   rotation_tightness: 13
   afterburner_Shake_Amount: 2
   yawMultiplier: 0.005
-  upOffset: 0.5
+  upOffset: 5
   shake_on_afterburn: 1
 --- !u!114 &114384777407749328
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   listenerId: 0
 --- !u!114 &114503943194640504
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648787333143832}

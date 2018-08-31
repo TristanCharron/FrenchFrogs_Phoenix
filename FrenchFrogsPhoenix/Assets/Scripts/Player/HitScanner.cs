@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class HitScanner : MonoBehaviour {
 
+    [SerializeField] bool hitFromCamera;
     [SerializeField] protected DamageData damageData;
     [SerializeField] protected Player player;
+
+    [SerializeField] LayerMask ignoreCollision;
 
     protected Vector3 aimDirection;
     protected Vector3 targetPosition;
@@ -15,7 +18,7 @@ public class HitScanner : MonoBehaviour {
 
     protected void Start()
     {
-        damageData.owner = gameObject;
+        damageData.owner = player.Health;
         EventManager.Subscribe<Vector3>(EventConst.GetUpdateWorldPosAim(player.ID), (aimPosition) => UpdateAimDirection(aimPosition));
     }
 
@@ -39,19 +42,22 @@ public class HitScanner : MonoBehaviour {
 
     protected void HitScanAnalyse()
     {
-        Vector3 diff = (targetPosition - transform.position);
+        Vector3 startPosition = (hitFromCamera) ? Camera.main.transform.position : transform.transform.position;
+
+        Vector3 diff = (targetPosition - startPosition);    
         float distance = diff.magnitude;
         Vector3 direction = diff.normalized;
 
         float sphereCastRadius = 1;
         //Physics.Raycast(transform.position, direction, out scanHit, distance);
-        Physics.SphereCast(transform.position, sphereCastRadius, direction, out scanHit, distance);
-        Debug.DrawRay(transform.position, direction * distance);
+        Physics.SphereCast(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
+        //Physics.SphereCastAll(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
+
+        Debug.DrawRay(startPosition, direction * distance);
         InvokeEventIfNewTargetInSight();
 
-
-        if(scanHit.collider != null)
-            Debug.Log(scanHit.collider.name);
+        //if(scanHit.collider != null)
+        //    Debug.Log(scanHit.collider.name);
 
         previousScanHit = scanHit;
     }
