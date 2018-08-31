@@ -36,7 +36,7 @@ public class HealthComponent : MonoBehaviour {
 
     public void Damge(DamageData damageData)
     {
-        if (isInvincible || gameObject == damageData.owner)
+        if (isInvincible || this == damageData.owner)
             return;
 
         OnDamageTaken.Invoke();

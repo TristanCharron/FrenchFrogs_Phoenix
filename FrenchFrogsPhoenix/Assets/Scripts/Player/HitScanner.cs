@@ -50,8 +50,16 @@ public class HitScanner : MonoBehaviour {
 
         float sphereCastRadius = 1;
         //Physics.Raycast(transform.position, direction, out scanHit, distance);
-        Physics.SphereCast(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
-        //Physics.SphereCastAll(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
+        //Physics.SphereCast(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
+        RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, distance, ignoreCollision);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if(hits[i].collider.gameObject != player.gameObject)
+            {
+                scanHit = hits[i];
+                break;
+            }
+        }
 
         Debug.DrawRay(startPosition, direction * distance);
         InvokeEventIfNewTargetInSight();
