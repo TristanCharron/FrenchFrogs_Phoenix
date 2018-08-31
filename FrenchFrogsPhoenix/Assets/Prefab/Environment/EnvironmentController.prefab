@@ -57,7 +57,6 @@ MonoBehaviour:
   - {fileID: 114685601360782866, guid: 858d7866831b4ee4ca98e6c68e0f6d74, type: 2}
   - {fileID: 114576835599836072, guid: 768b52b107c171a4db050faf8e00efc0, type: 2}
   - {fileID: 114506424356459512, guid: 11e4245ba03c1ac4cb26403db02cbd35, type: 2}
-  - {fileID: 114543756268175794, guid: 28ffa85771fc91643a29e5ddde5ff2ba, type: 2}
   maxBounds: {x: 500, y: 500, z: 500}
   currentObjects: []
   environmentContainer: {fileID: 0}

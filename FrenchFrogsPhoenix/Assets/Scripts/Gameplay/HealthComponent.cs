@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour {
 
-    public UnityEvent OnDamageTaken = new UnityEvent();
+    public FloatUnityEvent OnDamageTaken = new FloatUnityEvent();
     public UnityEvent OnDeathEvent = new UnityEvent();
 
     [SerializeField] float maxHp;
@@ -34,13 +34,13 @@ public class HealthComponent : MonoBehaviour {
         Heal(hpRegen * Time.deltaTime);
     }
 
-    public void Damge(DamageData damageData)
+    public void Damage(DamageData damageData)
     {
         if (isInvincible || this == damageData.owner)
             return;
 
-        OnDamageTaken.Invoke();
         currentHp -= damageData.damage;
+        OnDamageTaken.Invoke(currentHp/maxHp);
 
         invinciblityCoroutine = StartCoroutine(InvincibilityDelay());
 
@@ -64,3 +64,5 @@ public class HealthComponent : MonoBehaviour {
         isInvincible = false;
     }
 }
+
+public class FloatUnityEvent:UnityEvent<float>{}

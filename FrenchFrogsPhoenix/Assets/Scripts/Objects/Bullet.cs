@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
         HealthComponent health = other.GetComponent<HealthComponent>();
         if(health)
         {
-            health.Damge(damageData);
+            health.Damage(damageData);
         }
     }
 }
