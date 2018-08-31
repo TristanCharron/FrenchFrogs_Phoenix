@@ -42,7 +42,9 @@ public class PlayerCannon : HitScanner
         Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.transform.position = cannonTip.position;
 
-        bullet.Initialize(player, damageData, aimDirection, cannonData.speed);
+        ///Vector3 realAimDirection = Aim
+        Vector3 dir = (GetAssistAimPosition() - transform.position) .normalized;
+        bullet.Initialize(player, damageData, dir, cannonData.speed);
 
         StartCoroutine(CooldownFire());
 

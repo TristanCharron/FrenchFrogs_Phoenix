@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//A centraliser, pas que le cannon/laser/etc herite de ca
 public class HitScanner : MonoBehaviour {
 
     [SerializeField] bool hitFromCamera;
@@ -16,9 +18,27 @@ public class HitScanner : MonoBehaviour {
     RaycastHit previousScanHit;
     RaycastHit scanHit;
 
-    protected void Start()
+    float aimStickTimer = 0.3f;
+    float aimStickCurrentTimer = 0;
+
+    CameraFlightFollow cameraFligth;
+
+    public Vector3 GetAssistAimPosition()
     {
+        if(scanHit.collider != null)
+        {
+            return scanHit.collider.transform.position;
+        }
+        else
+        {
+            return targetPosition;
+        }
+    }
+
+    protected void Start()
+    {      
         damageData.owner = player.Health;
+        cameraFligth = GetComponent<CameraFlightFollow>();
         EventManager.Subscribe<Vector3>(EventConst.GetUpdateWorldPosAim(player.ID), (aimPosition) => UpdateAimDirection(aimPosition));
     }
 
@@ -42,9 +62,9 @@ public class HitScanner : MonoBehaviour {
 
     protected void HitScanAnalyse()
     {
-        Vector3 startPosition = (hitFromCamera) ? Camera.main.transform.position : transform.transform.position;
+        Vector3 startPosition = (hitFromCamera) ? Camera.main.transform.position + Camera.main.transform.forward * 5 : transform.transform.position;
 
-        Vector3 diff = (targetPosition - startPosition);    
+        Vector3 diff = (targetPosition - startPosition);
         float distance = diff.magnitude;
         Vector3 direction = diff.normalized;
 
@@ -52,14 +72,8 @@ public class HitScanner : MonoBehaviour {
         //Physics.Raycast(transform.position, direction, out scanHit, distance);
         //Physics.SphereCast(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
         RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, distance, ignoreCollision);
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if(hits[i].collider.gameObject != player.gameObject)
-            {
-                scanHit = hits[i];
-                break;
-            }
-        }
+
+        SetAimStickness(hits);
 
         Debug.DrawRay(startPosition, direction * distance);
         InvokeEventIfNewTargetInSight();
@@ -68,6 +82,35 @@ public class HitScanner : MonoBehaviour {
         //    Debug.Log(scanHit.collider.name);
 
         previousScanHit = scanHit;
+    }
+
+    private void SetAimStickness(RaycastHit[] hits)
+    {
+        if (hits.Length == 0)
+        {
+            aimStickCurrentTimer += Time.deltaTime;
+            if (aimStickCurrentTimer > aimStickTimer && scanHit.collider != null)
+            {
+                scanHit = new RaycastHit();
+            }
+        }
+        else
+        {
+            aimStickCurrentTimer = 0;
+            FilterGoodHits(hits);
+        }
+    }
+
+    private void FilterGoodHits(RaycastHit[] hits)
+    {
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject != player.gameObject)
+            {
+                scanHit = hits[i];
+                break;
+            }
+        }
     }
 
     private void InvokeEventIfNewTargetInSight()

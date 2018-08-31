@@ -19,6 +19,11 @@ public class CameraFlightFollow : MonoBehaviour
     [SerializeField] float upOffset = 5;
     [SerializeField] bool shake_on_afterburn = true; 
 
+    public float GetFollowDistance()
+    {
+        return follow_distance;
+    }
+
     public void SetPlayerFlightControl(PlayerFlightControl control)
     {
         this.control = control;
