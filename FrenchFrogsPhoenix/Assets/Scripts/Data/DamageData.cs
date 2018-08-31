@@ -3,6 +3,6 @@
 [System.Serializable]
 public class DamageData{
 
-    public GameObject owner;
+    public HealthComponent owner;
     public int damage;
 }

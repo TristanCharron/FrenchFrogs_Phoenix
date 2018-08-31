@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
 
     public InputBase input;
 
+    public HealthComponent Health { get; protected set; }
     public PlayerFlightControl Control { get; protected set; }
     public PlayerFuel Fuel { get; protected set; }
     public PlayerType Type { get; private set; }
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour {
         Fuel = GetComponent<PlayerFuel>();
         playerStats = new ObjectStats();
         Control = GetComponent<PlayerFlightControl>();
+        Health = GetComponent<HealthComponent>();
 
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {

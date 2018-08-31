@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4351748042136314}
   - component: {fileID: 114736063224885130}
   - component: {fileID: 54403728765251072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33794139123673550}
   - component: {fileID: 23860302080955736}
   - component: {fileID: 114484701843264320}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4999967766793138}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987168510344542}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CannonTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4560388217033666}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CannonTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 4559956600057046}
   - component: {fileID: 33639478228785130}
   - component: {fileID: 23499612758230164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipWing (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 4921345519616886}
   - component: {fileID: 33481303248376082}
   - component: {fileID: 23598462539258298}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipWing (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4651909290952186}
   - component: {fileID: 33926373122852290}
   - component: {fileID: 23667052793286578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipWing (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4814350318595258}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4084057301838428}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4915698640298344}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4654215297440296}
   - component: {fileID: 33137057577235518}
   - component: {fileID: 23439023548442718}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipWing (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 33671090270981424}
   - component: {fileID: 23263268704352416}
   - component: {fileID: 114507664115823338}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 4053759370043454}
   - component: {fileID: 198922240673476532}
   - component: {fileID: 199516411219530024}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WarpParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4961492507694994}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 114632248590464066}
   - component: {fileID: 114716390445417616}
   - component: {fileID: 135160934254482212}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StickingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 114875848869452298}
   - component: {fileID: 114415344700934680}
   - component: {fileID: 114795618164359754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 4409994498202906}
   - component: {fileID: 33936420413081876}
   - component: {fileID: 23799726586706532}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShipBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 4070866271921828}
   - component: {fileID: 23025434324112006}
   - component: {fileID: 33026159396324614}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: nullCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 4061069060592474}
   - component: {fileID: 33660350052044392}
   - component: {fileID: 23864753814678452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipCore (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4264082990043878}
   - component: {fileID: 120113497634908870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,10 +1161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f11a84e33786b640afa03edc5790358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFromCamera: 1
   damageData:
     owner: {fileID: 0}
     damage: 5
   player: {fileID: 114344964493810840}
+  ignoreCollision:
+    serializedVersion: 2
+    m_Bits: 1024
   cannonTip: {fileID: 4987168510344542}
   cannonData:
     speed: 500
@@ -1181,10 +1185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f11a84e33786b640afa03edc5790358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFromCamera: 1
   damageData:
     owner: {fileID: 0}
     damage: 5
   player: {fileID: 114344964493810840}
+  ignoreCollision:
+    serializedVersion: 2
+    m_Bits: 1024
   cannonTip: {fileID: 4560388217033666}
   cannonData:
     speed: 500
@@ -1228,10 +1236,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70587b6a884f644d88408c28275ef69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFromCamera: 1
   damageData:
     owner: {fileID: 0}
     damage: 5
   player: {fileID: 114344964493810840}
+  ignoreCollision:
+    serializedVersion: 2
+    m_Bits: 1024
   shootAheadDistance: 200
   lineRenderer: {fileID: 120113497634908870}
   laserCostPerSecond: 15
