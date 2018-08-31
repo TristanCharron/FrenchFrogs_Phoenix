@@ -23,7 +23,9 @@ public class EnvironmentBlock : EnvironmentObject {
 
     public void StartMovement()
     {
-        transform.DOLocalMove(new Vector3(startPosition.x + Random.Range(-1, 2), startPosition.y + Random.Range(-1, 2), startPosition.z + Random.Range(-1, 2)), randomSpeed).SetEase(Ease.InOutQuad).OnComplete(ResetMovement);
+        float radiusMove = 1;
+        //Vector3 randomVector3 = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2));
+        transform.DOLocalMove(startPosition + Random.onUnitSphere * radiusMove, randomSpeed).SetEase(Ease.InOutQuad).OnComplete(ResetMovement);
     }
 
 
