@@ -93,9 +93,10 @@ public class PlayerFactory : MonoBehaviour {
 
     void SetCameraToPlayer(Player player)
     {
-        CameraFlightFollow cameraFollow = Instantiate(playerCameraPrefab, transform, true);
+        CameraFlightFollow cameraFlight = Instantiate(playerCameraPrefab, transform, true);
         PlayerFlightControl flight = player.GetComponent<PlayerFlightControl>();
-        cameraFollow.SetPlayerFlightControl(flight);
+        player.CameraFlight = cameraFlight;
+        cameraFlight.SetPlayerFlightControl(flight);
     }
 
     //public void RemovePlayer(string ID)

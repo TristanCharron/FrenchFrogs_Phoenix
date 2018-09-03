@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
 
     public InputBase input;
 
+    public CameraFlightFollow CameraFlight { get; set; }
     public HealthComponent Health { get; protected set; }
     public PlayerFlightControl Control { get; protected set; }
     public PlayerFuel Fuel { get; protected set; }
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour {
 
     public void OnDamage(float healthRatio)
     {
+        Debug.Log(healthRatio);
         EventManager.Invoke<float>(EventConst.GetUpdatePlayerHealth(ID), healthRatio);
     }
 

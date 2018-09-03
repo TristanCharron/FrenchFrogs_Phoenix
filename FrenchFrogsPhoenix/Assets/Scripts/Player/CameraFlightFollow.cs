@@ -6,6 +6,7 @@ using System.Collections;
 public class CameraFlightFollow : MonoBehaviour
 {
     public Player player { get; protected set; }
+    public HitScanner hitScanner { get; protected set; }
 
     [SerializeField] public PlayerFlightControl control; 
 	
@@ -17,7 +18,12 @@ public class CameraFlightFollow : MonoBehaviour
 	[SerializeField] float afterburner_Shake_Amount = 2f; 
     [SerializeField] float yawMultiplier = 0.005f;
     [SerializeField] float upOffset = 5;
-    [SerializeField] bool shake_on_afterburn = true; 
+    [SerializeField] bool shake_on_afterburn = true;
+
+    private void Awake()
+    {
+        hitScanner = GetComponent<HitScanner>();
+    }
 
     public float GetFollowDistance()
     {

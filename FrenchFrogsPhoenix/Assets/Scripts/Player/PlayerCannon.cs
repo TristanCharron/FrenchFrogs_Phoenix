@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RewiredConsts;
-public class PlayerCannon : HitScanner
+public class PlayerCannon : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] Transform cannonTip;
+    [SerializeField] HitScanner hitScanner;
+    [SerializeField] Player player;
+
+    [Header("Stats")]
     [SerializeField] CannonData cannonData;
-    [SerializeField] bool useHitScan= true;
+    [SerializeField] DamageData damageData;
 
     InputBase input; 
     bool canFire = true;
 
     void Start()
     {
-        base.Start();
-
+        damageData.owner = player.Health;
         input = player.input;
+        hitScanner = player.CameraFlight.hitScanner;
 
-        //input.SubscribeButtonDown(Action.Fire, Fire);
         input.SubscribeButtonHold(Action.Fire, Fire);
-    }
-
-    void Update()
-    {
-        HitScanAnalyse();
     }
 
     IEnumerator CooldownFire()
@@ -43,15 +42,17 @@ public class PlayerCannon : HitScanner
         bullet.transform.position = cannonTip.position;
 
         ///Vector3 realAimDirection = Aim
-        Vector3 dir = (GetAssistAimPosition() - transform.position) .normalized;
-        bullet.Initialize(player, damageData, dir, cannonData.speed);
+        Vector3 diff = (hitScanner.GetAssistAimPosition() - transform.position);
+        Vector3 dir = diff.normalized;
+
+        bool hasHit = hitScanner.HitScanDamage(damageData);
+
+        float duration = (hasHit) ? (diff.magnitude / cannonData.speed) :  5;
+        bullet.Initialize(player, damageData, dir, cannonData.speed, duration);
 
         StartCoroutine(CooldownFire());
 
-        if(useHitScan)
-        {
-            HitScanDamage();
-            bullet.useHitScan = true;
-        }
+
+         bullet.useHitScan = true;
     }
 }

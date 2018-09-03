@@ -5,8 +5,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public static string poolName = "Bullet";
-    [SerializeField] float delayDestroy;
     public bool useHitScan = true;
+    float duration;
+
     Coroutine delayDestroyCoroutine;
     Rigidbody rigidbody;
     Player player;
@@ -18,11 +19,11 @@ public class Bullet : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
     }
 
-    public void Initialize(Player player, DamageData damageData, Vector3 direction, float speed)
+    public void Initialize(Player player, DamageData damageData, Vector3 direction, float speed, float duration)
     {
         this.player = player;
         this.damageData = damageData;
-
+        this.duration = duration;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = direction * speed;
 
@@ -33,9 +34,13 @@ public class Bullet : MonoBehaviour
 
     IEnumerator DelayCoroutineDestroy()
     {
-        yield return new WaitForSeconds(delayDestroy);
+        yield return new WaitForSeconds(duration);
+        //End trail
+        rigidbody.velocity = Vector3.zero;
 
+        yield return new WaitForSeconds(.1f);
         PoolManager.instance.ReturnObject(poolName, gameObject);
+
     }
 
     private void OnTriggerEnter(Collider other)

@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using RewiredConsts;
 
-public class PlayerLaser : HitScanner
+public class PlayerLaser : MonoBehaviour
 {
-    [SerializeField] float shootAheadDistance = 50;
+    [Header("Components")]
+    [SerializeField] Player player;
+    [SerializeField] HitScanner hitScanner;
     [SerializeField] LineRenderer lineRenderer;
+
+    [Header("Stats")]
+    [SerializeField] float shootAheadDistance = 50;
     [SerializeField] float laserCostPerSecond = 5;
+    [SerializeField] DamageData damageData;
 
     private float timer = 0;
     private float tickTimer = 0.1f;
     bool isOnCooldown = false;
 
-    //Vector3 targetPosition;
-
     void Start()
     {
-        base.Start();
-
-        //player.input.SubscribeButtonDown(Action.Fire, Fire);
-        // EventManager.Subscribe<Vector3>(EventConst.GetUpdateWorldPosAim(player.ID), (aimPos) => targetPosition = aimPos);
+        damageData.owner = player.Health;
+        hitScanner = player.CameraFlight.hitScanner;
     }
 
     void Fire()
@@ -33,7 +35,6 @@ public class PlayerLaser : HitScanner
        if(player.input != null)
        {
             ShowBeam(player.input.GetButton(Action.Fire2));
-            HitScanAnalyse();
        }    
     }
 
@@ -57,13 +58,13 @@ public class PlayerLaser : HitScanner
         if (isOnCooldown)
             return;
 
-        HitScanDamage();
+        hitScanner.HitScanDamage(damageData);
     }
 
     void UpdateLaserPosition()
     {
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, targetPosition);
+        lineRenderer.SetPosition(1, hitScanner.TargetPosition);
     }
 
     IEnumerator LaserTickDelay()

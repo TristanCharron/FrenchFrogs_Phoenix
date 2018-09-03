@@ -65,4 +65,5 @@ public class HealthComponent : MonoBehaviour {
     }
 }
 
+[System.Serializable]
 public class FloatUnityEvent:UnityEvent<float>{}

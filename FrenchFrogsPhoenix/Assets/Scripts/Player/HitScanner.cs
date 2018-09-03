@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//A centraliser, pas que le cannon/laser/etc herite de ca
 public class HitScanner : MonoBehaviour {
 
-    [SerializeField] bool hitFromCamera;
-    [SerializeField] protected DamageData damageData;
-    [SerializeField] protected Player player;
+    Player player;
 
     [SerializeField] LayerMask ignoreCollision;
 
-    protected Vector3 aimDirection;
-    protected Vector3 targetPosition;
+    public Vector3 AimDirection { get; protected set; }
+    public Vector3 TargetPosition { get; protected set; }
 
     RaycastHit previousScanHit;
     RaycastHit scanHit;
@@ -31,24 +27,25 @@ public class HitScanner : MonoBehaviour {
         }
         else
         {
-            return targetPosition;
+            return TargetPosition;
         }
     }
 
     protected void Start()
-    {      
-        damageData.owner = player.Health;
+    {
+        //damageData.owner = player.Health;
         cameraFligth = GetComponent<CameraFlightFollow>();
+        player = cameraFligth.player;
         EventManager.Subscribe<Vector3>(EventConst.GetUpdateWorldPosAim(player.ID), (aimPosition) => UpdateAimDirection(aimPosition));
     }
 
     void UpdateAimDirection(Vector3 aimPosition)
     {
-        targetPosition = aimPosition;
-        aimDirection = (aimPosition - transform.position).normalized;
+        TargetPosition = aimPosition;
+        AimDirection = (aimPosition - transform.position).normalized;
     }
 
-    protected void HitScanDamage()
+    public bool HitScanDamage(DamageData damageData)
     {
         if (scanHit.collider != null)
         {
@@ -56,30 +53,30 @@ public class HitScanner : MonoBehaviour {
             if (health != null)
             {
                 health.Damage(damageData);
+                return true;
             }
         }
+        return false;
     }
 
-    protected void HitScanAnalyse()
+    private void Update()
     {
-        Vector3 startPosition = (hitFromCamera) ? Camera.main.transform.position + Camera.main.transform.forward * 5 : transform.transform.position;
+        HitScanAnalyse();
+    }
 
-        Vector3 diff = (targetPosition - startPosition);
+    void HitScanAnalyse()
+    {
+        Vector3 startPosition = transform.position + transform.forward * cameraFligth.GetFollowDistance();
+        Vector3 diff = (TargetPosition - startPosition);
         float distance = diff.magnitude;
         Vector3 direction = diff.normalized;
 
-        float sphereCastRadius = 1;
-        //Physics.Raycast(transform.position, direction, out scanHit, distance);
-        //Physics.SphereCast(startPosition, sphereCastRadius, direction, out scanHit, distance, ignoreCollision);
         RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, distance, ignoreCollision);
 
         SetAimStickness(hits);
 
         Debug.DrawRay(startPosition, direction * distance);
         InvokeEventIfNewTargetInSight();
-
-        //if(scanHit.collider != null)
-        //    Debug.Log(scanHit.collider.name);
 
         previousScanHit = scanHit;
     }

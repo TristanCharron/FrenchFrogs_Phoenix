@@ -1126,11 +1126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2b6c3939f6f9a449f0e12222dc941a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDamageTaken:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1161,19 +1156,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f11a84e33786b640afa03edc5790358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFromCamera: 1
-  damageData:
-    owner: {fileID: 0}
-    damage: 5
-  player: {fileID: 114344964493810840}
-  ignoreCollision:
-    serializedVersion: 2
-    m_Bits: 1024
   cannonTip: {fileID: 4987168510344542}
+  hitScanner: {fileID: 0}
+  player: {fileID: 114344964493810840}
   cannonData:
     speed: 500
     fireRate: 0.3
-  useHitScan: 1
+  damageData:
+    owner: {fileID: 0}
+    damage: 5
 --- !u!114 &114507664115823338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1185,19 +1176,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f11a84e33786b640afa03edc5790358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFromCamera: 1
-  damageData:
-    owner: {fileID: 0}
-    damage: 5
-  player: {fileID: 114344964493810840}
-  ignoreCollision:
-    serializedVersion: 2
-    m_Bits: 1024
   cannonTip: {fileID: 4560388217033666}
+  hitScanner: {fileID: 0}
+  player: {fileID: 114344964493810840}
   cannonData:
     speed: 500
     fireRate: 0.3
-  useHitScan: 1
+  damageData:
+    owner: {fileID: 0}
+    damage: 5
 --- !u!114 &114632248590464066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1236,17 +1223,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70587b6a884f644d88408c28275ef69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFromCamera: 1
+  player: {fileID: 114344964493810840}
+  hitScanner: {fileID: 0}
+  lineRenderer: {fileID: 120113497634908870}
+  shootAheadDistance: 200
+  laserCostPerSecond: 15
   damageData:
     owner: {fileID: 0}
     damage: 5
-  player: {fileID: 114344964493810840}
-  ignoreCollision:
-    serializedVersion: 2
-    m_Bits: 1024
-  shootAheadDistance: 200
-  lineRenderer: {fileID: 120113497634908870}
-  laserCostPerSecond: 15
 --- !u!114 &114795618164359754
 MonoBehaviour:
   m_ObjectHideFlags: 1
