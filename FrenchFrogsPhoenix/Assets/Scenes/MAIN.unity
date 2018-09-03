@@ -5072,6 +5072,21 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.size
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4343504618466360, guid: 3fc92a85c720cc947b74018676abe4c5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5103,6 +5118,86 @@ Prefab:
     - target: {fileID: 4343504618466360, guid: 3fc92a85c720cc947b74018676abe4c5, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[12]._actionId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[12]._elementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[12]._elementIdentifierId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.data[14]._id
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.data[14]._name
+      value: Rotate
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.data[14]._type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.data[14]._descriptiveName
+      value: Action0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actions.Array.data[14]._userAssignable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.data[14]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.actionIdCounter
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[12]._keyboardKeyCode
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[13]._actionId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[13]._elementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[13]._elementIdentifierId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[13]._keyboardKeyCode
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 114975690875790908, guid: 3fc92a85c720cc947b74018676abe4c5,
+        type: 2}
+      propertyPath: _userData.keyboardMaps.Array.data[0].actionElementMaps.Array.data[13]._axisContribution
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc92a85c720cc947b74018676abe4c5, type: 2}

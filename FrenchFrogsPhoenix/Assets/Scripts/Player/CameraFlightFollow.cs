@@ -20,6 +20,8 @@ public class CameraFlightFollow : MonoBehaviour
     [SerializeField] float upOffset = 5;
     [SerializeField] bool shake_on_afterburn = true;
 
+
+
     private void Awake()
     {
         hitScanner = GetComponent<HitScanner>();
@@ -43,7 +45,7 @@ public class CameraFlightFollow : MonoBehaviour
 
         Vector3 newPosition = target.TransformPoint(control.yaw * yawMultiplier, camera_elevation, -follow_distance);
 
-        Vector3 positionDifference = (target.position - transform.position) + target.up * upOffset;
+        Vector3 positionDifference = (target.position - transform.position) + (target.up * upOffset);
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * follow_tightness);
 
         Quaternion newRotation;
@@ -62,4 +64,17 @@ public class CameraFlightFollow : MonoBehaviour
         }
 		transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * rotation_tightness);
 	}
+
+    float CalculateHorizontal()
+    {
+        //Sine: sin(θ) = Opposite / Hypotenuse
+        //      sin(θ) * Hypothenuse = Opposite
+        Transform target = control.transform;
+
+        Vector3 diff = target.position - transform.transform.position;
+        float theta = Vector3.Angle(transform.forward, diff.normalized);
+        float sin = Mathf.Sin(theta);
+
+        return sin * diff.magnitude;
+    }
 }

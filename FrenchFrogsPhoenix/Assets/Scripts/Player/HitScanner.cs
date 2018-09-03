@@ -66,7 +66,8 @@ public class HitScanner : MonoBehaviour {
 
     void HitScanAnalyse()
     {
-        Vector3 startPosition = transform.position + transform.forward * cameraFligth.GetFollowDistance();
+        float minDistance = 3;
+        Vector3 startPosition = transform.position + transform.forward * minDistance;
         Vector3 diff = (TargetPosition - startPosition);
         float distance = diff.magnitude;
         Vector3 direction = diff.normalized;

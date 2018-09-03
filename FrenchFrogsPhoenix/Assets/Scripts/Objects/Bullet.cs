@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         //End trail
         rigidbody.velocity = Vector3.zero;
 
-        yield return new WaitForSeconds(.1f);
+       // yield return new WaitForSeconds(.1f);
         PoolManager.instance.ReturnObject(poolName, gameObject);
 
     }

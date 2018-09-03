@@ -539,7 +539,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617711523838746}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.331, y: 0, z: 1}
+  m_LocalPosition: {x: -0.56, y: -0, z: 1.82}
   m_LocalScale: {x: 0.5, y: 1.0000005, z: 0.50000024}
   m_Children:
   - {fileID: 4560388217033666}
@@ -553,7 +553,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1151031552607106}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.339, y: 0, z: 1}
+  m_LocalPosition: {x: 0.54499996, y: 0, z: 1.82}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children:
   - {fileID: 4987168510344542}
@@ -696,7 +696,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617711523838746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -906,7 +906,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1151031552607106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1126,6 +1126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2b6c3939f6f9a449f0e12222dc941a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FloatUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   OnDeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1231,6 +1236,11 @@ MonoBehaviour:
   damageData:
     owner: {fileID: 0}
     damage: 5
+  laserInfo:
+    widthBeamStartSize: 0
+    widthBeamIncreasePerSecond: 1
+    widthBeamSinAmplitude: 1
+    widthBeamSinSpeed: 5
 --- !u!114 &114795618164359754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1246,7 +1256,7 @@ MonoBehaviour:
   debugAim: {fileID: 0}
   aimAheadDistance: 100
   offset: 0.3
-  deadZone: 5
+  deadZone: 50
 --- !u!114 &114875848869452298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1331,19 +1341,21 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   core: {fileID: 1557069209997504}
   moveSettings:
-    warpSpeed: 35
-    noInputSpeed: 15
-    upInputSpeed: 10
-    downInputSeed: 2
+    warpSpeed: 50
+    noInputSpeed: 10
+    upInputSpeed: 20
+    downInputSeed: -5
+    horizontalRotationMaxSpeed: 150
+    horizontalRotationAcceleration: 2
     thrust_transition_speed: 5
-    turnspeed: 3
-    rollSpeedModifier: 7
+    turnspeed: 2
+    rollSpeedModifier: 15
     pitchYaw_strength: 0.5
   blankSettings:
     use_banking: 1
     bank_angle_clamp: 360
-    bank_rotation_speed: 3
-    bank_rotation_multiplier: 1
+    bank_rotation_speed: 5
+    bank_rotation_multiplier: 5
   warpFuelConsumption: 15
   screen_clamp: 400
   roll: -0

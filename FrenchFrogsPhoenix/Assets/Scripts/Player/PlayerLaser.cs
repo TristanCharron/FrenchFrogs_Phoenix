@@ -15,6 +15,9 @@ public class PlayerLaser : MonoBehaviour
     [SerializeField] float laserCostPerSecond = 5;
     [SerializeField] DamageData damageData;
 
+    [SerializeField] LaserInfo laserInfo;
+
+    private float timeLaserActivated = 0;
     private float timer = 0;
     private float tickTimer = 0.1f;
     bool isOnCooldown = false;
@@ -45,9 +48,13 @@ public class PlayerLaser : MonoBehaviour
             player.Fuel.RemoveFuel(laserCostPerSecond * Time.deltaTime);
             CalculateBeam();
             UpdateLaserPosition();
+            UpdateLaserWidth();
+
+            timeLaserActivated += Time.deltaTime;
         }
         else
         {
+            timeLaserActivated = 0;
             show = false;
         }
         lineRenderer.enabled = show;
@@ -59,6 +66,14 @@ public class PlayerLaser : MonoBehaviour
             return;
 
         hitScanner.HitScanDamage(damageData);
+    }
+
+    void UpdateLaserWidth()
+    {
+
+        float width = laserInfo.GetWidth(timeLaserActivated);
+        lineRenderer.startWidth = width;
+        lineRenderer.endWidth = width;
     }
 
     void UpdateLaserPosition()
@@ -73,4 +88,22 @@ public class PlayerLaser : MonoBehaviour
         yield return new WaitForSeconds(tickTimer);
         isOnCooldown = false;
     }
+
+    [System.Serializable]
+    public class LaserInfo
+    {
+        public float widthBeamStartSize;
+        public float widthBeamIncreasePerSecond;
+        public float widthBeamSinAmplitude;
+        public float widthBeamSinSpeed;
+
+        public float GetWidth(float timeLaserActivated)
+        {
+            float sizeOverTime = widthBeamStartSize + (timeLaserActivated * widthBeamIncreasePerSecond);
+            float sizeVibration = widthBeamSinAmplitude * Mathf.Sin(timeLaserActivated * widthBeamSinSpeed);
+
+            return sizeOverTime + sizeVibration;
+        }
+    }
+
 }

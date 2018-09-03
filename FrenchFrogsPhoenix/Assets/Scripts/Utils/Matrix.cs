@@ -36,7 +36,6 @@
 using System;
 using System.Text.RegularExpressions;
 
-
 public class Matrix
 {
     public int rows;
@@ -62,6 +61,30 @@ public class Matrix
         mat = arrayMatrix;
     }
 
+    public Matrix(UnityEngine.Vector3 vector3)         // Matrix Class constructor
+    {
+        rows = 1;
+        cols = 3;
+        mat = new double[rows, cols];
+        mat[0, 0] = vector3.x;
+        mat[0, 1] = vector3.y;
+        mat[0, 2] = vector3.z;
+
+    }
+    public Matrix(UnityEngine.Vector3[] vector3Array)         // Matrix Class constructor
+    {
+        rows = vector3Array.Length;
+        cols = 3;
+        mat = new double[rows, cols];
+
+        for (int i = 0; i < vector3Array.Length; i++)
+        {
+            mat[i, 0] = vector3Array[i].x;
+            mat[i, 1] = vector3Array[i].y;
+            mat[i, 2] = vector3Array[i].z;
+        }
+    }
+
     public Boolean IsSquare()
     {
         return (rows == cols);
@@ -71,6 +94,11 @@ public class Matrix
     {
         get { return mat[iRow, iCol]; }
         set { mat[iRow, iCol] = value; }
+    }
+
+    public UnityEngine.Vector3 GetRowVector3(int row)
+    {
+        return new UnityEngine.Vector3((float)mat[row, 0], (float)mat[row, 1], (float)mat[row, 2]);     
     }
 
     public Matrix GetCol(int k)

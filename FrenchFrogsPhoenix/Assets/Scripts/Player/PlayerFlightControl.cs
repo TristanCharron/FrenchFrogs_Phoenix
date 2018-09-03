@@ -21,12 +21,15 @@ public class PlayerFlightControl : MonoBehaviour
 
     Vector2 mousePos = new Vector2(0, 0); //Pointer position from CustomPointer
 
-    float DZ = 0; //Deadzone, taken from CustomPointer.
+    //float DZ = 0; //Deadzone, taken from CustomPointer.
     float currentMag = 0f;
+    float currentHorizontalRotation = 0;
 
     bool thrust_exists = true;
     bool roll_exists = true;
 
+
+    PlayerAim playerAim;
     Rigidbody rigidBody;
     public Player Player { get; protected set; }
 
@@ -37,8 +40,8 @@ public class PlayerFlightControl : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         Player = GetComponent<Player>();
 
-        mousePos = new Vector2(0,0);	
-		DZ = GetComponent<PlayerAim>().deadZone;
+        mousePos = new Vector2(0,0);
+        playerAim = GetComponent<PlayerAim>();
 		
 		roll = 0; //Setting this equal to 0 here as a failsafe in case the roll axis is not set up.
 
@@ -59,7 +62,9 @@ public class PlayerFlightControl : MonoBehaviour
             SetPitchYawRoll();
             ApplyTorque();
         }
-        rigidBody.velocity = transform.forward * currentMag;
+
+        // Vector3 horizontalVelocity = transform.right * Player.input.GetAxis(Action.MoveHorizontal) * moveSettings.horizontalSpeed;
+        rigidBody.velocity = transform.forward * currentMag; // + horizontalVelocity;
 
         if (blankSettings.use_banking)
             UpdateBanking();
@@ -111,17 +116,34 @@ public class PlayerFlightControl : MonoBehaviour
 
     private void SetPitchYawRoll()
     {
+        float DZ = playerAim.deadZone;
+
         //Clamping the pitch and yaw values, and taking in the roll input.
         pitch = Mathf.Clamp(distFromVertical, -screen_clamp - DZ, screen_clamp + DZ) * moveSettings.pitchYaw_strength;
-        yaw = Mathf.Clamp(distFromHorizontal, -screen_clamp - DZ, screen_clamp + DZ) * moveSettings.pitchYaw_strength;
+
+        currentHorizontalRotation = Mathf.Lerp(
+            currentHorizontalRotation,
+            (Player.input.GetAxis(Action.MoveHorizontal) * moveSettings.horizontalRotationMaxSpeed),
+            Time.deltaTime * moveSettings.horizontalRotationAcceleration);
+
+        yaw = Mathf.Clamp(
+            currentHorizontalRotation,
+            -moveSettings.horizontalRotationMaxSpeed,
+            moveSettings.horizontalRotationMaxSpeed);
+        
+        /* Mathf.Clamp(distFromHorizontal, -screen_clamp - DZ, screen_clamp + DZ) * moveSettings.pitchYaw_strength */
+                                   
+
         if (roll_exists)
-            roll = (Player.input.GetAxis(Action.MoveHorizontal) * -moveSettings.rollSpeedModifier);
+            roll = (Player.input.GetAxis(Action.Rotate) * -moveSettings.rollSpeedModifier);
     }
 
     void UpdateCursorPosition(Vector2 mousePos)
     {
-		//Calculate distances from the center of the screen.
-		float distV = Vector2.Distance(mousePos, new Vector2(mousePos.x, Screen.height / 2));
+        float DZ = playerAim.deadZone;
+
+        //Calculate distances from the center of the screen.
+        float distV = Vector2.Distance(mousePos, new Vector2(mousePos.x, Screen.height / 2));
 		float distH = Vector2.Distance(mousePos, new Vector2(Screen.width / 2, mousePos.y));
 		
 		//If the distances are less than the deadzone, then we want it to default to 0 so that no movements will occur.
@@ -166,11 +188,18 @@ public class PlayerFlightControl : MonoBehaviour
     [System.Serializable]
     public class MouvementSettings
     {
+        [Header("Speed")]
         public float warpSpeed = 35;
         public float noInputSpeed = 15.0f; 
         public float upInputSpeed = 10f; 
-        public float downInputSeed = 2f; 
+        public float downInputSeed = 2f;
 
+        [Header("Max rotation Horizontal")]
+        public float horizontalRotationMaxSpeed = 5f;
+        public float horizontalRotationAcceleration = 5f;
+
+
+        [Header("Rotation")]
         public float thrust_transition_speed = 5f; //Thrust Transition Speed", "How quickly afterburners/brakes will reach their maximum effect"
         public float turnspeed = 15.0f; //"Turn/Roll Speed", "How fast turns and rolls will be executed "
         public float rollSpeedModifier = 7; //"Roll Speed", "Multiplier for roll speed. Base roll is determined by turn speed"

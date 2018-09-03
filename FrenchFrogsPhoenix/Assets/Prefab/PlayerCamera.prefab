@@ -113,13 +113,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 0}
-  follow_distance: 10
-  camera_elevation: 2
+  follow_distance: 8
+  camera_elevation: 1
   follow_tightness: 8
-  rotation_tightness: 13
+  rotation_tightness: 8
   afterburner_Shake_Amount: 2
   yawMultiplier: 0.005
-  upOffset: 5
+  upOffset: 4
   shake_on_afterburn: 1
 --- !u!114 &114384777407749328
 MonoBehaviour:
