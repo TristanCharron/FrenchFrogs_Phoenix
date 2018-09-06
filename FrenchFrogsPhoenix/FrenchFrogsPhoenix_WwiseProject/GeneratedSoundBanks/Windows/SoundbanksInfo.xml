@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="132">
+	<RootPaths>
+		<ProjectRoot>C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1741871505" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\PrivateFrogsBank</ObjectPath>
+			<ShortName>PrivateFrogsBank</ShortName>
+			<Path>PrivateFrogsBank.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2607556080" Name="Menu" ObjectPath="\Events\Default Work Unit\Menu"/>
+				<Event Id="1467867859" Name="Ship_Speed_Boost" ObjectPath="\Events\Default Work Unit\Ship_Speed\Ship_Speed_Boost" MaxAttenuation="0.000000"/>
+				<Event Id="3082625079" Name="Ship_Speed_Brake" ObjectPath="\Events\Default Work Unit\Ship_Speed\Ship_Speed_Brake" MaxAttenuation="0.000000"/>
+				<Event Id="3568150045" Name="Ship_Speed_Forward" ObjectPath="\Events\Default Work Unit\Ship_Speed\Ship_Speed_Forward" MaxAttenuation="0.000000"/>
+				<Event Id="3692956948" Name="Ship_Speed_Idle" ObjectPath="\Events\Default Work Unit\Ship_Speed\Ship_Speed_Idle" MaxAttenuation="0.000000"/>
+				<Event Id="1281810935" Name="Start" ObjectPath="\Events\Default Work Unit\Start"/>
+				<Event Id="1803197027" Name="Stick" ObjectPath="\Events\Default Work Unit\Stick"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="42119737" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_04.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_04_8956FC97.wem</Path>
+				</File>
+				<File Id="76088048" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_02.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_02_8956FC97.wem</Path>
+				</File>
+				<File Id="157494681" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_03.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_03_8956FC97.wem</Path>
+				</File>
+				<File Id="299180188" Language="SFX">
+					<ShortName>SFX_Main_Skill_Stick_02.wav</ShortName>
+					<Path>SFX\SFX_Main_Skill_Stick_02_56D34C19.wem</Path>
+				</File>
+				<File Id="300076275" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_01.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_01_8956FC97.wem</Path>
+				</File>
+				<File Id="337076647" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_10.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_10_8956FC97.wem</Path>
+				</File>
+				<File Id="368136654" Language="SFX">
+					<ShortName>1808_FF_techScienceJam_v1.wav</ShortName>
+					<Path>SFX\1808_FF_techScienceJam_v1_8956FC97.wem</Path>
+				</File>
+				<File Id="389643904" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_07.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_07_8956FC97.wem</Path>
+				</File>
+				<File Id="532916767" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_06.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_06_8956FC97.wem</Path>
+				</File>
+				<File Id="559870666" Language="SFX">
+					<ShortName>SFX_Main_Skill_Stick_03.wav</ShortName>
+					<Path>SFX\SFX_Main_Skill_Stick_03_56D34C19.wem</Path>
+				</File>
+				<File Id="631627208" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_11.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_11_8956FC97.wem</Path>
+				</File>
+				<File Id="692796208" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_09.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_09_8956FC97.wem</Path>
+				</File>
+				<File Id="780296882" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_05.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_05_8956FC97.wem</Path>
+				</File>
+				<File Id="888522010" Language="SFX">
+					<ShortName>SFX_Main_Skill_Stick_01.wav</ShortName>
+					<Path>SFX\SFX_Main_Skill_Stick_01_56D34C19.wem</Path>
+				</File>
+				<File Id="1023889869" Language="SFX">
+					<ShortName>SFX_SHIP_SPEED_08.wav</ShortName>
+					<Path>SFX\SFX_SHIP_SPEED_08_8956FC97.wem</Path>
+				</File>
+				<File Id="1068849344" Language="SFX">
+					<ShortName>SFX_Main_Skill_Stick_04.wav</ShortName>
+					<Path>SFX\SFX_Main_Skill_Stick_04_56D34C19.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>
