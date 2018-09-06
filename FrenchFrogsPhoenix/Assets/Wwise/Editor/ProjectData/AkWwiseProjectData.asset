@@ -17,22 +17,37 @@ MonoBehaviour:
   m_lastPopulateTimePsrt1: 0
   AcousticTextureWwu:
   - Guid: '{4749D360-E523-4FDF-B45E-B42E98B12DDB}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749803354
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207634383
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     List: []
   AuxBusWwu:
   - Guid: '{1F42FB6E-89BD-447A-8A5F-19580926BBD9}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749663435
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -208024572
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     List: []
   BankWwu:
   - Guid: '{F5A8985D-4068-421D-A3D8-A1E15B76DA5C}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238437
     m_lastTimePsrt1: 1864060131
+=======
+    m_lastTimePart2: -1999238434
+    m_lastTimePsrt1: -1821081779
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: SoundBanks\Default Work Unit.wwu
     List:
@@ -47,8 +62,13 @@ MonoBehaviour:
         ObjectType: 7
   EventWwu:
   - Guid: '{3966F247-F001-4DD0-AB22-18EB74A0F403}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238437
     m_lastTimePsrt1: 1718795012
+=======
+    m_lastTimePart2: -1999238434
+    m_lastTimePsrt1: -1844496695
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Events\Default Work Unit.wwu
     List:
@@ -78,35 +98,58 @@ MonoBehaviour:
       minDuration: 0
   ExpandedItems:
   - /FrenchFrogsPhoenix_WwiseProject
+<<<<<<< HEAD
   - /FrenchFrogsPhoenix_WwiseProject/Events
   - /FrenchFrogsPhoenix_WwiseProject/Events/Default Work Unit
+=======
+>>>>>>> master
   - /FrenchFrogsPhoenix_WwiseProject/SoundBanks
   - /FrenchFrogsPhoenix_WwiseProject/SoundBanks/Default Work Unit
   RtpcWwu:
   - Guid: '{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749733387
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -208114526
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Game Parameters\Default Work Unit.wwu
     List: []
   StateWwu:
   - Guid: '{4CDE4AE9-983F-4FB1-9EF6-0C757A8903BE}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749343544
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207734268
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: States\Default Work Unit.wwu
     List: []
   SwitchWwu:
   - Guid: '{7646F3B9-1F83-48E6-9DCF-1EFA8EF50CFC}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749703414
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207704346
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Switches\Default Work Unit.wwu
     List: []
   TriggerWwu:
   - Guid: '{28A82474-D236-4747-8239-44866801DE2A}'
+<<<<<<< HEAD
     m_lastTimePart2: -1999238611
     m_lastTimePsrt1: -1749313631
+=======
+    m_lastTimePart2: -1999238607
+    m_lastTimePsrt1: -207674356
+>>>>>>> master
     ParentPhysicalPath: 
     PhysicalPath: Triggers\Default Work Unit.wwu
     List: []

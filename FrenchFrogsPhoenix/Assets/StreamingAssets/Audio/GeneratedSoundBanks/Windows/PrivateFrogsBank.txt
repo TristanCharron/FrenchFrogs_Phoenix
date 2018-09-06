@@ -1,0 +1,11 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1803197027	Stick			\Default Work Unit\Stick	
+	2607556080	Menu			\Default Work Unit\Menu	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	299180188	SFX_Main_Skill_Stick_02	C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\SFX\SFX_Main_Skill_Stick_02_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_02		51512
+	368136654	1808_FF_techScienceJam_v1	C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\SFX\1808_FF_techScienceJam_v1_8956FC97.wem		\Interactive Music Hierarchy\Default Work Unit\New Music Playlist Container\1808_FF_techScienceJam_v1\1808_FF_techScienceJam_v1		22439016
+	559870666	SFX_Main_Skill_Stick_03	C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\SFX\SFX_Main_Skill_Stick_03_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_03		70788
+	888522010	SFX_Main_Skill_Stick_01	C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\SFX\SFX_Main_Skill_Stick_01_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_01		51288
+	1068849344	SFX_Main_Skill_Stick_04	C:\Users\GuiRay\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Windows\SFX\SFX_Main_Skill_Stick_04_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_04		48676
+
