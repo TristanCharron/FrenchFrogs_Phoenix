@@ -31,6 +31,101 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Folder Name="Ship_Speed" ID="{5272CF95-6429-44ED-92D5-4024BAB2C6F1}" ShortID="225834963">
+					<ChildrenList>
+						<Event Name="Ship_Speed_Idle" ID="{F778EDFB-7AFA-401B-8472-0195B7BE104E}">
+							<ChildrenList>
+								<Action Name="" ID="{88D69D9F-6A77-4BB9-BFCE-9BBA604D6532}" ShortID="624471352">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="50"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Ship_Speed_Brake" ID="{A5DFE621-C45A-4ACF-BC27-426DD60546B7}">
+							<ChildrenList>
+								<Action Name="" ID="{8B3DB706-AA93-47B1-BE7B-7AD590252F7F}" ShortID="533972028">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="25"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Ship_Speed_Forward" ID="{234F94F5-741F-4F71-B313-C2DB19069C00}">
+							<ChildrenList>
+								<Action Name="" ID="{88A9DBC5-F93A-4E67-A693-D700823AA1E2}" ShortID="133564406">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="80"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Ship_Speed_Boost" ID="{DA721038-94D3-4B34-A5E9-D61F7D5D6810}">
+							<ChildrenList>
+								<Action Name="" ID="{1D22D213-F3CD-4E3C-B1C2-D79C66AE33CB}" ShortID="81771335">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="38"/>
+										<Property Name="GameParameterValue" Type="Real64" Value="100"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Event Name="Start" ID="{264F3EAB-06A6-4E2E-819A-854EEB0F8756}">
+					<ChildrenList>
+						<Action Name="" ID="{DF20C242-491E-4356-9F6D-5F7F86C50273}" ShortID="379187202">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+								<Property Name="GameParameterValue" Type="Real64" Value="50">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{20B8D0DE-E452-40A3-82C9-BB544A88A280}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{89D3212E-8DE8-476B-A88D-64425F3DEFAD}" ShortID="71190136">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ship_Engine" ID="{52B28822-09B4-4116-8F60-9C1D4B650C1E}" WorkUnitID="{90EBE803-9D53-461F-941A-80406BDFED78}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

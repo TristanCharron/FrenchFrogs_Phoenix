@@ -3,8 +3,13 @@
 	<UserProjectSettingsInfo>
 		<UserProjectSettings Name="" ID="{0CD04435-9C55-42EB-919D-9DD9667EC250}">
 			<PropertyList>
+				<Property Name="Event Action List\{234F94F5-741F-4F71-B313-C2DB19069C00}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{264F3EAB-06A6-4E2E-819A-854EEB0F8756}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{39282F11-1D4D-4E54-9405-E7A49FB52332}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{A5DFE621-C45A-4ACF-BC27-426DD60546B7}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{CBB7A600-B4C9-4949-9A73-40A4660E7949}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{DA721038-94D3-4B34-A5E9-D61F7D5D6810}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{F778EDFB-7AFA-401B-8472-0195B7BE104E}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="EventView\FilterMode1" Type="int32" Value="2"/>
 				<Property Name="ExternalSourcesInputPath" Type="string">
 					<ValueList>
@@ -24,7 +29,7 @@
 				<Property Name="GenerateSoundBanks\x64_SelectedPlatforms" Type="string" Value="ElFEiTTqZ0Kq6y048wdvPQ=="/>
 				<Property Name="GenerateSoundBanks\x64_SelectedSoundBanks" Type="string" Value="7Qo/ozWsVUWky1e1sviJIg=="/>
 				<Property Name="HardwareController\CurrentSession" Type="string" Value="{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}"/>
-				<Property Name="HardwareController\{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}\x64_ActiveGroups" Type="string" Value="c9eTUM8etE+C2H63FIBFigH/////////WFS06/c5Aky7V4YJMip/ogH/////////"/>
+				<Property Name="HardwareController\{2451DD2E-A7B2-45E6-B93B-6F49B9B887AD}\x64_ActiveGroups" Type="string" Value="WFS06/c5Aky7V4YJMip/ogH/////////c9eTUM8etE+C2H63FIBFigH/////////"/>
 				<Property Name="Interactive Music\x64_{13D712B7-BAD1-4813-B948-0580C90186AD} - SegmentEditorZoomInfo" Type="string" Value="AAAAAAAA8D8AAAAAAADwP/Nre/BtCyFAAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAA"/>
 				<Property Name="MeterView\LastObject1" Type="string" Value="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"/>
 				<Property Name="MeterView\MeterMode1" Type="int32" Value="1"/>
@@ -57,13 +62,14 @@
 				<Property Name="ProjectExplorer\x64_Expanded_1_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_20_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_21_1" Type="string" Value=""/>
-				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="TlOQy6n7TESRkrYNyh63dAPo65BTnR9GlBqAQGvf7Xg="/>
-				<Property Name="ProjectExplorer\x64_Expanded_3_1" Type="string" Value="R/JmOQHw0E2rIhjrdKD0Aw=="/>
+				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="IoiyUrQJFkGPYJwdS2UMHk5TkMup+0xEkZK2Dcoet3QD6OuQU50fRpQagEBr3+14"/>
+				<Property Name="ProjectExplorer\x64_Expanded_3_1" Type="string" Value="lc9yUilk7USS1UAkurLG8UfyZjkB8NBNqyIY63Sg9AM="/>
 				<Property Name="ProjectExplorer\x64_Expanded_4_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_5_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_6_1" Type="string" Value=""/>
-				<Property Name="ProjectExplorer\x64_Expanded_7_1" Type="string" Value=""/>
+				<Property Name="ProjectExplorer\x64_Expanded_7_1" Type="string" Value="QxbBvRvPHUufH4T0BS+Cuw=="/>
 				<Property Name="ProjectExplorer\x64_Expanded_8_1" Type="string" Value=""/>
+				<Property Name="RTPC\GameParameterSimValue\{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" Type="Real64" Value="82"/>
 				<Property Name="SoundBank Manager\x64_Expand States" Type="string" Value="XZio9WhAHUKj2KHhW3baXA=="/>
 				<Property Name="SoundBankHeaderFilePath" Type="string" Value="GeneratedSoundBanks\"/>
 				<Property Name="SoundBankPaths" Type="string">
@@ -96,6 +102,7 @@
 						<Value Platform="Windows"></Value>
 					</ValueList>
 				</Property>
+				<Property Name="Soundcaster\PreviousSession" Type="string" Value="{8C86F598-3E44-4BEF-869E-2340DAA76FAA}"/>
 			</PropertyList>
 		</UserProjectSettings>
 	</UserProjectSettingsInfo>

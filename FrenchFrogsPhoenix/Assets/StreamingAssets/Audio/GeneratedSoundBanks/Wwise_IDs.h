@@ -14,8 +14,18 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID MENU = 2607556080U;
+        static const AkUniqueID SHIP_SPEED_BOOST = 1467867859U;
+        static const AkUniqueID SHIP_SPEED_BRAKE = 3082625079U;
+        static const AkUniqueID SHIP_SPEED_FORWARD = 3568150045U;
+        static const AkUniqueID SHIP_SPEED_IDLE = 3692956948U;
+        static const AkUniqueID START = 1281810935U;
         static const AkUniqueID STICK = 1803197027U;
     } // namespace EVENTS
+
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID SHIP_SPEED = 919421835U;
+    } // namespace GAME_PARAMETERS
 
     namespace BANKS
     {

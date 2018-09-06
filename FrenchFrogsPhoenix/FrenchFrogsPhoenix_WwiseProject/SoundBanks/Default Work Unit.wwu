@@ -5,8 +5,13 @@
 			<ChildrenList>
 				<SoundBank Name="PrivateFrogsBank" ID="{A33F0AED-AC35-4555-A4CB-57B5B2F88922}">
 					<ObjectInclusionList>
+						<ObjectRef Name="Ship_Speed_Idle" ID="{F778EDFB-7AFA-401B-8472-0195B7BE104E}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="Menu" ID="{CBB7A600-B4C9-4949-9A73-40A4660E7949}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Ship_Speed_Brake" ID="{A5DFE621-C45A-4ACF-BC27-426DD60546B7}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Ship_Speed_Boost" ID="{DA721038-94D3-4B34-A5E9-D61F7D5D6810}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Start" ID="{264F3EAB-06A6-4E2E-819A-854EEB0F8756}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
 						<ObjectRef Name="Stick" ID="{39282F11-1D4D-4E54-9405-E7A49FB52332}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Ship_Speed_Forward" ID="{234F94F5-741F-4F71-B313-C2DB19069C00}" WorkUnitID="{3966F247-F001-4DD0-AB22-18EB74A0F403}" Filter="7" Origin="Manual"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

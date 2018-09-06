@@ -132,6 +132,832 @@
 						</Sound>
 					</ChildrenList>
 				</RandomSequenceContainer>
+				<BlendContainer Name="Ship_Engine" ID="{52B28822-09B4-4116-8F60-9C1D4B650C1E}" ShortID="290545602">
+					<PropertyList>
+						<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>1</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<RTPCList>
+								<RTPC Name="" ID="{8C87B058-458F-4742-B5E1-3582BC5D8C15}" ShortID="42400017">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{BD2FA848-0BAD-49A1-BCD4-3AAA98836500}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="3"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>0</XPos>
+												<YPos>-12</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>0</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="SFX_SHIP_SPEED_01" ID="{459AA36C-0EB8-422C-ACBB-51044B38D0C6}" ShortID="884886338">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{E60F8F18-A324-4366-A6AC-3C7DB6481144}" ShortID="1013173466">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{2292B219-4F6D-40ED-9689-77791CD4573D}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>10</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_01" ID="{1CFF751D-66F0-4478-A1D4-1C0C5444A14B}" ShortID="300076275">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_01.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_01" ID="{1CFF751D-66F0-4478-A1D4-1C0C5444A14B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_02" ID="{5A8C7604-5384-4EBF-8080-710532EE7288}" ShortID="529290436">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{6144721C-CCBE-41D5-9955-841AA18E50BA}" ShortID="79318947">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{B65AED7D-96AB-4937-A4D4-5CF40C77EFCA}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>9</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>10</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>18</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_02" ID="{AFF774C0-0883-4092-9F78-DD02602191B1}" ShortID="76088048">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_02.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_02" ID="{AFF774C0-0883-4092-9F78-DD02602191B1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_03" ID="{6AB691C1-2962-4A97-979C-48BCD10940AE}" ShortID="290946153">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{2540B0A9-DAE1-4239-961B-B26D745B8CB2}" ShortID="868259404">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{8698B86B-0BE0-4F70-BDEC-B3527F2388A1}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>18</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>27</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_03" ID="{AA170AB9-D953-41EC-B65A-9FC7F9E19E9B}" ShortID="157494681">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_03.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_03" ID="{AA170AB9-D953-41EC-B65A-9FC7F9E19E9B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_04" ID="{2A30451A-9914-46EC-A336-7CE45B548550}" ShortID="1043433240">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{83299256-0E30-4CE9-8989-31DEB27212BE}" ShortID="567043634">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{0BC7D5CE-65EA-4AF3-96D1-636952D09347}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>26.999</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>36</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_04" ID="{E28C24C0-3D51-439F-9602-E1A4C44D291A}" ShortID="42119737">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_04.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_04" ID="{E28C24C0-3D51-439F-9602-E1A4C44D291A}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_05" ID="{56FE5C6C-C2C9-4115-A28F-CAE82CF388DF}" ShortID="306999486">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{2F652CF5-2B42-4090-AD32-CA0C1DD941B5}" ShortID="531615889">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{68979992-7832-428C-8532-A67D668F9F98}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>36</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>45</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_05" ID="{F6E6B100-B94C-4477-A578-5F68D1BD62A5}" ShortID="780296882">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_05.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_05" ID="{F6E6B100-B94C-4477-A578-5F68D1BD62A5}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_06" ID="{77B7EDC0-1E1B-49E2-80D7-E2B2C643D58C}" ShortID="492962058">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{0824C579-2199-48DE-923E-A6938FFFEC91}" ShortID="616562798">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{0740B2D1-43E5-4269-9A2A-4C4EFC809194}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>45</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>54</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_06" ID="{43B16891-6B03-49D1-8422-046D68D90142}" ShortID="532916767">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_06.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_06" ID="{43B16891-6B03-49D1-8422-046D68D90142}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_07" ID="{328D5041-5DAC-403F-8E0F-2182C420B61C}" ShortID="687912458">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{3763B87C-6037-4F78-A80F-70AB268E67C7}" ShortID="825616318">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{806FA6FF-9288-4C5A-9ED4-9624D9925770}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>54</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>63</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_07" ID="{1DBA1F8B-D06D-488A-A7CE-2D99E744D0F1}" ShortID="389643904">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_07.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_07" ID="{1DBA1F8B-D06D-488A-A7CE-2D99E744D0F1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_08" ID="{37155B2F-02E4-4BCE-B899-CA31002E61E2}" ShortID="813146326">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{0A692FA1-26A0-404C-A91A-C1BB1195C6E8}" ShortID="954380590">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{37C5E74F-BA64-4FDF-9B86-58F768115A47}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>63</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>72</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_08" ID="{343DE93A-71EA-40EC-AF0A-25BA80355DD6}" ShortID="1023889869">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_08.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_08" ID="{343DE93A-71EA-40EC-AF0A-25BA80355DD6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_09" ID="{06928511-E45B-489E-BF41-42D0F76F92E1}" ShortID="809097001">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{A0B55BD4-7A93-4543-9810-3DF5E64AF329}" ShortID="753887197">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{43EF80C3-ABC4-4351-A2DF-E9E3E056C39B}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>72</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>81</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_09" ID="{3F4FD33A-BADE-45C7-B497-88DA1F38E570}" ShortID="692796208">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_09.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_09" ID="{3F4FD33A-BADE-45C7-B497-88DA1F38E570}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_10" ID="{BF8AA886-89FA-42AD-AD39-E65DCD10924E}" ShortID="305580568">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{D742E242-0ABC-460F-BA16-985EFFD92F9C}" ShortID="140753887">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{C3730F3B-0CB6-4985-8FE9-C467283D4375}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>81</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>90</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_10" ID="{A54C571A-D3CA-41FC-9508-AC4F21C83E9F}" ShortID="337076647">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_10.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_10" ID="{A54C571A-D3CA-41FC-9508-AC4F21C83E9F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SFX_SHIP_SPEED_11" ID="{90F7F7D8-3572-4FA8-816C-1CDD7C2B8F77}" ShortID="58828615">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<RTPCList>
+										<RTPC Name="" ID="{0FE48B79-C91E-40CE-80A1-BD1330A4FB9C}" ShortID="178548266">
+											<ReferenceList>
+												<Reference Name="ControlInput">
+													<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+												</Reference>
+											</ReferenceList>
+											<Curve Name="" ID="{97C649CC-5026-4933-B816-FC0815F227E0}">
+												<PropertyList>
+													<Property Name="Flags" Type="int32" Value="65537"/>
+												</PropertyList>
+												<PointList>
+													<Point>
+														<XPos>0</XPos>
+														<YPos>0</YPos>
+														<Flags>5</Flags>
+													</Point>
+													<Point>
+														<XPos>90</XPos>
+														<YPos>0</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>99.999</XPos>
+														<YPos>100</YPos>
+														<Flags>0</Flags>
+													</Point>
+													<Point>
+														<XPos>100</XPos>
+														<YPos>0</YPos>
+														<Flags>37</Flags>
+													</Point>
+												</PointList>
+											</Curve>
+										</RTPC>
+									</RTPCList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{91459689-2FED-4566-8154-0880F41EB611}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1F42FB6E-89BD-447A-8A5F-19580926BBD9}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SFX_SHIP_SPEED_11" ID="{2884F684-149A-412E-A4C6-3C9D47DE65D9}" ShortID="631627208">
+									<Language>SFX</Language>
+									<AudioFile>SFX_SHIP_SPEED_11.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SFX_SHIP_SPEED_11" ID="{2884F684-149A-412E-A4C6-3C9D47DE65D9}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<BlendTrackList>
+						<BlendTrack Name="Ship_Speed" ID="{0D127A14-31D2-42B7-9E7E-A0271A023A41}" ShortID="1056985280">
+							<PropertyList>
+								<Property Name="EnableCrossFading" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="LayerCrossFadeControlInput">
+									<ObjectRef Name="Ship_Speed" ID="{8F63B0B7-B93F-4904-8E22-AD36228C63A9}" WorkUnitID="{BDC11643-CF1B-4B1D-9F1F-84F4052F82BB}"/>
+								</Reference>
+							</ReferenceList>
+							<BlendTrackAssocList>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_01" ID="{459AA36C-0EB8-422C-ACBB-51044B38D0C6}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>0</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<RightEdgePos>11</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_02" ID="{5A8C7604-5384-4EBF-8080-710532EE7288}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>9</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>19</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_03" ID="{6AB691C1-2962-4A97-979C-48BCD10940AE}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>17</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>28</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_04" ID="{2A30451A-9914-46EC-A336-7CE45B548550}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>26</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>37</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_05" ID="{56FE5C6C-C2C9-4115-A28F-CAE82CF388DF}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>35</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>46</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_06" ID="{77B7EDC0-1E1B-49E2-80D7-E2B2C643D58C}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>44</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>55</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_07" ID="{328D5041-5DAC-403F-8E0F-2182C420B61C}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>53</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>64</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_08" ID="{37155B2F-02E4-4BCE-B899-CA31002E61E2}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>62</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>73</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_09" ID="{06928511-E45B-489E-BF41-42D0F76F92E1}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>71</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>82</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_10" ID="{BF8AA886-89FA-42AD-AD39-E65DCD10924E}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>80</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>91</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+								<BlendTrackAssoc>
+									<ItemRef Name="SFX_SHIP_SPEED_11" ID="{90F7F7D8-3572-4FA8-816C-1CDD7C2B8F77}"/>
+									<CrossfadingInfo>
+										<LeftEdgePos>89</LeftEdgePos>
+										<LeftFadingMode>Automatic</LeftFadingMode>
+										<LeftFadingSegmentShape>Log3</LeftFadingSegmentShape>
+										<RightEdgePos>100</RightEdgePos>
+										<RightFadingMode>Automatic</RightFadingMode>
+									</CrossfadingInfo>
+								</BlendTrackAssoc>
+							</BlendTrackAssocList>
+						</BlendTrack>
+					</BlendTrackList>
+				</BlendContainer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
