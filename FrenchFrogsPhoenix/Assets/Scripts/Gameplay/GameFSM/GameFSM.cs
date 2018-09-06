@@ -13,13 +13,10 @@ public enum GameFSMStates
 [System.Serializable]
 public class GameFSM : FiniteStateMachine
 {
-
     public const string EVT_ON_CHANGE_GAME_STATE = "OnChangeGameState";
     public const string EVT_ON_ENDGAME = "OnEndGame";
 
-    [SerializeField]
-    private FSMState[] GameStates;
-
+    [SerializeField] private FSMState[] GameStates;
 
     protected void Awake()
     {

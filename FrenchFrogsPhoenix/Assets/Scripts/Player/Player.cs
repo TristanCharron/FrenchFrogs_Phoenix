@@ -21,11 +21,11 @@ public class Player : MonoBehaviour {
 
     //float maxDistanceStickingObject;
     public ObjectStats playerStats;
-    public PlayerType currentType;
-
-    public InputBase input;
+    public InputBase input { get; protected set; }
 
     public CameraFlightFollow CameraFlight { get; set; }
+    public HitScanner hitScanner { get; set; }
+
     public HealthComponent Health { get; protected set; }
     public PlayerFlightControl Control { get; protected set; }
     public PlayerFuel Fuel { get; protected set; }
@@ -59,29 +59,11 @@ public class Player : MonoBehaviour {
             input.Update();
     }
 
-    public void Spawn(PlayerType type,int ID)
+    public void InitializePlayer(PlayerType type, int ID, InputBase input)
     {
-        currentType = type;
-
-        switch (currentType)
-        {
-            case PlayerType.AI:
-                input = new InputAI();
-                AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
-                fsm.StartFSM(this);
-                break;
-            case PlayerType.HUMAN:
-                input = new InputPlayer();
-                break;
-            default:
-                break;
-        }
-        input.Init(ID);
-
-        input.SetActive(false);
-
+        this.input = input;
         this.ID = ID;
-        this.Type = type;
+        Type = type;
     }
 
     void CalculatePlayerStats()
@@ -119,7 +101,7 @@ public class Player : MonoBehaviour {
 
         if (playerRef != null)
         {
-            if (playerRef.currentType != PlayerType.HUMAN)
+            if (playerRef.Type != PlayerType.HUMAN)
             {
                 if (playerRef.worldPlayerStats != null)
                     playerRef.worldPlayerStats.ShowStats(this);

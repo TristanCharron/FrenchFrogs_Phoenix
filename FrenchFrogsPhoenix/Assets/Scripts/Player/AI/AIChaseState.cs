@@ -5,10 +5,12 @@ using RewiredConsts;
 
 public class AIChaseState : AIPlayerFSMState
 {
-    Transform ChasedObject = null;
+    Transform chasedObject = null;
 
-    StickingObject CachedStickingObject = null;
-    Player CachedPlayer = null;
+    StickingObject cachedStickingObject = null;
+    Player cachedPlayer = null;
+    float timeBeforePatrol = 5;
+    PlayerAIAim aim;
 
     public override void UpdateState()
     {
@@ -19,52 +21,47 @@ public class AIChaseState : AIPlayerFSMState
             if (CachedTransform == null)
                 CachedTransform = AIPlayer.transform;
 
-
-
             TimeElapsed += Time.deltaTime;
 
-            if (TimeElapsed > 5)
+            if (TimeElapsed > timeBeforePatrol)
             {
                 Owner.ChangeFSMState(AIPlayerStates.PATROL);
                 TimeElapsed = 0;
             }
 
-
             if (Owner.ChasedObject != null)
             {
-               // bool shouldFire = false;
+                ChaseObject();
 
-           
-                Vector3 relativePos = Owner.ChasedObject.transform.position - CachedTransform.position;
-
-                float dotForward = Vector3.Dot(relativePos, CachedTransform.forward);
-                float dotRight = Vector3.Dot(relativePos, CachedTransform.right);
-                float dotUp= Vector3.Dot(relativePos, CachedTransform.up);
-
-                if (Owner.ChasedObject.GetComponent<Player>())
-                {
-                    if(TimeElapsed % 2 == 0)
-                        Input.SetButton(Action.Fire, true);
-                }
-
-                currentY = Mathf.MoveTowards(currentX, dotUp, Time.deltaTime * 100);
-                currentX = Mathf.MoveTowards(currentY, dotRight, Time.deltaTime * 100);
-
-                Input.SetAxis(Action.MoveHorizontal, dotForward);
-                Input.SetAxis(Action.CameraHorizontal, currentX);
-                Input.SetAxis(Action.CameraVertical, currentY);
-
-                //AIPlayer.input.PressLeftStick(0, dotForward);
-                //AIPlayer.input.PressRightStick(currentX, currentY);
             }
             else
             {
                 Owner.ChangeFSMState(AIPlayerStates.PATROL);
                 TimeElapsed = 0;
             }
-       
-
         }
+    }
+
+    private void ChaseObject()
+    {
+        Vector3 relativePos = Owner.ChasedObject.transform.position - CachedTransform.position;
+
+        float dotForward = Vector3.Dot(relativePos, CachedTransform.forward);
+        float dotRight = Vector3.Dot(relativePos, CachedTransform.right);
+        float dotUp = Vector3.Dot(relativePos, CachedTransform.up);
+
+        ///if (Owner.ChasedObject.GetComponent<Player>())
+        //{
+            if (TimeElapsed % 10 == 0)
+                Input.SetButton(Action.Fire, true);
+        //}
+
+        currentY = Mathf.MoveTowards(currentX, dotUp, Time.deltaTime * 100);
+        currentX = Mathf.MoveTowards(currentY, dotRight, Time.deltaTime * 100);
+
+        Input.SetAxis(Action.MoveVertical, dotForward);
+        Input.SetAxis(Action.MoveHorizontal, currentX);
+        Input.SetAxis(Action.CameraVertical, currentY);
     }
 
     protected override void Awake()
@@ -74,35 +71,38 @@ public class AIChaseState : AIPlayerFSMState
 
     protected override void Start()
     {
+        aim = GetComponent<PlayerAIAim>();
     }
 
-    protected void OnTriggerEnter(Collider collision)
+    protected void AimTarget()
     {
-        if (ChasedObject == null)
+        Collider collider = aim.currentTarget;
+
+        if (chasedObject == null || collider == null)
             return;
 
-        CachedStickingObject = collision.gameObject.GetComponent<StickingObject>();
+        cachedStickingObject = collider.gameObject.GetComponent<StickingObject>();
 
-        CachedPlayer = collision.gameObject.GetComponent<Player>();
+        cachedPlayer = collider.gameObject.GetComponent<Player>();
 
-        if (CachedStickingObject)
+        if (cachedStickingObject)
         {
-            if (!CachedStickingObject.IsSticked)
+            if (!cachedStickingObject.IsSticked)
             {
-                if(Vector3.Distance(CachedStickingObject.transform.position,CachedTransform.position) < Vector3.Distance(ChasedObject.position, CachedTransform.position))
+                if(Vector3.Distance(cachedStickingObject.transform.position,CachedTransform.position) < Vector3.Distance(chasedObject.position, CachedTransform.position))
                 {
-                    ChasedObject = CachedStickingObject.gameObject.transform;
+                    chasedObject = cachedStickingObject.gameObject.transform;
                     TimeElapsed = 0;
                 }   
             }
         }
-        else if (CachedPlayer)
+        else if (cachedPlayer)
         {
-            if (CachedPlayer != AIPlayer && AIPlayer.Type != CachedPlayer.Type)
+            if (cachedPlayer != AIPlayer && AIPlayer.Type != cachedPlayer.Type)
             {
-                if (Vector3.Distance(CachedPlayer.transform.position, CachedTransform.position) < Vector3.Distance(ChasedObject.position, CachedTransform.position))
+                if (Vector3.Distance(cachedPlayer.transform.position, CachedTransform.position) < Vector3.Distance(chasedObject.position, CachedTransform.position))
                 {
-                    ChasedObject = CachedPlayer.gameObject.transform;
+                    chasedObject = cachedPlayer.gameObject.transform;
                     TimeElapsed = 0;
                 }
                     

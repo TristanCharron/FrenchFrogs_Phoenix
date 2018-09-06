@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HitScanner : MonoBehaviour {
 
-    Player player;
+    public Player player { get; set; }
 
-    [SerializeField] LayerMask ignoreCollision;
+    public LayerMask IgnoreCollisionLayerMask {get; protected set;}
 
     public Vector3 AimDirection { get; protected set; }
     public Vector3 TargetPosition { get; protected set; }
@@ -17,7 +17,7 @@ public class HitScanner : MonoBehaviour {
     float aimStickTimer = 0.3f;
     float aimStickCurrentTimer = 0;
 
-    CameraFlightFollow cameraFligth;
+    string layerMaskName = "Interactable";
 
     public Vector3 GetAssistAimPosition()
     {
@@ -33,9 +33,7 @@ public class HitScanner : MonoBehaviour {
 
     protected void Start()
     {
-        //damageData.owner = player.Health;
-        cameraFligth = GetComponent<CameraFlightFollow>();
-        player = cameraFligth.player;
+        IgnoreCollisionLayerMask = (1 << LayerMask.NameToLayer(layerMaskName));
         EventManager.Subscribe<Vector3>(EventConst.GetUpdateWorldPosAim(player.ID), (aimPosition) => UpdateAimDirection(aimPosition));
     }
 
@@ -72,7 +70,7 @@ public class HitScanner : MonoBehaviour {
         float distance = diff.magnitude;
         Vector3 direction = diff.normalized;
 
-        RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, distance, ignoreCollision);
+        RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, distance, IgnoreCollisionLayerMask);
 
         SetAimStickness(hits);
 

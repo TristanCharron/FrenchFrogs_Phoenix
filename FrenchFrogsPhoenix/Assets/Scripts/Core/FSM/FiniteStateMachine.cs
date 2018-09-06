@@ -6,7 +6,6 @@ using UnityEngine;
 
 public abstract class FiniteStateMachine : MonoBehaviour 
 {
-
     [SerializeField]
     protected string Name;
 
@@ -23,13 +22,9 @@ public abstract class FiniteStateMachine : MonoBehaviour
     void Awake()
     {
         isChangingState = false;
-
     }
 
-    protected virtual void Start()
-    {
-
-    }
+    protected virtual void Start(){}
 
     protected virtual void Update()
     {
@@ -42,13 +37,9 @@ public abstract class FiniteStateMachine : MonoBehaviour
         }
     }
 
-   
-
     protected void AddFSMState(FSMState FSMState)
     {
         Enum currentMenuID = FSMState.EnumID;
-
-       
 
         if (FSMStatesDictionnary == null)
             FSMStatesDictionnary = new Dictionary<System.Enum, FSMState>();
@@ -85,9 +76,6 @@ public abstract class FiniteStateMachine : MonoBehaviour
                 PreviousFSMState = CurrentFSMState;
                 yield return CurrentFSMState.ExitState();
             }
-
-
-
 
             CurrentFSMState = FSMStatesDictionnary[NextStateEnumID];
 

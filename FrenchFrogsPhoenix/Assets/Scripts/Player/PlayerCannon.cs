@@ -6,21 +6,22 @@ public class PlayerCannon : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] Transform cannonTip;
-    [SerializeField] HitScanner hitScanner;
     [SerializeField] Player player;
 
     [Header("Stats")]
     [SerializeField] CannonData cannonData;
     [SerializeField] DamageData damageData;
 
-    InputBase input; 
+    InputBase input;
+    HitScanner hitScanner;
+
     bool canFire = true;
 
     void Start()
     {
         damageData.owner = player.Health;
         input = player.input;
-        hitScanner = player.CameraFlight.hitScanner;
+        hitScanner = player.hitScanner;
 
         input.SubscribeButtonHold(Action.Fire, Fire);
     }
@@ -51,8 +52,5 @@ public class PlayerCannon : MonoBehaviour
         bullet.Initialize(player, damageData, dir, cannonData.speed, duration);
 
         StartCoroutine(CooldownFire());
-
-
-         bullet.useHitScan = true;
     }
 }

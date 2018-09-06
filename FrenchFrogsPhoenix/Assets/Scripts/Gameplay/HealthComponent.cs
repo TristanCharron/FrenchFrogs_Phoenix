@@ -34,6 +34,14 @@ public class HealthComponent : MonoBehaviour {
         Heal(hpRegen * Time.deltaTime);
     }
 
+    [ContextMenu("Take damage")]
+    public void TakeDamageDebug()
+    {
+        DamageData damageData = new DamageData();
+        damageData.damage = 5;
+        Damage(damageData);
+    }
+
     public void Damage(DamageData damageData)
     {
         if (isInvincible || this == damageData.owner)

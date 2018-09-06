@@ -7442,6 +7442,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114175006490868386, guid: e5e497c0597e92e4885b19177c458630,
+        type: 2}
+      propertyPath: ignoreCollisionLayerMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5e497c0597e92e4885b19177c458630, type: 2}
   m_IsPrefabAsset: 0

@@ -29,14 +29,9 @@ public class AIPlayerFSMState : FSMState {
         base.UpdateState();
     }
 
-    protected override void Awake()
-    {
-    }
+    protected override void Awake(){}
 
-    protected override void Start()
-    {
-
-    }
+    protected override void Start(){}
 
     public void SetPlayer(Player p)
     {
@@ -50,7 +45,6 @@ public class AIPlayerFSMState : FSMState {
         Owner = owner;
     }
 }
-
 
 [RequireComponent(typeof(Collider))]
 public class AIPlayerFSM : FiniteStateMachine {
@@ -73,10 +67,13 @@ public class AIPlayerFSM : FiniteStateMachine {
         AIChaseState chaseState = gameObject.AddComponent<AIChaseState>();
         patrolState.SetPlayer(player);
         patrolState.SetOwner(this);
+
         chaseState.SetPlayer(player);
         chaseState.SetOwner(this);
+
         AddFSMState(patrolState);
         AddFSMState(chaseState);
+
         StartCoroutine(StartFSMCoroutine());   
     }
 

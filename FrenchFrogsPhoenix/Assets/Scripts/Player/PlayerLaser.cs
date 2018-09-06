@@ -6,8 +6,7 @@ using RewiredConsts;
 public class PlayerLaser : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] Player player;
-    [SerializeField] HitScanner hitScanner;
+    [SerializeField] Player player; 
     [SerializeField] LineRenderer lineRenderer;
 
     [Header("Stats")]
@@ -17,6 +16,7 @@ public class PlayerLaser : MonoBehaviour
 
     [SerializeField] LaserInfo laserInfo;
 
+    HitScanner hitScanner;
     private float timeLaserActivated = 0;
     private float timer = 0;
     private float tickTimer = 0.1f;
@@ -25,7 +25,7 @@ public class PlayerLaser : MonoBehaviour
     void Start()
     {
         damageData.owner = player.Health;
-        hitScanner = player.CameraFlight.hitScanner;
+        hitScanner = player.hitScanner;
     }
 
     void Fire()

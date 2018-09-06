@@ -11,21 +11,16 @@ public abstract class InputBase
     Dictionary<InputKey, ButtonStats> buttonEventDictionary = new Dictionary<InputKey, ButtonStats>();
     List<InputKey> listKeys = new List<InputKey>();
 
-  //  UnityEvent ButtonDownEvent = new UnityEvent();
-  //  UnityEvent ButtonHoldEvent = new UnityEvent();
-
-    //Dictionary<InputKey, ButtonStats> buttonDictionaryUp = new Dictionary<InputKey, ButtonStats>();
-    //Dictionary<InputKey, ButtonStats> buttonDictionaryDown = new Dictionary<InputKey, ButtonStats>();
-    //Dictionary<InputKey, ButtonStats> buttonDictionaryHold = new Dictionary<InputKey, ButtonStats>();
-    //Dictionary<int, Action> floatList = new Dictionary<int, Action>();
-
     public const string ButtonDown = "ButtonDown_";
     public const string ButtonUp = "ButtonUp_";
     public const string ButtonHold= "ButtonHold_";
     public const string Axis = "Axis_";
 
     protected int ID;
-    public abstract void Init(int id);
+    public virtual void Init(int id)
+    {
+        ID = id;
+    }
 
     public abstract bool GetButtonDown(int button);
     public abstract bool GetButtonUp(int button);

@@ -18,7 +18,6 @@ public class MainMenuState : FSMState {
         input.SetActive(true);
 
         EventManager.Subscribe<System.Enum>("OnChangeGameFSM", (nextState) => {
-
             bool isActive = nextState.ToString() == GameFSMStates.MAINMENU.ToString();
             SetActive(isActive);
         });

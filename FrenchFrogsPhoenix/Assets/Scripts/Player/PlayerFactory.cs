@@ -17,21 +17,17 @@ public class PlayerFactory : MonoBehaviour {
     [SerializeField] Player playerPrefab;
     [SerializeField] CameraFlightFollow playerCameraPrefab;
 
-   // [SerializeField] Player AIPlayerPrefab;
-
     [SerializeField] float radiusSpwan = 50;
 
     List<Player> playerList;
 
     public Player LocalPlayer { get; private set; }
 
-	// Use this for initialization
 	void Start () {
         playerList = new List<Player>();
 
         LocalPlayer = SpawnPlayer(PlayerType.HUMAN, Vector3.zero, Quaternion.identity, 0);
 
-       
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
             if(CurrentState == GameFSMStates.GAMEPLAY)
@@ -43,7 +39,6 @@ public class PlayerFactory : MonoBehaviour {
                 StopAllCoroutines();
                 RemovePlayersOfType(PlayerType.AI);
             }
-            
         });
 
         EventManager.Subscribe<Player>(Player.EVT_ON_PLAYER_DEATH, (player) =>
@@ -53,8 +48,6 @@ public class PlayerFactory : MonoBehaviour {
                 EventManager.Invoke(EVT_ONLOCALPLAYERDEATH);
             }
         });
-
-
     }
 
     IEnumerator SpawnDelay()
@@ -75,11 +68,17 @@ public class PlayerFactory : MonoBehaviour {
             //Player prefab = type == PlayerType.HUMAN ? playerPrefab : AIPlayerPrefab;
             Player player = Instantiate(playerPrefab, transform, true);
             player.transform.SetPositionAndRotation(position, rotation);
-            player.Spawn(type,ID);
-            playerList.Add(player);
+
+            InputBase input = GenerateInput(type, ID);       
+            player.InitializePlayer(type, ID, input);
 
             if (type == PlayerType.HUMAN)
-                SetCameraToPlayer(player);
+                SetupPlayer(player);
+            else if (type == PlayerType.AI)
+                SetupPlayerAI(player);
+
+            
+            playerList.Add(player);
 
             return player;
         }
@@ -91,12 +90,44 @@ public class PlayerFactory : MonoBehaviour {
         
     }
 
-    void SetCameraToPlayer(Player player)
+    InputBase GenerateInput(PlayerType type, int ID)
+    {
+        InputBase input;
+        if (type == PlayerType.HUMAN)
+            input = new InputPlayer();
+        else //if (type == PlayerType.AI)
+            input = new InputAI();
+
+        input.Init(ID);
+        input.SetActive(false);
+
+        return input;
+    }
+
+    void SetupPlayer(Player player)
     {
         CameraFlightFollow cameraFlight = Instantiate(playerCameraPrefab, transform, true);
         PlayerFlightControl flight = player.GetComponent<PlayerFlightControl>();
+
         player.CameraFlight = cameraFlight;
+        player.hitScanner = cameraFlight.GetComponent<HitScanner>();
+        player.hitScanner.player = player;
+
         cameraFlight.SetPlayerFlightControl(flight);
+    }
+    void SetupPlayerAI(Player player)
+    {
+        HitScanner hitScanner = player.gameObject.AddComponent<HitScanner>();
+        player.hitScanner = hitScanner;
+        hitScanner.player = player;
+
+        AIPlayerFSM fsm = player.gameObject.AddComponent<AIPlayerFSM>();
+        fsm.StartFSM(player);
+
+        if(player.gameObject.GetComponent<PlayerAim>())
+            Destroy(player.gameObject.GetComponent<PlayerAim>());
+
+        player.gameObject.AddComponent<PlayerAIAim>();
     }
 
     //public void RemovePlayer(string ID)

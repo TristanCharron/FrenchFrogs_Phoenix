@@ -1,0 +1,30 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1281810935	Start			\Default Work Unit\Start	
+	1467867859	Ship_Speed_Boost			\Default Work Unit\Ship_Speed\Ship_Speed_Boost	
+	1803197027	Stick			\Default Work Unit\Stick	
+	2607556080	Menu			\Default Work Unit\Menu	
+	3082625079	Ship_Speed_Brake			\Default Work Unit\Ship_Speed\Ship_Speed_Brake	
+	3568150045	Ship_Speed_Forward			\Default Work Unit\Ship_Speed\Ship_Speed_Forward	
+	3692956948	Ship_Speed_Idle			\Default Work Unit\Ship_Speed\Ship_Speed_Idle	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	919421835	Ship_Speed			\Default Work Unit\Ship_Speed	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	42119737	SFX_SHIP_SPEED_04	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_04_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_04		274724
+	76088048	SFX_SHIP_SPEED_02	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_02_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_02		336484
+	157494681	SFX_SHIP_SPEED_03	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_03_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_03		323404
+	299180188	SFX_Main_Skill_Stick_02	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_Main_Skill_Stick_02_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_02		51512
+	300076275	SFX_SHIP_SPEED_01	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_01_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_01		233304
+	337076647	SFX_SHIP_SPEED_10	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_10_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_10		320080
+	368136654	1808_FF_techScienceJam_v1	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\1808_FF_techScienceJam_v1_8956FC97.wem		\Interactive Music Hierarchy\Default Work Unit\New Music Playlist Container\1808_FF_techScienceJam_v1\1808_FF_techScienceJam_v1		22439016
+	389643904	SFX_SHIP_SPEED_07	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_07_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_07		230556
+	532916767	SFX_SHIP_SPEED_06	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_06_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_06		372104
+	559870666	SFX_Main_Skill_Stick_03	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_Main_Skill_Stick_03_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_03		70788
+	631627208	SFX_SHIP_SPEED_11	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_11_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_11		344996
+	692796208	SFX_SHIP_SPEED_09	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_09_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_09		291272
+	780296882	SFX_SHIP_SPEED_05	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_05_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_05		322856
+	888522010	SFX_Main_Skill_Stick_01	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_Main_Skill_Stick_01_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_01		51288
+	1023889869	SFX_SHIP_SPEED_08	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_SHIP_SPEED_08_8956FC97.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ship_Engine\SFX_SHIP_SPEED_08		351224
+	1068849344	SFX_Main_Skill_Stick_04	D:\WindowsLibrary\Documents\GitHub\FrenchFrogs_Phoenix\FrenchFrogsPhoenix\FrenchFrogsPhoenix_WwiseProject\.cache\Mac\SFX\SFX_Main_Skill_Stick_04_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Stick\SFX_Main_Skill_Stick_04		48676
+

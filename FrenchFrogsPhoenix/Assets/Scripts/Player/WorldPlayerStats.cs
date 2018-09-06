@@ -21,7 +21,7 @@ public class WorldPlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(isActive && playerToLookAt.currentType != PlayerType.AI)
+		if(isActive && playerToLookAt.Type != PlayerType.AI)
         {
             transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, transform.rotation, speed * Time.deltaTime);
             //transform.LookAt(Mathf.Lerp(playerToLookAt.GetPlayerCamera().transform.eulerAngles);
@@ -30,7 +30,7 @@ public class WorldPlayerStats : MonoBehaviour {
 
     public void ShowStats(Player playerRef)
     {
-        if (playerRef.currentType == PlayerType.HUMAN && playerRef != currentPlayer)
+        if (playerRef.Type == PlayerType.HUMAN && playerRef != currentPlayer)
         {
             playerToLookAt = playerRef;
             isActive = true;

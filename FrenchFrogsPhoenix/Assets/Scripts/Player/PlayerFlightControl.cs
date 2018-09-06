@@ -46,6 +46,10 @@ public class PlayerFlightControl : MonoBehaviour
 		roll = 0; //Setting this equal to 0 here as a failsafe in case the roll axis is not set up.
 
         EventManager.Subscribe<Vector2>(EventConst.GetUpdateUIPosAim(Player.ID), (mPos) => UpdateCursorPosition(mPos));
+
+
+        if(Player.Type == PlayerType.HUMAN)
+            AkSoundEngine.PostEvent("Start", gameObject);
 	}
 
     void FixedUpdate ()
@@ -55,7 +59,7 @@ public class PlayerFlightControl : MonoBehaviour
 
         //Getting the current speed.
         currentMag = rigidBody.velocity.magnitude;
-        ApplyTrust();
+        CalculateTrust();
 
         if (!Player.input.GetButton(RewiredConsts.Action.FreeAim))
         {
@@ -78,40 +82,56 @@ public class PlayerFlightControl : MonoBehaviour
             (roll * moveSettings.turnspeed * (moveSettings.rollSpeedModifier / 2) * Time.deltaTime));
     }
 
-    private void ApplyTrust()
+    private void CalculateTrust()
     {
         if (thrust_exists)
         {
             if (Player.input.GetButton(Action.Dash) && Player.Fuel.CurrentFuel > 0)
             {
-                currentMag = Mathf.Lerp(currentMag, moveSettings.warpSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
-                if (!IsWarpSpeed)
-                    OnWarpAcceleration.Invoke();
-
-                Player.Fuel.RemoveFuel(warpFuelConsumption * Time.deltaTime);
-                IsWarpSpeed = true;
+                ApplyDash();
             }
             else
             {
-                if (Player.input.GetAxis(Action.MoveVertical) > 0)
-                {
-                    currentMag = Mathf.Lerp(currentMag, moveSettings.upInputSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
-                }
-                else if (Player.input.GetAxis(Action.MoveVertical) < 0)
-                {
-                    currentMag = Mathf.Lerp(currentMag, moveSettings.downInputSeed, moveSettings.thrust_transition_speed * Time.deltaTime);
-                }
-                else
-                {
-                    currentMag = Mathf.Lerp(currentMag, moveSettings.noInputSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
-                }
-
-                if (IsWarpSpeed)
-                    OnStopWarpAcceleration.Invoke();
-
-                IsWarpSpeed = false;
+                ApplyRegularTrust();
             }
         }
+    }
+
+    private void ApplyRegularTrust()
+    {
+        if (Player.input.GetAxis(Action.MoveVertical) > 0)
+        {
+            currentMag = Mathf.Lerp(currentMag, moveSettings.upInputSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
+            AkSoundEngine.PostEvent("Ship_Speed_Forward", gameObject);
+        }
+        else if (Player.input.GetAxis(Action.MoveVertical) < 0)
+        {
+            currentMag = Mathf.Lerp(currentMag, moveSettings.downInputSeed, moveSettings.thrust_transition_speed * Time.deltaTime);
+            AkSoundEngine.PostEvent("Ship_Speed_Brake", gameObject);
+        }
+        else
+        {
+            currentMag = Mathf.Lerp(currentMag, moveSettings.noInputSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
+            AkSoundEngine.PostEvent("Ship_Speed_Idle", gameObject);
+        }
+
+        if (IsWarpSpeed)
+            OnStopWarpAcceleration.Invoke();
+
+        IsWarpSpeed = false;
+    }
+
+    private void ApplyDash()
+    {
+        currentMag = Mathf.Lerp(currentMag, moveSettings.warpSpeed, moveSettings.thrust_transition_speed * Time.deltaTime);
+        if (!IsWarpSpeed)
+        {
+            OnWarpAcceleration.Invoke();
+            AkSoundEngine.PostEvent("Ship_Speed_Boost", gameObject);
+        }
+
+        Player.Fuel.RemoveFuel(warpFuelConsumption * Time.deltaTime);
+        IsWarpSpeed = true;
     }
 
     private void SetPitchYawRoll()
