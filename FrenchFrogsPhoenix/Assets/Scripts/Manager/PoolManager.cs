@@ -98,6 +98,7 @@ public class PoolObject
     public void ReturnObject(GameObject gameObject)
     {
         queue.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
 	public GameObject GetNext()

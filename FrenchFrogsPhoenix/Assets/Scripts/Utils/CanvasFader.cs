@@ -127,6 +127,7 @@ public class CanvasFader : MonoBehaviour {
 		isVisible = true;
 
 		DOTween.Kill(grp);
+        grp.alpha = 0;
 		grp.DOFade(1f, 0.05f).SetDelay(delay).SetLoops(3, LoopType.Yoyo);
 	
 		if(overrideInteractivity){

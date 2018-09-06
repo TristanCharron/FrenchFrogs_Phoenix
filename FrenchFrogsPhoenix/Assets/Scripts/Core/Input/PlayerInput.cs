@@ -13,10 +13,11 @@ public class PlayerInput : BaseInput
         if (!isActive)
             return;
 
-        if(player.GetButtonDown("Fire"))
-            FireButton.Press();
+        for (int i = 0; i < ButtonList.Count; i++)
+        {
+            ButtonList[i].Update(player.GetButton(ButtonList[i].Name));
+        }
 
- 
     }
 
     public PlayerInput(int ID) : base()

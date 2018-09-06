@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 114416602815232710}
   - component: {fileID: 114243647544942332}
   - component: {fileID: 135192205618425236}
-  m_Layer: 0
+  - component: {fileID: 114697629348758984}
+  m_Layer: 10
   m_Name: StickingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +55,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -71,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.3
   shakeFactor: 0.1
+  randomness: 10
 --- !u!114 &114416602815232710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,6 +86,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactBlobiness: 0.4
   impactPropagation: 0.5
+--- !u!114 &114697629348758984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328541488904356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2b6c3939f6f9a449f0e12222dc941a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114416602815232710}
+        m_MethodName: OnDamageEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: FloatUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114416602815232710}
+        m_MethodName: OnDestroyEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  maxHp: 25
+  hpRegen: 0
+  armor: 0
 --- !u!135 &135192205618425236
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -94,5 +142,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}

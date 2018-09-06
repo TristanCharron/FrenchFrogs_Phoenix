@@ -15,6 +15,7 @@ public class GameFSM : FiniteStateMachine
 {
 
     public const string EVT_ON_CHANGE_GAME_STATE = "OnChangeGameState";
+    public const string EVT_ON_ENDGAME = "OnEndGame";
 
     [SerializeField]
     private FSMState[] GameStates;
@@ -32,6 +33,12 @@ public class GameFSM : FiniteStateMachine
         EventManager.Subscribe<GameFSMStates>(EVT_ON_CHANGE_GAME_STATE, (state) =>
          {
              ChangeFSMState(state);
+         });
+
+        EventManager.Subscribe(PlayerFactory.EVT_ONLOCALPLAYERDEATH, () =>
+         {
+             if(CurrentFSMState.EnumID.ToString() == GameFSMStates.GAMEPLAY.ToString())
+                ChangeFSMState(GameFSMStates.GAMEOVER);
          });
 
 

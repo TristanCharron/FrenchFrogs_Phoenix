@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class StickingObject : MonoBehaviour {
 
+    public StickyObjectFactory Factory { get; set; }
+
     //Accesors
     public Rigidbody rb { get; protected set; }
-    public bool IsSticked { get { return PlayerParent != null; } }
-    public Player PlayerParent { get; protected set; }
+    public bool IsSticked { get { return ObjectParent != null; } }
+    public MassObject ObjectParent { get; protected set; }
 
     [SerializeField] float impactBlobiness;
     [SerializeField, Range(0, 1)] float impactPropagation = 0.8f;
-
-    //Life
-    int maxLife = 20;
-    int currentLife;
 
     ObjectStats objectStats;
     SinRotation sinRotation;
@@ -25,25 +24,20 @@ public class StickingObject : MonoBehaviour {
     StickingObject stickingObjectParent;
     List<StickingObject> stickingObjectChilds = new List<StickingObject>();
 
+    Vector3 size;
+
+    bool isInvincible = false;
+    float invisibilityTime = 0.5f;
+
     private void Awake()
-    {
-        //Test
-        objectStats = new ObjectStats();
-        objectStats.damage = Random.Range(0, 3);
-        objectStats.speed = Random.Range(0, 3);
-    
-        currentLife = maxLife;
+    {   
         rb = GetComponent<Rigidbody>();
         sinRotation = GetComponent<SinRotation>();
     }
 
-    public void RecrusiveCalculateStats(ObjectStats playerStats)
+    private void Start()
     {
-        playerStats += objectStats;
-        foreach (StickingObject stickingChild in stickingObjectChilds)
-        {
-            stickingChild.RecrusiveCalculateStats(playerStats);
-        }
+        Wiggle();
     }
 
     public void SetMeshChild(Transform childMeshTransform)
@@ -51,54 +45,74 @@ public class StickingObject : MonoBehaviour {
         this.childMeshTransform = childMeshTransform;
     }
 
-    public void SetParent(Player playerParent, StickingObject stickingObjectParent)
+    public void SetParent(MassObject ObjectParent, StickingObject stickingObjectParent)
     {
         sinRotation.Initialize();
         this.stickingObjectParent = stickingObjectParent;
-        this.PlayerParent = playerParent;
+        this.ObjectParent = ObjectParent;
+        size = transform.localScale;
+        rb.isKinematic = true;
     }
 
-    public void Damage(int damage)
+    public void SetObjectStats(ObjectStats objectStats)
     {
-        currentLife -= damage;
-        if(currentLife < 0)
+        this.objectStats = objectStats;
+    }
+
+    public void RecrusiveCalculateStats(ObjectStats playerStats)
+    {
+        playerStats += objectStats;
+        foreach (StickingObject stickingChild in stickingObjectChilds)
         {
-            Destroy();
+            if (stickingChild == this)
+                Debug.LogError("HUGE MISTAKE");
+
+            stickingChild.RecrusiveCalculateStats(playerStats);
         }
     }
 
-    [ContextMenu("Destroy")]
-    void Destroy()
+    public void OnDamageEvent()
+    {
+        childMeshTransform.DOKill();
+        childMeshTransform.DOShakeScale(1, 1, 20).OnComplete(Wiggle);
+    }
+
+    public void OnDestroyEvent()
     {
         DetatchChilds();
         stickingObjectChilds.Clear();
-        Destroy(gameObject);
+        rb.isKinematic = false;
+
+        if (Factory != null)
+            Factory.DestroyObject(this);
     }
 
-    public void SetFirstStickingchild(Player player)
+    public void SetFirstStickingchild(MassObject parent)
     {
-        SetParent(player, null);
-        PlayerParent.OnNewStickingObject.Invoke(this);
+        SetParent(parent, null);
     }
 
     public void StickingNewChild(StickingObject stickingChild)
     {
         stickingChild.transform.SetParent(transform, true);
 
-        stickingChild.SetParent(PlayerParent, this);
+        stickingChild.SetParent(ObjectParent, this);
 
         stickingObjectChilds.Add(stickingChild);
 
         stickingChild.rb.velocity = Vector3.zero;
         stickingChild.rb.angularVelocity = Vector3.zero;
 
-        PlayerParent.OnNewStickingObject.Invoke(this);
+        //PlayerParent.OnNewStickingObject.Invoke(this);
+
+        AkSoundEngine.PostEvent("Stick", gameObject);
     }
 
     public void DetatchFromParent()
     {
         transform.SetParent(null, true);
-        PlayerParent = null;
+        ObjectParent = null;
+        stickingObjectParent = null;
 
         DetatchChilds();
 
@@ -130,14 +144,15 @@ public class StickingObject : MonoBehaviour {
         }
     }
 
+
     public void ShakeScale(float impact, StickingObject objectToIgnore)
     {
         if (impact < 0.01)
             return;
 
         childMeshTransform.DOKill();
-        childMeshTransform.localScale = Vector3.one;
-        childMeshTransform.DOShakeScale(1, impact, 20);
+        //childMeshTransform.localScale = Vector3.one;
+        childMeshTransform.DOShakeScale(1, impact, 20).OnComplete(ResetSizeWiggle);
 
         foreach (StickingObject stickingChild in stickingObjectChilds)
         {
@@ -148,4 +163,23 @@ public class StickingObject : MonoBehaviour {
         if (stickingObjectParent != null && stickingObjectParent != objectToIgnore)
             stickingObjectParent.ShakeScale(impact * impactPropagation, this);
     }
+
+    void ResetSizeWiggle()
+    {
+        transform.localScale = size;
+        Wiggle();
+    }
+
+    void Wiggle()
+    {
+        float randomDelay = Random.Range(0, 3f);
+        float randomWiggle = Random.Range(0.005f, 0.02f);
+        float randomWiggleDuration = Random.Range(.2f, 2f);
+        childMeshTransform.DOShakeScale(randomWiggleDuration, randomWiggle, 20)
+            .SetDelay(randomDelay)
+            .SetLoops(-1, LoopType.Yoyo);
+    }
 }
+
+[System.Serializable]
+public class StickingObjectEvent : UnityEvent<StickingObject> { }

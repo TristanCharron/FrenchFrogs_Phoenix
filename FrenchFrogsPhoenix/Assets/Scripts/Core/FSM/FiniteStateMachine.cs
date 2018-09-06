@@ -48,11 +48,14 @@ public abstract class FiniteStateMachine : MonoBehaviour
     {
         Enum currentMenuID = FSMState.EnumID;
 
+       
+
         if (FSMStatesDictionnary == null)
             FSMStatesDictionnary = new Dictionary<System.Enum, FSMState>();
 
         if (!FSMStatesDictionnary.ContainsKey(currentMenuID))
         {
+            FSMState.SetOwner(this);
             FSMStatesDictionnary.Add(FSMState.EnumID, FSMState);
         }
         else
@@ -62,7 +65,7 @@ public abstract class FiniteStateMachine : MonoBehaviour
     }
 
 
-    protected void ChangeFSMState(System.Enum NextStateID)
+    public void ChangeFSMState(System.Enum NextStateID)
     {
         StartCoroutine(ChangeFSMStateCoRoutine(FSMStatesDictionnary[NextStateID].EnumID));
     }

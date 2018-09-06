@@ -5,111 +5,137 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
 
+    public const string EVT_ON_PLAYER_DEATH = "OnPlayerDeath";
+
     public MouseRotation mouseRotation = new MouseRotation();
     public StickingObjectEvent OnNewStickingObject = new StickingObjectEvent();
+    public StickingObjectEvent OnDestroyStickingObject = new StickingObjectEvent();
 
-    [SerializeField] PlayerCamera playerCamera;
+    [SerializeField] WorldPlayerStats worldPlayerStats;
+
     [SerializeField] Transform nullCore;
-    [SerializeField] StickingObject stickingObject;
+    //[SerializeField] StickingObject stickingObject;
     [SerializeField] float cameraSensitivity = 2;
     [SerializeField] float rotateSensitivity = 0.01f;
 
-    [SerializeField] float moveSpeed;
 
-    float maxDistanceStickingObject;
+    //float maxDistanceStickingObject;
     public ObjectStats playerStats;
+    public PlayerType currentType;
 
-    public BaseInput input;
+    public InputBase input;
 
-    public string ID { private set; get; }
+    public CameraFlightFollow CameraFlight { get; set; }
+    public HealthComponent Health { get; protected set; }
+    public PlayerFlightControl Control { get; protected set; }
+    public PlayerFuel Fuel { get; protected set; }
+    public PlayerType Type { get; private set; }
+
+    public int ID { private set; get; }
 
     void Start ()
     {
+        Fuel = GetComponent<PlayerFuel>();
         playerStats = new ObjectStats();
-
-        if (playerCamera != null)
-        playerCamera.player = this;
-
-        OnNewStickingObject.AddListener((newStickingObject) => CalculatePlayerStats(newStickingObject));
-        OnNewStickingObject.AddListener((newStickingObject) => playerCamera.CalculateDistanceCamera(newStickingObject));
-
-        stickingObject.SetFirstStickingchild(this);
-        stickingObject.SetMeshChild(nullCore);
+        Control = GetComponent<PlayerFlightControl>();
+        Health = GetComponent<HealthComponent>();
 
         EventManager.Subscribe<GameFSMStates>(GameFSM.EVT_ON_CHANGE_GAME_STATE, (CurrentState) =>
         {
             if(input != null)
                 input.SetActive(CurrentState == GameFSMStates.GAMEPLAY);
-        });
 
-        UIController.GetInstance().canvas.worldCamera = playerCamera.cameraRef;
+            if (CurrentState == GameFSMStates.GAMEPLAY)
+                Fuel.SetActive(true);
+            else
+                Fuel.SetActive(false);
+
+        });
     }
 
     private void Update()
     {
-        input.Update();
+        if(input != null)
+            input.Update();
     }
 
-    public void Spawn(PlayerType type,string ID)
+    public void Spawn(PlayerType type,int ID)
     {
-        switch (type)
+        currentType = type;
+
+        switch (currentType)
         {
             case PlayerType.AI:
-                
-                //Add AI Input
-                input = new AIInput();
+                input = new InputAI();
+                AIPlayerFSM fsm = gameObject.AddComponent<AIPlayerFSM>();
+                fsm.StartFSM(this);
                 break;
             case PlayerType.HUMAN:
-
-                input = new PlayerInput(0);
+                input = new InputPlayer();
                 break;
             default:
                 break;
         }
+        input.Init(ID);
 
         input.SetActive(false);
 
-        input.LeftStick.AddEvent(Move);
-        input.RightStick.AddEvent(RightStickHandle);
-
         this.ID = ID;
+        this.Type = type;
     }
 
-    void RightStickHandle(float x, float y)
-    {
-        //Vector3 cameraTransform = playerCamera.transform.InverseTransformDirection(new Vector3(-y, -x, 0));
-        Vector3 cameraTransform = new Vector3(-y, x, 0);
-
-        if (Input.GetMouseButton(1))
-            mouseRotation.LookRotation(nullCore.transform, rotateSensitivity, cameraTransform);
-        else
-            mouseRotation.LookRotation(transform, cameraSensitivity, cameraTransform);
-    
-    }
-
-    void CalculatePlayerStats(StickingObject newStickingObject)
+    void CalculatePlayerStats()
     {
         playerStats.Reset();
-        stickingObject.RecrusiveCalculateStats(playerStats);
+      //  stickingObject.RecrusiveCalculateStats(playerStats);
+        EventManager.Invoke<ObjectStats>(EventConst.GetUpdatePlayerStats(ID), playerStats);
     }
 
-    private void Move(float x, float y)
+    //void DestroyStickingObject(StickingObject stickingObject)
+    //{
+    //    if(this.stickingObject == stickingObject)
+    //    {
+    //        Debug.Log("I DIE OH NON");
+    //        EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH,this);
+    //        gameObject.SetActive(false);
+    //    }
+    //}
+
+    public void OnDamage(float healthRatio)
     {
-        float upFactor = 0;
-        if (Input.GetKey(KeyCode.Q))
-            upFactor = 1;
-        else if (Input.GetKey(KeyCode.E))
-            upFactor = -1;
+        Debug.Log(healthRatio);
+        EventManager.Invoke<float>(EventConst.GetUpdatePlayerHealth(ID), healthRatio);
+    }
 
-        Vector3 input = new Vector3(x, upFactor, y);
+    public void OnDestroy()
+    {
+        EventManager.Invoke<Player>(EVT_ON_PLAYER_DEATH, this);
+        gameObject.SetActive(false);
+    }
 
-        if (input.magnitude > 1)
-            input.Normalize();
+    public void OnTriggerEnter(Collider other)
+    {
+        Player playerRef = other.GetComponent<Player>();
 
-        Vector3 direction = transform.TransformDirection(input);
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        if (playerRef != null)
+        {
+            if (playerRef.currentType != PlayerType.HUMAN)
+            {
+                if (playerRef.worldPlayerStats != null)
+                    playerRef.worldPlayerStats.ShowStats(this);
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        Player playerRef = other.GetComponent<Player>();
+        if (playerRef != null)
+        {
+            if(playerRef.worldPlayerStats != null)
+            {
+                playerRef.worldPlayerStats.HideStats();
+            }
+        }
     }
 }
-
-[System.Serializable]
-public class StickingObjectEvent : UnityEvent<StickingObject> {}

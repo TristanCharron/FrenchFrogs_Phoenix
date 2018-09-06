@@ -2,30 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
-
+public class Bullet : MonoBehaviour
+{
     public static string poolName = "Bullet";
+    public bool useHitScan = true;
+    float duration;
 
-    CannonData cannonData;
+    Coroutine delayDestroyCoroutine;
     Rigidbody rigidbody;
     Player player;
+    DamageData damageData;
+    TrailRenderer trail;
 
-    public void Initialize(Player player, CannonData cannonData, Vector3 direction)
+    private void Awake()
+    {
+        trail = GetComponent<TrailRenderer>();
+    }
+
+    public void Initialize(Player player, DamageData damageData, Vector3 direction, float speed, float duration)
     {
         this.player = player;
-        this.cannonData = cannonData;
-
+        this.damageData = damageData;
+        this.duration = duration;
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = direction * cannonData.speed;
+        rigidbody.velocity = direction * speed;
+
+        delayDestroyCoroutine = StartCoroutine(DelayCoroutineDestroy());
+
+        trail.Clear();
+    }
+
+    IEnumerator DelayCoroutineDestroy()
+    {
+        yield return new WaitForSeconds(duration);
+        //End trail
+        rigidbody.velocity = Vector3.zero;
+
+       // yield return new WaitForSeconds(.1f);
+        PoolManager.instance.ReturnObject(poolName, gameObject);
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        StickingObject stickingObject = GetComponent<StickingObject>();
-        if(stickingObject != null && stickingObject.PlayerParent != player)
+        if (useHitScan)
+            return;
+
+        HealthComponent health = other.GetComponent<HealthComponent>();
+        if(health)
         {
-            stickingObject.Damage(cannonData.damage);
-            PoolManager.instance.ReturnObject(poolName, gameObject);
+            health.Damage(damageData);
         }
     }
 }
